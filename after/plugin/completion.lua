@@ -1,0 +1,31 @@
+-- require('epo').setup({
+--   fuzzy = true,
+--   signature = true,
+-- })
+--
+-- -- vim.opt.completeopt = { 'popup', 'menu', 'menuone', 'noselect' }
+--
+-- vim.keymap.set('i', '<c-j>', function()
+--   if vim.snippet.jumpable(1) then
+--     return '<cmd>lua vim.snippet.jump(1)<cr>'
+--   end
+--   return '<c-j>'
+-- end, { expr = true })
+--
+-- vim.keymap.set('i', '<c-h>', function()
+--   if vim.snippet.jumpable(-1) then
+--     return '<cmd>lua vim.snippet.jump(-1)<CR>'
+--   end
+--   return '<c-h>'
+-- end, { expr = true })
+--
+-- vim.keymap.set('i', '<c-e>', function()
+--   if vim.fn.pumvisible() == 1 then
+--     require('epo').disable_trigger()
+--   end
+--   return '<c-e>'
+-- end, { expr = true })
+--
+-- vim.keymap.set('i', '<cr>', function()
+--   return vim.fn.pumvisible() == 1 and '<c-y>' or '<cr>'
+-- end, { expr = true, noremap = true })
