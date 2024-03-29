@@ -47,22 +47,3 @@ lsp.start({
     },
   },
 })
-
--- lsp.start({
---   name = 'diagnostic-languageserver',
---   cmd = { 'diagnostic-languageserver', '--stdio' },
---   workspace_folders = ws.git() or ws.cwd(),
---   init_options = {
---     formatters = {
---       stylua = {
---         command = 'stylua',
---         args = { '-' },
---         rootPatterns = { 'stylua.toml', '.stylua.toml', '.editorconfig' },
---         requiredFiles = { 'stylua.toml', '.stylua.toml', '.editorconfig' },
---       },
---     },
---     formatFiletypes = {
---       lua = { 'stylua' },
---     },
---   },
--- })

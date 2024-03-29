@@ -15,6 +15,7 @@ require('conform').setup({
     lua = { 'stylua' },
     nim = { { 'nph', 'nimpretty' } },
     python = { { 'ruff_format', 'black' } },
+    sh = { 'shfmt' },
     toml = { 'taplo' },
     typescript = { { 'biome-check', 'prettier' } },
   },
