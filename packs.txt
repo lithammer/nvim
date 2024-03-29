@@ -9,7 +9,7 @@ folke/start/flash.nvim	git@github.com:folke/flash.nvim.git
 folke/start/trouble.nvim	git@github.com:folke/trouble.nvim.git
 github/start/copilot.vim	git@github.com:github/copilot.vim.git
 j-hui/start/fidget.nvim	git@github.com:j-hui/fidget.nvim.git
-lewis6991/start/gitsigns.nvim	git@github.com:lewis6991/gitsigns.nvim.git
+# lewis6991/start/gitsigns.nvim	git@github.com:lewis6991/gitsigns.nvim.git
 mfussenegger/start/nvim-ansible	git@github.com:mfussenegger/nvim-ansible.git
 mfussenegger/start/nvim-lint	git@github.com:mfussenegger/nvim-lint.git
 nvim-lua/start/plenary.nvim	git@github.com:nvim-lua/plenary.nvim.git

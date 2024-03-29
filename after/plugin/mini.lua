@@ -19,6 +19,20 @@ for _, plugin in ipairs({
       },
     },
   },
+  {
+    'mini.diff',
+    {
+      mappings = {
+        apply = '',
+        reset = '',
+        textobject = '',
+        goto_first = '',
+        goto_prev = '[c',
+        goto_next = ']c',
+        goto_last = '',
+      },
+    },
+  },
   'mini.extra',
   -- 'mini.files',
   'mini.pick',
