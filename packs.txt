@@ -1,4 +1,4 @@
-# vim: ts=60 sw=0 noet
+# vim: ts=60 sw=0 noet cms=#\ %s
 brenoprata10/start/nvim-highlight-colors	git@github.com:brenoprata10/nvim-highlight-colors.git
 dgagn/start/diagflow.nvim	git@github.com:dgagn/diagflow.nvim.git
 DNLHC/start/glance.nvim	git@github.com:DNLHC/glance.nvim.git
