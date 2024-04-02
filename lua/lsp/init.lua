@@ -1,5 +1,6 @@
 local fn = vim.fn
 local fs = vim.fs
+local uv = vim.uv
 
 local M = {}
 
@@ -72,13 +73,14 @@ local handlers = {
 ---@param path string Path to the file to read.
 ---@return string
 local function read_file(path)
-  local fd = io.open(path, 'r')
+  local fd = uv.fs_open(path, 'r', 438)
   if not fd then
     vim.notify(('Could not open file %s for reading'):format(path), vim.log.levels.ERROR)
     return ''
   end
-  local data = fd:read('*a')
-  fd:close()
+  local stat = assert(uv.fs_fstat(fd))
+  local data = uv.fs_read(fd, stat.size, 0)
+  uv.fs_close(fd)
   return data
 end
 
