@@ -69,6 +69,7 @@ local handlers = {
   ),
 }
 
+---@param path string Path to the file to read.
 ---@return string
 local function read_file(path)
   local fd = io.open(path, 'r')
