@@ -156,7 +156,7 @@ end
 
 ---@param config ClientConfig
 function M.start(config)
-  if vim.tbl_isempty(config.workspace_folders or {}) then
+  if not vim.tbl_isempty(config.workspace_folders or {}) then
     -- Lazily start the LSP client to avoid blocking the UI.
     vim.defer_fn(function()
       start(config)
