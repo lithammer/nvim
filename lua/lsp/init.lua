@@ -98,17 +98,8 @@ local function local_config()
   return fn.json_decode(data)
 end
 
----@class ClientConfig: vim.lsp.ClientConfig
----@field workspace_folders? lsp.WorkspaceFolder[]
----@field require_workspace_folder? boolean
-
----@param config ClientConfig
+---@param config vim.lsp.ClientConfig
 local function start(config)
-  -- local capabilities = vim.tbl_deep_extend(
-  --   'force',
-  --   vim.lsp.protocol.make_client_capabilities(),
-  --   require('epo').register_cap()
-  -- )
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   if not capabilities then
@@ -125,12 +116,6 @@ local function start(config)
 
   if not merged_config then
     vim.notify('Failed to merge client config', vim.log.levels.ERROR)
-    return
-  end
-
-  if
-    merged_config.require_workspace_folder and vim.tbl_isempty(merged_config.workspace_folders)
-  then
     return
   end
 
@@ -165,17 +150,17 @@ local function start(config)
   return client_id
 end
 
+---@class ClientConfig: vim.lsp.ClientConfig
+---@field workspace_folders? lsp.WorkspaceFolder[]
+
 ---@param config ClientConfig
 function M.start(config)
-  -- Lazily start the LSP client to avoid blocking the UI.
-
-  -- vim.schedule(function()
-  --   start(config)
-  -- end)
-
-  vim.defer_fn(function()
-    start(config)
-  end, 1000)
+  if vim.tbl_isempty(config.workspace_folders or {}) then
+    -- Lazily start the LSP client to avoid blocking the UI.
+    vim.defer_fn(function()
+      start(config)
+    end, 1000)
+  end
 end
 
 return M
