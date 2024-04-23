@@ -38,7 +38,7 @@ local function on_attach(args)
     lsp.setup_document_highlight(bufnr)
   end
 
-  vim.lsp.inlay_hint.enable(bufnr, true)
+  vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 end
 
 vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
