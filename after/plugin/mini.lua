@@ -8,7 +8,6 @@ for _, plugin in ipairs({
       },
     },
   },
-  'mini.comment',
   {
     'mini.completion',
     {
