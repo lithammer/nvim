@@ -27,13 +27,11 @@ tpope/start/vim-sleuth	git@github.com:tpope/vim-sleuth.git
 tpope/start/vim-vinegar	git@github.com:tpope/vim-vinegar.git
 
 # Colorschemes
-AlexvZyl/start/nordic.nvim	git@github.com:AlexvZyl/nordic.nvim.git
 rktjmp/opt/lush.nvim	git@github.com:rktjmp/lush.nvim.git
 rose-pine/start/neovim	git@github.com:rose-pine/neovim.git
 catppuccin/start/nvim	git@github.com:catppuccin/nvim.git
 folke/start/tokyonight.nvim	git@github.com:folke/tokyonight.nvim.git
 mcchrish/start/zenbones.nvim	git@github.com:mcchrish/zenbones.nvim.git
-nordtheme/start/nord	git@github.com:nordtheme/vim.git
 rebelot/start/kanagawa.nvim	git@github.com:rebelot/kanagawa.nvim.git
 sainnhe/start/everforest	git@github.com:sainnhe/everforest.git
 sainnhe/start/gruvbox-material	git@github.com:sainnhe/gruvbox-material.git
