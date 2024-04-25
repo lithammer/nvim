@@ -1,4 +1,5 @@
-local fn, fs, uv = vim.fn, vim.fs, vim.uv
+vim.loader.enable()
+
 local g, opt = vim.g, vim.opt
 
 -- Disable providers.
