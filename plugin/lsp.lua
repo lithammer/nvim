@@ -26,14 +26,6 @@ local function on_attach(args)
     return
   end
 
-  if client.server_capabilities.completionProvider then
-    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-  end
-
-  if client.server_capabilities.definitionProvider then
-    vim.bo[bufnr].tagfunc = 'v:lua.vim.lsp.tagfunc'
-  end
-
   if client.server_capabilities.documentHighlightProvider then
     lsp.setup_document_highlight(bufnr)
   end

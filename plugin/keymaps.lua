@@ -1,104 +1,57 @@
-local set = vim.keymap.set
-
--- local function noremap(mode, lhs, rhs, opts)
---   opts = opts or {}
---   opts['noremap'] = true
---   set(mode, lhs, rhs, opts)
---   -- set(mode, lhs, rhs, vim.tbl_extend('keep', { noremap = true }, opts or {}))
--- end
-
-local function noremap(mode, lhs, rhs, ...)
-  local opts = vim.tbl_extend('error', { noremap = true }, ...)
-  set(mode, lhs, rhs, opts)
-end
-
--- stylua: ignore start
-local function cnoremap(...) noremap('c', ...) end
-local function inoremap(...) noremap('i', ...) end
-local function nnoremap(...) noremap('n', ...) end
-local function onoremap(...) noremap('o', ...) end
-local function vnoremap(...) noremap('v', ...) end
-local function xnoremap(...) noremap('x', ...) end
--- stylua: ignore end
+local keymap = vim.keymap
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
 
-    local code_action_source = function()
-      vim.lsp.buf.code_action({
-        context = {
-          only = {
-            'source',
-          },
-          diagnostics = {},
-        },
-      })
+    local function keymap_set(...)
+      local mode, lhs, rhs, opts = ...
+      opts = vim.tbl_extend('force', opts or {}, { buffer = bufnr })
+      keymap.set(mode, lhs, rhs, opts)
     end
 
-    -- local keymaps = {
-    --   { 'n', 'K', vim.lsp.buf.hover },
-    --   { 'n', 'gd', vim.lsp.buf.definition },
-    --   { 'n', 'gP', '<cmd>Glance definitions<cr>' },
-    --   { 'n', 'gD', vim.lsp.buf.declaration },
-    --   -- { 'n', 'gy', vim.lsp.buf.type_definition },
-    --   { 'n', 'gy', '<cmd>Glance type_definitions<cr>' },
-    --   -- { 'n', 'gI', vim.lsp.buf.implementation },
-    --   { 'n', 'gI', '<cmd>Glance implementations<cr>' },
-    --   { 'n', 'gK', vim.lsp.buf.signature_help },
-    --   { 'i', '<c-k>', vim.lsp.buf.signature_help },
-    --   { 'n', '<leader>r', vim.lsp.buf.rename },
-    --   -- { 'n', 'gr', vim.lsp.buf.references },
-    --   { 'n', 'gr', '<cmd>Glance references<cr>' },
-    --   { 'n', 'gO', vim.lsp.buf.document_symbol },
-    --   { 'n', 'gW', vim.lsp.buf.workspace_symbol },
-    --   { { 'n', 'v' }, 'ga', vim.lsp.buf.code_action },
-    --   { 'n', 'gA', code_action_source },
-    --   {
-    --     'n',
-    --     '[g',
-    --     function()
-    --       vim.diagnostic.goto_prev({ wrap = false, float = false })
-    --     end,
-    --   },
-    --   {
-    --     'n',
-    --     ']g',
-    --     function()
-    --       vim.diagnostic.goto_next({ wrap = false, float = false })
-    --     end,
-    --   },
-    -- }
+    local function code_action_kind(kind)
+      ---@diagnostic disable-next-line: missing-fields
+      vim.lsp.buf.code_action({ context = { only = { kind } } })
+    end
 
-    -- for _, keymap in pairs(keymaps) do
-    --   local mode, lhs, rhs, extra_opts = unpack(keymap)
-    --   local default_opts = { buffer = bufnr, silent = true }
-    --   local opts = vim.tbl_extend('error', default_opts, extra_opts or {})
-    --   set(mode, lhs, rhs, opts)
-    -- end
+    keymap_set('n', 'gd', vim.lsp.buf.definition)
+    keymap_set('n', 'gP', '<cmd>Glance definitions<cr>')
+    keymap_set('n', 'gD', vim.lsp.buf.declaration)
+    keymap_set('n', 'gy', '<cmd>Glance type_definitions<cr>')
+    keymap_set('n', 'gI', '<cmd>Glance implementations<cr>')
+    -- keymap_set('n', 'gy', vim.lsp.buf.type_definition)
+    -- keymap_set('n', 'gI', vim.lsp.buf.implementation)
+    keymap_set('i', '<c-s>', vim.lsp.buf.signature_help)
+    keymap_set('n', 'crn', vim.lsp.buf.rename)
+    -- keymap_set('n', 'gr', vim.lsp.buf.references)
+    keymap_set('n', 'gr', '<cmd>Glance references<cr>')
+    keymap_set('n', 'gO', vim.lsp.buf.document_symbol)
+    keymap_set('n', 'gW', vim.lsp.buf.workspace_symbol)
+    keymap_set('n', 'cra', vim.lsp.buf.code_action)
+    keymap_set('n', 'crA', function()
+      code_action_kind('source')
+    end)
+    keymap_set('n', '<leader>r', function()
+      code_action_kind('refactor')
+    end)
 
-    local opts = { buffer = bufnr, silent = true }
-
-    nnoremap('K', vim.lsp.buf.hover, opts)
-    nnoremap('gd', vim.lsp.buf.definition, opts)
-    nnoremap('gP', '<cmd>Glance definitions<cr>', opts)
-    nnoremap('gD', vim.lsp.buf.declaration, opts)
-    nnoremap('gy', '<cmd>Glance type_definitions<cr>', opts)
-    nnoremap('gI', '<cmd>Glance implementations<cr>', opts)
-    nnoremap('gK', vim.lsp.buf.signature_help, opts)
-    inoremap('<c-k>', vim.lsp.buf.signature_help, opts)
-    nnoremap('<leader>r', vim.lsp.buf.rename, opts)
-    nnoremap('gr', '<cmd>Glance references<cr>', opts)
-    nnoremap('gO', vim.lsp.buf.document_symbol, opts)
-    nnoremap('gW', vim.lsp.buf.workspace_symbol, opts)
-    nnoremap('ga', vim.lsp.buf.code_action, opts)
-    vnoremap('ga', vim.lsp.buf.code_action, opts)
-    nnoremap('gA', code_action_source, opts)
-    nnoremap('[g', function()
+    keymap_set('n', '[d', function()
       vim.diagnostic.goto_prev({ wrap = false, float = false })
-    end, opts)
-    nnoremap(']g', function()
+    end)
+    keymap_set('n', ']d', function()
       vim.diagnostic.goto_next({ wrap = false, float = false })
-    end, opts)
+    end)
+
+    keymap_set('n', '<c-w>d', function()
+      vim.diagnostic.open_float({ border = 'rounded' })
+    end, {
+      desc = 'Open a floating window showing diagnostics under the cursor',
+    })
+    keymap_set('n', '<c-w><c-d>', function()
+      vim.diagnostic.open_float({ border = 'rounded' })
+    end, {
+      desc = 'Open a floating window showing diagnostics under the cursor',
+    })
   end,
 })
