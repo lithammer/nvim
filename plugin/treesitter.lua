@@ -122,5 +122,5 @@ require('nvim-treesitter.configs').setup({
 
 require('treesitter-context').setup({
   max_lines = 3,
-  separator = '╱',
+  separator = vim.opt.fillchars:get().diff,
 })
