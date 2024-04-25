@@ -1,4 +1,4 @@
-local later = MiniDeps.later
+local now, later = MiniDeps.now, MiniDeps.later
 
 for _, plugin in ipairs({
   {
@@ -15,8 +15,8 @@ for _, plugin in ipairs({
     {
       mappings = { force_twostep = '', force_fallback = '' },
       window = {
-        info = { height = 25, width = 80, border = 'single' },
-        signature = { height = 25, width = 80, border = 'single' },
+        info = { border = 'single' },
+        signature = { border = 'single' },
       },
     },
   },
@@ -41,15 +41,15 @@ for _, plugin in ipairs({
   'mini.surround',
 }) do
   local name
-  local config
+  local config = {}
 
   if type(plugin) == 'string' then
     name = plugin
   elseif type(plugin) == 'table' then
-    name, config = unpack(plugin)
+    name, config = plugin[1], plugin[2]
   end
 
-  later(function()
+  now(function()
     require(name).setup(config)
   end)
 end
