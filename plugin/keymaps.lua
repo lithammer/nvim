@@ -4,12 +4,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
 
-    local function keymap_set(...)
-      local mode, lhs, rhs, opts = ...
+    local function keymap_set(mode, lhs, rhs, opts)
       opts = vim.tbl_extend('force', opts or {}, { buffer = bufnr })
       keymap.set(mode, lhs, rhs, opts)
     end
 
+    ---@param kind string
     local function code_action_kind(kind)
       ---@diagnostic disable-next-line: missing-fields
       vim.lsp.buf.code_action({ context = { only = { kind } } })
