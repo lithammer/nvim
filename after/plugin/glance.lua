@@ -1,13 +1,19 @@
-local glance = require('glance')
+local add, later = MiniDeps.add, MiniDeps.later
 
--- local horiz = vim.opt.fillchars:get().horiz
+add('DNLHC/glance.nvim')
 
----@diagnostic disable-next-line: missing-fields
-glance.setup({
-  -- detached = true,
-  border = {
-    enable = true,
-    top_char = ' ͞',
-    bottom_char = '_',
-  },
-})
+later(function()
+  local glance = require('glance')
+
+  -- local horiz = vim.opt.fillchars:get().horiz
+
+  ---@diagnostic disable-next-line: missing-fields
+  glance.setup({
+    -- detached = true,
+    border = {
+      enable = true,
+      top_char = ' ͞',
+      bottom_char = '_',
+    },
+  })
+end)

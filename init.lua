@@ -1,29 +1,107 @@
-vim.g.loaded_node_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
+local fn, fs, uv = vim.fn, vim.fs, vim.uv
+local g, opt = vim.g, vim.opt
 
-vim.g.zenbones = { darkness = 'warm' }
-vim.g.zenwritten = { darkness = 'warm' }
+-- Disable providers.
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
 
-vim.opt.termguicolors = true
+opt.breakindent = true
+opt.breakindentopt = { 'shift:2', 'sbr' }
+-- opt.completeopt:append('noselect')
+opt.completeopt:remove('preview')
+opt.conceallevel = 2
+opt.cursorline = true
+opt.expandtab = true
+opt.fillchars:append({ diff = '╱' })
+-- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
+opt.grepformat:prepend({ '%f:%l:%c:%m' })
+opt.grepprg = 'rg --vimgrep'
+opt.inccommand = 'split'
+opt.list = true
+opt.listchars:append({ tab = '│ ', trail = '·' })
+opt.number = true
+opt.pumblend = 10
+opt.scrolloff = 4
+opt.shiftwidth = 4
+opt.showbreak = '↪'
+opt.sidescrolloff = 8
+opt.signcolumn = 'number'
+opt.smartcase = true
+opt.smartindent = true
+opt.tabstop = 4
+opt.tabstop = 4
+opt.termguicolors = true
+opt.undofile = true
+opt.wrap = false
 
--- vim.g.bones_compat = 1
-vim.cmd.packadd('lush.nvim')
--- vim.cmd.colorscheme('zenwritten')
-require('kanagawa').setup({
-  overrides = function(_colors)
-    return {
-      NormalFloat = { bg = 'none' },
-      FloatBorder = { bg = 'none' },
-      FloatTitle = { bg = 'none' },
-    }
+-- if vim.fn.has('nvim-0.10') == 1 then
+--   opt.foldenable = false
+--   opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+--   -- opt.foldlevel = 1
+--   opt.foldlevelstart = 99
+--   opt.foldmethod = 'expr'
+--   opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+-- end
+
+require('mini.deps').setup()
+local add, now = MiniDeps.add, MiniDeps.now
+add('echasnovski/mini.nvim')
+
+now(function()
+  require('mini.notify').setup({ lsp_progress = { enable = false } })
+  vim.notify = MiniNotify.make_notify()
+end)
+
+add('brenoprata10/nvim-highlight-colors')
+add('folke/neodev.nvim')
+add('folke/twilight.nvim')
+add('folke/trouble.nvim')
+add('github/copilot.vim')
+add('j-hui/fidget.nvim')
+add('mfussenegger/nvim-ansible')
+add('nvim-tree/nvim-web-devicons')
+add({
+  source = 'nvim-treesitter/nvim-treesitter',
+  hooks = {
+    post_checkout = function()
+      vim.cmd('TSUpdate')
+    end,
+  },
+})
+add('stevearc/oil.nvim')
+add('tpope/vim-sleuth')
+add('tpope/vim-vinegar')
+
+-- add('rose-pine/neovim')
+-- add({ source = 'catppuccin/nvim', name = 'catppuccin' })
+-- add('folke/tokyonight.nvim')
+-- add({ source = 'mcchrish/zenbones.nvim', depends = 'rktjmp/lush.nvim' })
+-- add('rebelot/kanagawa.nvim')
+-- add('sainnhe/everforest')
+add('sainnhe/gruvbox-material')
+
+g.gruvbox_material_better_performance = 1
+g.gruvbox_material_foreground = 'original'
+vim.cmd [[colorscheme gruvbox-material]]
+
+g.netrw_altfile = 1
+g.netrw_liststyle = 3
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'netrw',
+  callback = function()
+    local ok, ignore = vim.fn['netrw_gitignore#Hide']()
+    if ok then
+      g.netrw_list_hide = ignore
+    end
   end,
 })
-vim.cmd.colorscheme('kanagawa-dragon')
 
 -- :h last-position-jump
 vim.api.nvim_create_autocmd('BufRead', {
+  group = vim.api.nvim_create_augroup('last_position_jump', {}),
   callback = function(opts)
     local buf = opts.buf
     vim.api.nvim_create_autocmd('BufWinEnter', {
@@ -45,13 +123,10 @@ vim.api.nvim_create_autocmd('BufRead', {
 })
 
 -- :h vim.highlight
-do
-  local group = vim.api.nvim_create_augroup('yank_highlight', {})
-  vim.api.nvim_create_autocmd('TextYankPost', {
-    group = group,
-    callback = function()
-      require('vim.highlight').on_yank()
-    end,
-    desc = 'Highlight yanked text',
-  })
-end
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('yank_highlight', {}),
+  callback = function()
+    require('vim.highlight').on_yank()
+  end,
+  desc = 'Highlight yanked text',
+})

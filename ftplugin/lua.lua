@@ -1,7 +1,6 @@
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
-vim.cmd.packadd('neodev.nvim')
 require('neodev').setup({ lspconfig = false })
 
 lsp.start({

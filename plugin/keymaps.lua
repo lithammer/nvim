@@ -102,24 +102,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-
--- vim-qf
-nnoremap('<leader>q', '<plug>(qf_qf_toggle)', { desc = 'Toggle quickfix window' })
-nnoremap(']q', '<plug>(qf_qf_next)', { desc = 'Go down the quickfix list' })
-nnoremap('[q', '<plug>(qf_qf_previous)', { desc = 'Go up the quickfix list' })
-nnoremap(']l', '<plug>(qf_loc_next)', { desc = 'Go down the current location list' })
-nnoremap('[l', '<plug>(qf_loc_previous)', { desc = 'Go up the current location list' })
--- set('n', '<leader>q', '<plug>(qf_qf_toggle)', { desc = 'Toggle quickfix window' })
--- set('n', ']q', '<plug>(qf_qf_next)', { desc = 'Go down the quickfix list' })
--- set('n', '[q', '<plug>(qf_qf_previous)', { desc = 'Go up the quickfix list' })
--- set('n', ']l', '<plug>(qf_loc_next)', { desc = 'Go down the current location list' })
--- set('n', '[l', '<plug>(qf_loc_previous)', { desc = 'Go up the current location list' })
-
--- flash
--- stylua: ignore start
-set({ 'n', 'x', 'o' }, 's',  require('flash').jump, { desc = 'Flash' })
-set({ 'n', 'x', 'o' }, 'S', require('flash').treesitter, { desc = 'Flash Treesitter' })
-set('o', 'r', require('flash').remote, { desc = 'Remote Flash' })
-set({ 'o', 'x' }, 'R', require('flash').treesitter_search, { desc = 'Treesitter Search' })
-set({ 'c' }, '<c-s>', require('flash').toggle, { desc = 'Toggle Flash Search' })
--- stylua: ignore end
