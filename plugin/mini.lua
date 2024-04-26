@@ -1,62 +1,17 @@
 local now, later = MiniDeps.now, MiniDeps.later
 
-for _, plugin in ipairs({
-  {
-    'mini.ai',
-    {
+later(
+  function()
+    require('mini.ai').setup({
       mappings = {
         goto_left = '',
         goto_right = '',
       },
-    },
-  },
-  {
-    'mini.completion',
-    {
-      mappings = { force_twostep = '', force_fallback = '' },
-      window = {
-        info = { border = 'single' },
-        signature = { border = 'single' },
-      },
-    },
-  },
-  {
-    'mini.diff',
-    {
-      mappings = {
-        apply = '',
-        reset = '',
-        textobject = '',
-        goto_first = '',
-        goto_prev = '[c',
-        goto_next = ']c',
-        goto_last = '',
-      },
-    },
-  },
-  'mini.extra',
-  -- 'mini.files',
-  'mini.pick',
-  'mini.splitjoin',
-  'mini.surround',
-}) do
-  local name
-  local config = {}
-
-  if type(plugin) == 'string' then
-    name = plugin
-  elseif type(plugin) == 'table' then
-    name, config = plugin[1], plugin[2]
+    })
   end
-
-  now(function()
-    require(name).setup(config)
-  end)
-end
+)
 
 later(function()
-  vim.keymap.set('n', '<c-p>', MiniPick.builtin.files)
-
   local miniclue = require('mini.clue')
   miniclue.setup({
     triggers = {
@@ -102,3 +57,47 @@ later(function()
     },
   })
 end)
+
+now(
+  function()
+    require('mini.completion').setup({
+      mappings = {
+        force_twostep = '',
+        force_fallback = '',
+      },
+      window = {
+        info = { border = 'single' },
+        signature = { border = 'single' },
+      },
+    })
+  end
+)
+
+later(
+  function()
+    require('mini.diff').setup({
+      mappings = {
+        apply = '',
+        reset = '',
+        textobject = '',
+        goto_first = '',
+        goto_prev = '[c',
+        goto_next = ']c',
+        goto_last = '',
+      },
+    })
+  end
+)
+
+later(function() require('mini.extra').setup() end)
+
+later(function() require('mini.files').setup() end)
+
+later(function()
+  require('mini.pick').setup()
+  vim.keymap.set('n', '<c-p>', MiniPick.builtin.files)
+end)
+
+later(function() require('mini.splitjoin').setup() end)
+
+later(function() require('mini.surround').setup() end)
