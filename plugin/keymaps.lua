@@ -37,7 +37,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     keymap_set('n', 'gr', '<cmd>Glance references<cr>')
     keymap_set('n', 'gO', vim.lsp.buf.document_symbol)
     keymap_set('n', 'gW', vim.lsp.buf.workspace_symbol)
-    keymap_set('n', 'crR', function() code_action_kind('source') end)
-    keymap_set('n', '<leader>r', function() code_action_kind('refactor') end)
+    keymap_set('n', 'crR', function()
+      code_action_kind('source')
+    end)
+    keymap_set('n', '<leader>r', function()
+      code_action_kind('refactor')
+    end)
   end,
 })

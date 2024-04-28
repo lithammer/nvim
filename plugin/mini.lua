@@ -1,15 +1,13 @@
 local now, later = MiniDeps.now, MiniDeps.later
 
-later(
-  function()
-    require('mini.ai').setup({
-      mappings = {
-        goto_left = '',
-        goto_right = '',
-      },
-    })
-  end
-)
+later(function()
+  require('mini.ai').setup({
+    mappings = {
+      goto_left = '',
+      goto_right = '',
+    },
+  })
+end)
 
 later(function()
   local miniclue = require('mini.clue')
@@ -58,46 +56,50 @@ later(function()
   })
 end)
 
-now(
-  function()
-    require('mini.completion').setup({
-      mappings = {
-        force_twostep = '',
-        force_fallback = '',
-      },
-      window = {
-        info = { border = 'single' },
-        signature = { border = 'single' },
-      },
-    })
-  end
-)
+now(function()
+  require('mini.completion').setup({
+    mappings = {
+      force_twostep = '',
+      force_fallback = '',
+    },
+    window = {
+      info = { border = 'single' },
+      signature = { border = 'single' },
+    },
+  })
+end)
 
-later(
-  function()
-    require('mini.diff').setup({
-      mappings = {
-        apply = '',
-        reset = '',
-        textobject = '',
-        goto_first = '',
-        goto_prev = '[c',
-        goto_next = ']c',
-        goto_last = '',
-      },
-    })
-  end
-)
+later(function()
+  require('mini.diff').setup({
+    mappings = {
+      apply = '',
+      reset = '',
+      textobject = '',
+      goto_first = '',
+      goto_prev = '[c',
+      goto_next = ']c',
+      goto_last = '',
+    },
+  })
+end)
 
-later(function() require('mini.extra').setup() end)
+later(function()
+  require('mini.extra').setup()
+end)
 
-later(function() require('mini.files').setup() end)
+later(function()
+  require('mini.files').setup()
+end)
 
 later(function()
   require('mini.pick').setup()
   vim.keymap.set('n', '<c-p>', MiniPick.builtin.files)
 end)
 
-later(function() require('mini.splitjoin').setup() end)
+later(function()
+  require('mini.splitjoin').setup()
+end)
 
-later(function() require('mini.surround').setup() end)
+later(function()
+  require('mini.surround').setup()
+end)

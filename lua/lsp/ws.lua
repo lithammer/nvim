@@ -54,6 +54,8 @@ function M.git()
 end
 
 ---@return lsp.WorkspaceFolder[]
-function M.cwd() return { fname_to_workspace_folder(getcwd()) } end
+function M.cwd()
+  return { fname_to_workspace_folder(getcwd()) }
+end
 
 return M
