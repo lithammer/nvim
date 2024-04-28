@@ -50,7 +50,7 @@ function M.git()
     return nil
   end
 
-  return { fname_to_workspace_folder(match) }
+  return { fname_to_workspace_folder(abspath(match)) }
 end
 
 ---@return lsp.WorkspaceFolder[]
