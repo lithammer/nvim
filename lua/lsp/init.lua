@@ -127,30 +127,7 @@ local function start(config)
     bufnr = 0,
   }
 
-  local client_id = vim.lsp.start(merged_config, opts)
-  if not client_id then
-    return nil
-  end
-
-  local client = vim.lsp.get_client_by_id(client_id)
-  if not client then
-    return nil
-  end
-
-  local workspace_folders = vim
-    .iter(client.workspace_folders or {})
-    :map(function(ws)
-      return ws.uri
-    end)
-    :totable()
-
-  for _, ws in ipairs(merged_config.workspace_folders or {}) do
-    if not vim.tbl_contains(workspace_folders, ws.uri) then
-      vim.lsp.buf.add_workspace_folder(ws.name)
-    end
-  end
-
-  return client_id
+  return vim.lsp.start(merged_config, opts)
 end
 
 ---@class ClientConfig: vim.lsp.ClientConfig
