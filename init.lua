@@ -88,6 +88,8 @@ vim.cmd [[colorscheme gruvbox-material]]
 g.netrw_altfile = 1
 g.netrw_liststyle = 3
 
+vim.api.nvim_create_user_command('W', 'w', { nargs = 0 })
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'netrw',
   callback = function()
