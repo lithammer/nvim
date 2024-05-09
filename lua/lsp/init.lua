@@ -101,8 +101,9 @@ local function local_config()
   return fn.json_decode(data)
 end
 
+---@param bufnr number Buffer handle to attach to if starting or re-using a client.
 ---@param config vim.lsp.ClientConfig
-local function start(config)
+local function start(bufnr, config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   if not capabilities then
@@ -124,7 +125,7 @@ local function start(config)
 
   local opts = {
     reuse_client = M.reuse_client,
-    bufnr = 0,
+    bufnr = bufnr,
   }
 
   return vim.lsp.start(merged_config, opts)
@@ -136,9 +137,10 @@ end
 ---@param config ClientConfig
 function M.start(config)
   if not vim.tbl_isempty(config.workspace_folders or {}) then
+    local bufnr = vim.api.nvim_get_current_buf()
     -- Lazily start the LSP client to avoid blocking the UI.
     vim.defer_fn(function()
-      start(config)
+      start(bufnr, config)
     end, 1000)
   end
 end
