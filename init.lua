@@ -37,12 +37,12 @@ opt.termguicolors = true
 opt.undofile = true
 opt.wrap = false
 
--- opt.foldenable = false
--- opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- -- opt.foldlevel = 1
--- opt.foldlevelstart = 99
--- opt.foldmethod = 'expr'
--- opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+opt.foldenable = false
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- opt.foldlevel = 1
+opt.foldlevelstart = 99
+opt.foldmethod = 'expr'
+opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 require('mini.deps').setup()
 local add, now = MiniDeps.add, MiniDeps.now
