@@ -36,8 +36,8 @@ local function diagnostic()
     [vim.diagnostic.severity.ERROR] = ' ',
     [vim.diagnostic.severity.WARN] = ' ',
     [vim.diagnostic.severity.INFO] = ' ',
-    -- [vim.diagnostic.severity.HINT] = ' ',
-    [vim.diagnostic.severity.HINT] = ' ',
+    [vim.diagnostic.severity.HINT] = ' ',
+    -- [vim.diagnostic.severity.HINT] = ' ',
   }
 
   local bufnr = vim.api.nvim_get_current_buf()

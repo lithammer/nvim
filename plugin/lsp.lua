@@ -1,15 +1,14 @@
-vim.diagnostic.config({ signs = true, severity_sort = true })
+vim.diagnostic.config({
+  severity_sort = true,
+  signs = true,
+})
 
 do
   local signs = {
-    -- Error = ' ',
-    -- Warn = ' ',
-    -- Hint = ' ',
-    -- Info = ' ',
     Error = ' ',
     Warn = ' ',
     Info = ' ',
-    Hint = ' ',
+    Hint = ' ',
   }
   for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
