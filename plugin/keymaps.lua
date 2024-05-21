@@ -2,6 +2,25 @@ local keymap = vim.keymap
 
 local Methods = vim.lsp.protocol.Methods
 
+-- Tentative Neovim 0.11 LSP mappings.
+do
+  vim.keymap.set('n', 'gln', function()
+    vim.lsp.buf.rename()
+  end, { desc = 'vim.lsp.buf.rename()' })
+
+  vim.keymap.set({ 'n', 'x' }, 'gll', function()
+    vim.lsp.buf.code_action()
+  end, { desc = 'vim.lsp.buf.code_action()' })
+
+  vim.keymap.set('n', 'glr', function()
+    vim.lsp.buf.references()
+  end, { desc = 'vim.lsp.buf.references()' })
+
+  vim.keymap.set('i', '<C-S>', function()
+    vim.lsp.buf.signature_help()
+  end, { desc = 'vim.lsp.buf.signature_help()' })
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
