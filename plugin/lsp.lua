@@ -30,6 +30,11 @@ local function on_attach(args)
   end
 
   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+
+  if vim.lsp.completion then
+    vim.opt.completeopt = { 'menuone', 'noinsert', 'popup' }
+    vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+  end
 end
 
 vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
