@@ -71,12 +71,10 @@ add('stevearc/oil.nvim')
 add('tpope/vim-sleuth')
 add('tpope/vim-vinegar')
 
-add('rose-pine/neovim')
+-- Colorschemes.
 add({ source = 'catppuccin/nvim', name = 'catppuccin' })
-add('folke/tokyonight.nvim')
 add({ source = 'mcchrish/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
 add('rebelot/kanagawa.nvim')
-add('sainnhe/everforest')
 add('sainnhe/gruvbox-material')
 
 g.gruvbox_material_better_performance = 1
