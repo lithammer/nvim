@@ -3,10 +3,23 @@
     "runtime": {
         "version": "LuaJIT"
     },
+    "format": {
+        "enable": false
+    },
+    "hint": {
+        "enable": true,
+        "arrayIndex": "Disable",
+    },
     "workspace": {
         "library": [
-            "$VIMRUNTIME"
+            "lua",
+            "$VIMRUNTIME/lua"
         ]
+    },
+    "diagnostics": {
+        "unusedLocalExclude": [
+            "_*"
+        ],
     },
     "diagnostics.globals": [
         "MiniDeps",

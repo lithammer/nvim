@@ -7,41 +7,12 @@ lsp.start({
   name = 'lua-language-server',
   cmd = { 'lua-language-server' },
   before_init = require('neodev.lsp').before_init,
-  workspace_folders = ws.find({
-    '.luarc.json',
-    '.luarc.jsonc',
-    '.luacheckrc',
-    '.stylua.toml',
-    'stylua.toml',
-    'selene.toml',
-    'selene.yml',
-  }),
+  workspace_folders = ws.find({ '.luarc.json', '.luarc.jsonc' }),
   settings = {
     Lua = {
       completion = {
-        -- callSnippet = 'Replace',
-        -- keywordSnippet = 'Replace',
-        callSnippet = 'Disable',
-        keywordSnippet = 'Disable',
-      },
-      diagnostics = {
-        unusedLocalExclude = { '_*' },
-      },
-      format = {
-        enable = false,
-        defaultConfig = {
-          indent_style = 'space',
-          indent_size = '2',
-          continuation_indent_size = '2',
-          quote_style = 'single',
-        },
-      },
-      hint = {
-        enable = true,
-        arrayIndex = 'Disable',
-      },
-      workspace = {
-        checkThirdParty = false,
+        callSnippet = 'Replace',
+        keywordSnippet = 'Replace',
       },
     },
   },
