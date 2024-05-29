@@ -1,20 +1,14 @@
 vim.diagnostic.config({
   severity_sort = true,
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = ' ',
+      [vim.diagnostic.severity.WARN] = ' ',
+      [vim.diagnostic.severity.INFO] = ' ',
+      [vim.diagnostic.severity.HINT] = ' ',
+    },
+  },
 })
-
-do
-  local signs = {
-    Error = ' ',
-    Warn = ' ',
-    Info = ' ',
-    Hint = ' ',
-  }
-  for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-  end
-end
 
 local function on_attach(args)
   local lsp = require('lsp')
