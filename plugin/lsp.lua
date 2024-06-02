@@ -8,6 +8,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = ' ',
     },
   },
+  virtual_text = false,
 })
 
 local function on_attach(args)
