@@ -1,3 +1,5 @@
+local Methods = vim.lsp.protocol.Methods
+
 vim.diagnostic.config({
   severity_sort = true,
   signs = {
@@ -20,7 +22,7 @@ local function on_attach(args)
     return
   end
 
-  if client.server_capabilities.documentHighlightProvider then
+  if client.supports_method(Methods.textDocument_documentHighlight) then
     lsp.setup_document_highlight(bufnr)
   end
 
