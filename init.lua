@@ -10,6 +10,7 @@ g.loaded_ruby_provider = 0
 
 opt.breakindent = true
 opt.breakindentopt = { 'shift:2', 'sbr' }
+opt.completeopt:append('fuzzy')
 opt.conceallevel = 2
 opt.cursorline = true
 opt.expandtab = true
