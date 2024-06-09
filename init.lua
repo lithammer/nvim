@@ -68,6 +68,7 @@ add({
   },
 })
 add('stevearc/oil.nvim')
+add('tpope/vim-fugitive')
 add('tpope/vim-sleuth')
 add('tpope/vim-vinegar')
 
