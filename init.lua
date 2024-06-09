@@ -79,10 +79,6 @@ add({ source = 'mcchrish/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
 add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 
-g.gruvbox_material_better_performance = 1
-g.gruvbox_material_foreground = 'original'
-vim.cmd [[colorscheme gruvbox-material]]
-
 g.netrw_altfile = 1
 g.netrw_liststyle = 3
 
