@@ -1,27 +1,16 @@
-local function set_user_hl()
-  local get_hl = vim.api.nvim_get_hl
-  local set_hl = vim.api.nvim_set_hl
-
-  local bg = get_hl(0, { name = 'StatusLine', link = false }).bg
-  -- local bg_nc = get_hl(0, { name = 'StatusLineNC' }).bg
-
-  local fg_error = get_hl(0, { name = 'DiagnosticError', link = false }).fg
-  local fg_warn = get_hl(0, { name = 'DiagnosticWarn', link = false }).fg
-  local fg_info = get_hl(0, { name = 'DiagnosticInfo', link = false }).fg
-  local fg_hint = get_hl(0, { name = 'DiagnosticHint', link = false }).fg
-
-  set_hl(0, 'User1', { fg = fg_error, bg = bg })
-  set_hl(0, 'User2', { fg = fg_warn, bg = bg })
-  set_hl(0, 'User3', { fg = fg_info, bg = bg })
-  set_hl(0, 'User4', { fg = fg_hint, bg = bg })
-end
-
-vim.api.nvim_create_autocmd('ColorScheme', {
+vim.api.nvim_create_autocmd({ 'ColorScheme', 'VimEnter' }, {
   pattern = '*',
-  callback = set_user_hl,
-})
+  callback = function()
+    vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NvimDarkGrey3', fg = 'NvimLightGrey3' })
 
-set_user_hl()
+    local statusline = vim.api.nvim_get_hl(0, { name = 'StatusLine', link = false })
+
+    for i, suffix in ipairs({ 'Error', 'Warn', 'Info', 'Hint' }) do
+      local fg = vim.api.nvim_get_hl(0, { name = 'Diagnostic' .. suffix, link = false }).fg
+      vim.api.nvim_set_hl(0, 'User' .. i, vim.tbl_extend('force', statusline, { fg = fg }))
+    end
+  end,
+})
 
 ---@return string
 local function diagnostic()
