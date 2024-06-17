@@ -31,7 +31,7 @@ later(function()
       then
         return {
           timeout_ms = 500,
-          lsp_fallback = true,
+          lsp_format = 'fallback',
         }
       end
     end,
