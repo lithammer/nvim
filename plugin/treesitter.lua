@@ -26,6 +26,7 @@ require('nvim-treesitter.configs').setup({
     'diff',
     'disassembly',
     'dockerfile',
+    'editorconfig',
     'embedded_template',
     'elixir',
     'erlang',
