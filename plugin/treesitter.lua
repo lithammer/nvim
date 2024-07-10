@@ -43,6 +43,7 @@ require('nvim-treesitter.configs').setup({
     'gotmpl',
     'gowork',
     'graphql',
+    'haskell',
     'hcl',
     'html',
     'htmldjango',
