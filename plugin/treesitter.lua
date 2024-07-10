@@ -72,6 +72,7 @@ require('nvim-treesitter.configs').setup({
     'passwd',
     'pem',
     'perl',
+    'printf',
     'proto',
     'python',
     'query',
