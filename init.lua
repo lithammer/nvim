@@ -59,7 +59,6 @@ add('folke/twilight.nvim')
 add('github/copilot.vim')
 add('j-hui/fidget.nvim')
 add('mfussenegger/nvim-ansible')
-add('nvim-tree/nvim-web-devicons')
 add({
   source = 'nvim-treesitter/nvim-treesitter',
   hooks = {
