@@ -3,10 +3,25 @@ local lsp = require('lsp')
 local ws = require('lsp.ws')
 
 lsp.start({
-  name = 'typescript-language-server',
-  cmd = { 'typescript-language-server', '--stdio' },
+  name = 'vtsls',
+  cmd = { 'vtsls', '--stdio' },
   workspace_folders = ws.find('package.json'),
+  settings = {
+    typescript = {
+      inlayHints = {
+        parameterNames = { enabled = 'literals' },
+        parameterTypes = { enabled = true },
+        variableTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        enumMemberValues = { enabled = true },
+      },
+    },
+  },
 })
+
+-- Buggy together with vtsls'. Removes completetion after dot.
+vim.opt.completeopt:remove({ 'longest' })
 
 -- local biome_json = ws.find({ 'biome.json', 'biome.jsonc' })
 -- if biome_json then
