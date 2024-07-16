@@ -11,6 +11,9 @@ vim.diagnostic.config({
     },
   },
   virtual_text = false,
+  jump = {
+    float = true,
+  },
 })
 
 local function on_attach(args)
