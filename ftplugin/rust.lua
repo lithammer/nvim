@@ -15,7 +15,6 @@ lsp.start({
       },
       completion = {
         postfix = { enable = false },
-        callable = { snippets = 'none' },
       },
     },
   },
