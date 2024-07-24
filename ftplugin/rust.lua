@@ -9,7 +9,6 @@ lsp.start({
     ['rust-analyzer'] = {
       check = {
         command = 'clippy',
-        features = 'all',
       },
       cargo = {
         features = 'all',
