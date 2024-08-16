@@ -16,13 +16,13 @@ later(function()
       },
     },
     formatters_by_ft = {
-      javascript = { { 'biome-check', 'prettier' } },
+      javascript = { 'biome-check', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
-      nim = { { 'nph', 'nimpretty' } },
-      python = { 'black' },
+      nim = { 'nph', 'nimpretty', stop_after_first = true },
+      python = { 'ruff_format' },
       sh = { 'shfmt' },
       toml = { 'taplo' },
-      typescript = { { 'biome-check', 'prettier' } },
+      typescript = { 'biome-check', 'prettier', stop_after_first = true },
     },
     format_on_save = function(bufnr)
       if
@@ -30,8 +30,8 @@ later(function()
         or not (vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat)
       then
         return {
-          timeout_ms = 500,
           lsp_format = 'fallback',
+          timeout_ms = 500,
         }
       end
     end,
