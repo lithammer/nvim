@@ -20,9 +20,6 @@ lsp.start({
   },
 })
 
--- Buggy together with vtsls'. Removes completion after dot.
-vim.opt.completeopt:remove({ 'longest' })
-
 -- local biome_json = ws.find({ 'biome.json', 'biome.jsonc' })
 -- if biome_json then
 --   lsp.start({
