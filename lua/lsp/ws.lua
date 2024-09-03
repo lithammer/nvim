@@ -21,7 +21,7 @@ end
 ---
 ---@param path string Path to file.
 ---@return lsp.WorkspaceFolder
-local function fname_to_workspace_folder(path)
+function M.fname_to_workspace_folder(path)
   return {
     name = path,
     uri = vim.uri_from_fname(path),
@@ -38,7 +38,7 @@ function M.find(names)
     return nil
   end
 
-  return { fname_to_workspace_folder(abspath(match)) }
+  return { M.fname_to_workspace_folder(abspath(match)) }
 end
 
 --- Finds Git repository root relative to the current buffer.
@@ -50,12 +50,12 @@ function M.git()
     return nil
   end
 
-  return { fname_to_workspace_folder(abspath(match)) }
+  return { M.fname_to_workspace_folder(abspath(match)) }
 end
 
 ---@return lsp.WorkspaceFolder[]
 function M.cwd()
-  return { fname_to_workspace_folder(getcwd()) }
+  return { M.fname_to_workspace_folder(getcwd()) }
 end
 
 return M
