@@ -25,3 +25,12 @@ add('dgagn/diagflow.nvim')
 later(function()
   require('diagflow').setup({ padding_top = 3 })
 end)
+
+later(function()
+  require('trouble').setup({
+    keys = {
+      j = 'next',
+      k = 'prev',
+    },
+  })
+end)
