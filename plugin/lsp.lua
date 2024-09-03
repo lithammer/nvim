@@ -18,7 +18,7 @@ vim.diagnostic.config({
 })
 
 local function trouble(mode)
-  local width = vim.api.nvim_win_get_width(0)
+  local width = vim.o.columns
   local is_small_window = width < 100
   require('trouble').first({
     mode = mode,
