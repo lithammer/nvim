@@ -23,7 +23,10 @@ end)
 
 add('dgagn/diagflow.nvim')
 later(function()
-  require('diagflow').setup({ padding_top = 3 })
+  require('diagflow').setup({
+    padding_top = 3,
+    toggle_event = { 'InsertEnter', 'InsertLeave' },
+  })
 end)
 
 later(function()
