@@ -98,8 +98,7 @@ later(function()
 end)
 
 later(function()
-  local style = vim.env.TERM == 'xterm-kitty' and 'ascii' or 'glyph'
-  require('mini.icons').setup({ style = style })
+  require('mini.icons').setup()
 end)
 
 later(function()
