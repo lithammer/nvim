@@ -43,6 +43,24 @@ opt.foldlevelstart = 99
 opt.foldmethod = 'expr'
 opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
+do
+  ---@diagnostic disable-next-line: param-type-mismatch
+  local mini_path = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/pack/deps/start/mini.nvim')
+  if not vim.uv.fs_stat(mini_path) then
+    vim.notify('Installing `mini.nvim`')
+    vim
+      .system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/echasnovski/mini.nvim',
+        mini_path,
+      })
+      :wait()
+    vim.cmd [[packadd mini.nvim | helptags ALL]]
+  end
+end
+
 require('mini.deps').setup()
 local add, now = MiniDeps.add, MiniDeps.now
 add('echasnovski/mini.nvim')
