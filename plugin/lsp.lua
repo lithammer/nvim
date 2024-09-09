@@ -83,7 +83,7 @@ local function setup_mappings(bufnr, client)
     code_action_kind(CodeActionKind.Source)
   end, { desc = 'List source code actions' })
 
-  map('n', '<leader>rr', function()
+  map({ 'n', 'x' }, '<leader>rr', function()
     code_action_kind(CodeActionKind.Refactor)
   end, { desc = 'List refactor code actions' })
 end
