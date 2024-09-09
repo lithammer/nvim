@@ -1,6 +1,7 @@
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
+---@return lsp.WorkspaceFolder[]?
 local function workspace_folders()
   local name = vim.api.nvim_buf_get_name(0)
 
@@ -10,7 +11,7 @@ local function workspace_folders()
     local modcache = vim.trim(obj.stdout or '')
     local is_module = name:sub(1, #modcache) == modcache
     if is_module then
-      return ws.fname_to_workspace_folder(modcache)
+      return { ws.fname_to_workspace_folder(modcache) }
     end
   else
     vim.notify('`go env GOMODCACHE` command failed: ' .. (obj.stderr or ''), vim.log.levels.ERROR)
