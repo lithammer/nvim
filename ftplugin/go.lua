@@ -11,7 +11,11 @@ local function workspace_folders()
     local modcache = vim.trim(obj.stdout or '')
     local is_module = name:sub(1, #modcache) == modcache
     if is_module then
-      return { ws.fname_to_workspace_folder(modcache) }
+      -- Attach to the most recent gopls client.
+      local client = vim.iter(vim.lsp.get_clients({ name = 'gopls' })):last() --[[@as vim.lsp.Client?]]
+      if client then
+        return client.workspace_folders
+      end
     end
   else
     vim.notify('`go env GOMODCACHE` command failed: ' .. (obj.stderr or ''), vim.log.levels.ERROR)
