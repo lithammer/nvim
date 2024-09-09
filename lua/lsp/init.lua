@@ -100,7 +100,7 @@ local function local_config()
   if data == '' then
     data = '{}'
   end
-  return fn.json_decode(data)
+  return vim.json.decode(data)
 end
 
 ---@param bufnr number Buffer handle to attach to if starting or re-using a client.
