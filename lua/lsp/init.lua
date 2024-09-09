@@ -45,6 +45,8 @@ function M.setup_document_highlight(bufnr)
   })
 end
 
+---@param client vim.lsp.Client
+---@param config vim.lsp.ClientConfig)
 function M.reuse_client(client, config)
   local client_workspace_folders = client.workspace_folders or {}
   local config_workspace_folders = config.workspace_folders or {}
@@ -103,7 +105,8 @@ end
 
 ---@param bufnr number Buffer handle to attach to if starting or re-using a client.
 ---@param config vim.lsp.ClientConfig
-local function start(bufnr, config)
+---@param opts? vim.lsp.start.Opts
+local function start(bufnr, config, opts)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   if not capabilities then
@@ -118,29 +121,23 @@ local function start(bufnr, config)
     local_config()
   )
 
-  if not merged_config then
-    vim.notify('Failed to merge client config', vim.log.levels.ERROR)
-    return
-  end
+  local default_opts = { reuse_client = M.reuse_client, bufnr = bufnr }
+  local merged_opts = vim.tbl_extend('force', default_opts, opts or {})
 
-  local opts = {
-    reuse_client = M.reuse_client,
-    bufnr = bufnr,
-  }
-
-  return vim.lsp.start(merged_config, opts)
+  return vim.lsp.start(merged_config, merged_opts)
 end
 
 ---@class ClientConfig: vim.lsp.ClientConfig
 ---@field workspace_folders? lsp.WorkspaceFolder[]
 
 ---@param config ClientConfig
-function M.start(config)
+---@param opts? vim.lsp.start.Opts
+function M.start(config, opts)
   if not vim.tbl_isempty(config.workspace_folders or {}) then
     local bufnr = vim.api.nvim_get_current_buf()
     -- Lazily start the LSP client to avoid blocking the UI.
     vim.defer_fn(function()
-      start(bufnr, config)
+      start(bufnr, config, opts)
     end, 1000)
   end
 end
