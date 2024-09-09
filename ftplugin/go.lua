@@ -1,8 +1,11 @@
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
+--- For buffers in the Go module cache (e.g. third-party libraries),
+--- attempt to attach to the most recent gopls client.
+---
 ---@return lsp.WorkspaceFolder[]?
-local function workspace_folders()
+local function modcache_workspace()
   local name = vim.api.nvim_buf_get_name(0)
 
   -- Check if the current buffer is a third-party module.
@@ -21,13 +24,13 @@ local function workspace_folders()
     vim.notify('`go env GOMODCACHE` command failed: ' .. (obj.stderr or ''), vim.log.levels.ERROR)
   end
 
-  return ws.find('go.work') or ws.find('go.mod')
+  return nil
 end
 
 lsp.start({
   name = 'gopls',
   cmd = { 'gopls', 'serve' },
-  workspace_folders = workspace_folders(),
+  workspace_folders = modcache_workspace() or ws.find('go.work') or ws.find('go.mod'),
   settings = {
     gopls = {
       analyses = {
