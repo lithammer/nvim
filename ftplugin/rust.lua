@@ -3,6 +3,33 @@ local ws = require('lsp.ws')
 
 local fs = vim.fs
 
+--- Resolve the path to a Rust library.
+---
+---@return lsp.WorkspaceFolder[]?
+local function library_workspace()
+  local name = vim.api.nvim_buf_get_name(0)
+
+  local cargo_home = vim.env.CARGO_HOME or fs.normalize('~/.cargo')
+  local registry = fs.joinpath(cargo_home, 'registry', 'src')
+  local git_registry = fs.joinpath(cargo_home, 'git', 'checkouts')
+
+  local rustup_home = vim.env.RUSTUP_HOME or fs.normalize('~/.rustup')
+  local toolchains = fs.joinpath(rustup_home, 'toolchains')
+
+  local is_library = vim.iter({ toolchains, registry, git_registry }):find(function(value)
+    return name:sub(1, #value) == value
+  end) ~= nil
+
+  if is_library then
+    local client = vim.iter(vim.lsp.get_clients({ name = 'rust-analyzer' })):last() --[[@as vim.lsp.Client?]]
+    if client then
+      return client.workspace_folders
+    end
+  end
+
+  return nil
+end
+
 --- Resolve workspace root folder for Rust projects.
 ---
 ---@param manifest_path string Path to a Cargo.toml file in the workspace.
@@ -58,7 +85,7 @@ local settings = {
 lsp.start({
   name = 'rust-analyzer',
   cmd = { 'rust-analyzer' },
-  workspace_folders = resolve_workspace_folders(),
+  workspace_folders = library_workspace() or resolve_workspace_folders(),
   settings = settings,
   init_options = settings['rust-analyzer'],
 })
