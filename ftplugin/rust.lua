@@ -19,9 +19,9 @@ local function cargo_locate_project(manifest_path)
       manifest_path,
     }, { text = true })
     :wait()
-  if obj.code ~= 0 then
+  if obj.code > 0 then
     vim.notify(
-      'Unexpected exit code from `cargo locate-project`: ' .. obj.stderr,
+      'Unexpected exit code from `cargo locate-project`: ' .. (obj.stderr or ''),
       vim.log.levels.WARN
     )
     return fs.dirname(manifest_path)
