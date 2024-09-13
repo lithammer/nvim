@@ -109,10 +109,10 @@ end
 local function start(bufnr, config, opts)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  if not capabilities then
-    vim.notify('Failed to create client capabilities', vim.log.levels.ERROR)
-    return
-  end
+  -- Enable dynamic registration of watched files. However might not work great on Linux.
+  -- https://github.com/neovim/neovim/pull/28690
+  -- https://github.com/neovim/neovim/pull/29374
+  capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
   local merged_config = vim.tbl_deep_extend(
     'force',
