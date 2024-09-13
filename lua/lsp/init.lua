@@ -45,6 +45,11 @@ function M.setup_document_highlight(bufnr)
   })
 end
 
+---@param name string Name of the binary.
+function M.has_server(name)
+  return fn.executable(name) == 1
+end
+
 ---@param client vim.lsp.Client
 ---@param config vim.lsp.ClientConfig)
 function M.reuse_client(client, config)
