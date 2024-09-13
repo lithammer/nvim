@@ -1,6 +1,8 @@
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
+local has_ruff = lsp.has_server('ruff')
+
 lsp.start({
   name = 'pyright',
   cmd = { 'pyright-langserver', '--stdio' },
@@ -13,7 +15,7 @@ lsp.start({
   }) or ws.cwd(),
   settings = {
     pyright = {
-      disableOrganizeImports = true,
+      disableOrganizeImports = has_ruff,
     },
     python = {
       analysis = {
@@ -25,16 +27,15 @@ lsp.start({
   },
 })
 
-if vim.fn.executable('ruff') == 1 then
+-- https://docs.astral.sh/ruff/editors/setup/#neovim
+if has_ruff then
   lsp.start({
     name = 'ruff',
-    cmd = { 'ruff', 'server', '--preview' },
+    cmd = { 'ruff', 'server' },
     workspace_folders = ws.find({ 'pyproject.toml', 'ruff.toml', '.ruff.toml' }),
-    -- https://github.com/astral-sh/ruff/blob/main/crates/ruff_server/docs/setup/NEOVIM.md#tips
     on_attach = function(client)
-      if client.name == 'ruff' then
-        client.server_capabilities.hoverProvider = false
-      end
+      -- Disable hover in favour of Pyright.
+      client.server_capabilities.hoverProvider = false
     end,
     init_options = {
       settings = {
