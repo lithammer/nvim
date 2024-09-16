@@ -8,7 +8,7 @@ now(function()
 end)
 
 lsp.start({
-  name = 'lua-language-server',
+  name = 'lua_ls',
   cmd = { 'lua-language-server' },
   workspace_folders = ws.find({ '.luarc.json', '.luarc.jsonc' }),
   settings = {
