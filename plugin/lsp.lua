@@ -112,3 +112,27 @@ local function on_attach(args)
 end
 
 vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
+
+vim.api.nvim_create_user_command('LspRestart', function(params)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local name = params.args
+  vim.notify('Restarting LSP server: ' .. name)
+
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, name = name })
+  for _, client in pairs(clients) do
+    -- local attached_buffers = client.attached_buffers
+    client.stop()
+    require('lsp').start(client.config)
+  end
+end, {
+  nargs = 1,
+  complete = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    return vim
+      .iter(vim.lsp.get_clients({ bufnr = bufnr }))
+      :map(function(client)
+        return client.name
+      end)
+      :totable()
+  end,
+})
