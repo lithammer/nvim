@@ -111,6 +111,7 @@ end
 ---@param bufnr number Buffer handle to attach to if starting or re-using a client.
 ---@param config vim.lsp.ClientConfig
 ---@param opts? vim.lsp.start.Opts
+---@return integer? client_id
 local function start(bufnr, config, opts)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
