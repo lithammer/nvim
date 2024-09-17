@@ -4,47 +4,6 @@ local uv = vim.uv
 
 local M = {}
 
----@class Autocmd: vim.api.keyset.create_autocmd
----@field [1] string | string[] Event(s) that will trigger the handler.
-
----@param augroup string The name of the augroup.
----@param bufnr number The buffer number.
----@param autocmds Autocmd[] The autocmd(s) to create.
-local function buf_create_autocmd(augroup, bufnr, autocmds)
-  local ok, cmds = pcall(vim.api.nvim_get_autocmds, { group = augroup, buffer = bufnr })
-
-  if not ok or vim.tbl_isempty(cmds) then
-    vim.api.nvim_create_augroup(augroup, { clear = false })
-
-    for _, autocmd in ipairs(autocmds) do
-      local events = autocmd[1]
-
-      autocmd[1] = nil
-      autocmd.group = augroup
-      autocmd.buffer = bufnr
-
-      vim.api.nvim_create_autocmd(events, autocmd)
-    end
-  end
-end
-
----@param bufnr number The buffer number.
-function M.setup_document_highlight(bufnr)
-  -- TODO: Don't implicitly set options...?
-  vim.opt.updatetime = 300
-
-  buf_create_autocmd('lsp_document_highlight', bufnr, {
-    {
-      { 'CursorHold', 'CursorHoldI' },
-      callback = vim.lsp.buf.document_highlight,
-    },
-    {
-      { 'CursorMoved', 'CursorMovedI', 'BufLeave' },
-      callback = vim.lsp.buf.clear_references,
-    },
-  })
-end
-
 ---@param name string Name of the binary.
 function M.has_server(name)
   return fn.executable(name) == 1

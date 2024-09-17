@@ -88,30 +88,72 @@ local function setup_mappings(bufnr, client)
   end, { desc = 'List refactor code actions' })
 end
 
-local function on_attach(args)
-  local lsp = require('lsp')
+---@param bufnr number The buffer number.
+local function enable_document_highlight(bufnr)
+  local group =
+    vim.api.nvim_create_augroup(string.format('lsp_document_highlight_%d', bufnr), { clear = true })
 
-  local bufnr = args.buf
-  local client = vim.lsp.get_client_by_id(args.data.client_id)
-  if not client then
-    return
-  end
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    callback = vim.lsp.buf.document_highlight,
+    buffer = bufnr,
+    group = group,
+  })
 
-  setup_mappings(bufnr, client)
-
-  if client.supports_method(Methods.textDocument_documentHighlight) then
-    lsp.setup_document_highlight(bufnr)
-  end
-
-  vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-
-  if vim.lsp.completion then
-    vim.opt.completeopt:append({ 'noselect', 'popup' })
-    vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-  end
+  vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufLeave' }, {
+    callback = vim.lsp.buf.clear_references,
+    buffer = bufnr,
+    group = group,
+  })
 end
 
-vim.api.nvim_create_autocmd('LspAttach', { callback = on_attach })
+---@param bufnr number The buffer number.
+local function disable_document_highlight(bufnr)
+  vim.api.nvim_clear_autocmds({
+    buffer = bufnr,
+    group = string.format('lsp_document_highlight_%d', bufnr),
+  })
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+
+    setup_mappings(bufnr, client)
+
+    if client.supports_method(Methods.textDocument_documentHighlight) then
+      vim.opt.updatetime = 300
+      enable_document_highlight(bufnr)
+    end
+
+    if client.supports_method(Methods.textDocument_inlayHint) then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+
+    if client.supports_method(Methods.textDocument_completion) then
+      vim.opt.completeopt:append({ 'noselect', 'popup' })
+      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('LspDetach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then
+      return
+    end
+    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+    vim.lsp.completion.enable(false, client.id, bufnr, {})
+    vim.opt.completeopt:remove({ 'noselect', 'popup' })
+    vim.opt.updatetime = 4000
+    disable_document_highlight(bufnr)
+  end,
+})
 
 vim.api.nvim_create_user_command('LspRestart', function(params)
   local bufnr = vim.api.nvim_get_current_buf()
