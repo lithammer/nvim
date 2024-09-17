@@ -136,7 +136,7 @@ end
 ---@class ClientConfig: vim.lsp.ClientConfig
 ---@field workspace_folders? lsp.WorkspaceFolder[]
 
----@param config ClientConfig
+---@param config ClientConfig|vim.lsp.ClientConfig
 ---@param opts? vim.lsp.start.Opts
 function M.start(config, opts)
   if not vim.tbl_isempty(config.workspace_folders or {}) then
