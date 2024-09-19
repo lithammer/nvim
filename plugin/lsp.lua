@@ -125,7 +125,7 @@ end
 ---@param client vim.lsp.Client The client to enable completion for.
 ---@param bufnr number The buffer number.
 local function enable_completion(client, bufnr)
-  vim.opt_local.completeopt:append({ 'noselect', 'popup' })
+  vim.bo[bufnr].completeopt = 'menu,fuzzy,noselect,popup'
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 end
 
@@ -163,7 +163,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
     end
     vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
     vim.lsp.completion.enable(false, client.id, bufnr, {})
-    vim.opt_local.completeopt:remove({ 'noselect', 'popup' })
+    vim.bo[bufnr].completeopt = nil
     vim.opt.updatetime = 4000
     disable_document_highlight(bufnr)
   end,
