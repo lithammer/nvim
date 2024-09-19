@@ -1,5 +1,12 @@
+local add, later = MiniDeps.add, MiniDeps.later
+
 local Methods = vim.lsp.protocol.Methods
 local CodeActionKind = vim.lsp.protocol.CodeActionKind
+
+add('j-hui/fidget.nvim')
+later(function()
+  require('fidget').setup({})
+end)
 
 vim.diagnostic.config({
   severity_sort = true,

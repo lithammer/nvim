@@ -75,7 +75,6 @@ add('folke/lazydev.nvim')
 add('folke/trouble.nvim')
 add('folke/twilight.nvim')
 add('github/copilot.vim')
-add('j-hui/fidget.nvim')
 add('mfussenegger/nvim-ansible')
 add({
   source = 'nvim-treesitter/nvim-treesitter',
