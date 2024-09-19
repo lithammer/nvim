@@ -115,10 +115,18 @@ end
 
 ---@param bufnr number The buffer number.
 local function disable_document_highlight(bufnr)
-  vim.api.nvim_clear_autocmds({
-    buffer = bufnr,
-    group = string.format('lsp_document_highlight_%d', bufnr),
-  })
+  local group = string.format('lsp_document_highlight_%d', bufnr)
+  local autocmds = vim.api.nvim_get_autocmds({ group = group })
+  if not vim.tbl_isempty(autocmds) then
+    vim.api.nvim_del_augroup_by_id(autocmds[1].group)
+  end
+end
+
+---@param client vim.lsp.Client The client to enable completion for.
+---@param bufnr number The buffer number.
+local function enable_completion(client, bufnr)
+  vim.opt_local.completeopt:append({ 'noselect', 'popup' })
+  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -141,8 +149,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if client.supports_method(Methods.textDocument_completion) then
-      vim.opt.completeopt:append({ 'noselect', 'popup' })
-      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+      enable_completion(client, bufnr)
     end
   end,
 })
@@ -156,7 +163,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
     end
     vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
     vim.lsp.completion.enable(false, client.id, bufnr, {})
-    vim.opt.completeopt:remove({ 'noselect', 'popup' })
+    vim.opt_local.completeopt:remove({ 'noselect', 'popup' })
     vim.opt.updatetime = 4000
     disable_document_highlight(bufnr)
   end,
