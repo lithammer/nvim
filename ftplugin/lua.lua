@@ -11,12 +11,5 @@ lsp.start({
   name = 'lua_ls',
   cmd = { 'lua-language-server' },
   workspace_folders = ws.find({ '.luarc.json', '.luarc.jsonc' }),
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = 'Replace',
-        keywordSnippet = 'Replace',
-      },
-    },
-  },
+  settings = {},
 })
