@@ -113,12 +113,15 @@ local function enable_document_highlight(bufnr)
   })
 end
 
+---@param client vim.lsp.Client The client to disable document highlight for.
 ---@param bufnr number The buffer number.
-local function disable_document_highlight(bufnr)
-  local group = string.format('lsp_document_highlight_%d', bufnr)
-  local autocmds = vim.api.nvim_get_autocmds({ group = group })
-  if not vim.tbl_isempty(autocmds) then
-    vim.api.nvim_del_augroup_by_id(autocmds[1].group)
+local function disable_document_highlight(client, bufnr)
+  if client.supports_method(Methods.textDocument_documentHighlight) then
+    local group = string.format('lsp_document_highlight_%d', bufnr)
+    local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
+    if not vim.tbl_isempty(autocmds) then
+      vim.api.nvim_del_augroup_by_id(autocmds[1].group)
+    end
   end
 end
 
@@ -165,7 +168,7 @@ vim.api.nvim_create_autocmd('LspDetach', {
     vim.lsp.completion.enable(false, client.id, bufnr, {})
     vim.bo[bufnr].completeopt = nil
     vim.opt.updatetime = 4000
-    disable_document_highlight(bufnr)
+    disable_document_highlight(client, bufnr)
   end,
 })
 
