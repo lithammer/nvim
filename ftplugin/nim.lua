@@ -2,13 +2,13 @@ local lsp = require('lsp')
 local ws = require('lsp.ws')
 
 do
-  local opt_local = vim.opt_local
-  opt_local.commentstring = '# %s'
-  opt_local.expandtab = true
-  opt_local.shiftwidth = 2
-  opt_local.softtabstop = 2
-  opt_local.tabstop = 2
-  opt_local.textwidth = 80
+  local bo = vim.bo
+  bo.commentstring = '# %s'
+  bo.expandtab = true
+  bo.shiftwidth = 2
+  bo.softtabstop = 2
+  bo.tabstop = 2
+  bo.textwidth = 80
 end
 
 lsp.start({

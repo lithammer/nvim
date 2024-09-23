@@ -143,7 +143,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     setup_mappings(bufnr, client)
 
     if client.supports_method(Methods.textDocument_documentHighlight) then
-      vim.opt.updatetime = 300
       enable_document_highlight(bufnr)
     end
 
@@ -174,7 +173,6 @@ vim.api.nvim_create_autocmd('LspDetach', {
       vim.bo[bufnr].completeopt = nil
     end
 
-    vim.opt.updatetime = 4000
     disable_document_highlight(client, bufnr)
   end,
 })

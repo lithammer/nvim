@@ -67,4 +67,4 @@ function Statusline()
   })
 end
 
-vim.opt.statusline = '%!v:lua.Statusline()'
+vim.o.statusline = '%!v:lua.Statusline()'

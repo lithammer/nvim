@@ -1,6 +1,6 @@
 vim.loader.enable()
 
-local g, opt = vim.g, vim.opt
+local g, o, opt = vim.g, vim.o, vim.opt
 
 -- Disable providers.
 g.loaded_node_provider = 0
@@ -8,40 +8,41 @@ g.loaded_perl_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
-opt.breakindent = true
-opt.breakindentopt = { 'shift:2', 'sbr' }
-opt.completeopt = { 'menu', 'fuzzy' }
-opt.conceallevel = 2
-opt.cursorline = true
-opt.expandtab = true
+o.breakindent = true
+o.breakindentopt = 'shift:2,sbr'
+o.completeopt = 'menu,fuzzy'
+o.conceallevel = 2
+o.cursorline = true
+o.expandtab = true
 opt.fillchars:append({ diff = '╱' })
 -- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
 opt.grepformat:prepend({ '%f:%l:%c:%m' })
-opt.grepprg = 'rg --vimgrep'
-opt.inccommand = 'split'
-opt.list = true
+o.grepprg = 'rg --vimgrep'
+o.inccommand = 'split'
+o.list = true
 opt.listchars:append({ tab = '│ ', trail = '·' })
-opt.number = true
-opt.pumblend = 10
-opt.scrolloff = 4
-opt.shiftwidth = 4
-opt.showbreak = '↪'
-opt.sidescrolloff = 8
-opt.signcolumn = 'number'
-opt.smartcase = true
-opt.smartindent = true
-opt.tabstop = 4
-opt.tabstop = 4
-opt.termguicolors = true
-opt.undofile = true
-opt.wrap = false
+o.number = true
+o.pumblend = 10
+o.scrolloff = 4
+o.shiftwidth = 4
+o.showbreak = '↪'
+o.sidescrolloff = 8
+o.signcolumn = 'number'
+o.smartcase = true
+o.smartindent = true
+o.tabstop = 4
+o.tabstop = 4
+o.termguicolors = true
+o.undofile = true
+o.updatetime = 300
+o.wrap = false
 
-opt.foldenable = false
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- opt.foldlevel = 1
-opt.foldlevelstart = 99
-opt.foldmethod = 'expr'
-opt.foldtext = 'v:lua.vim.treesitter.foldtext()'
+o.foldenable = false
+o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- o.foldlevel = 1
+o.foldlevelstart = 99
+o.foldmethod = 'expr'
+o.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 do
   ---@diagnostic disable-next-line: param-type-mismatch
