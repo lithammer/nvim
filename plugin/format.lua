@@ -16,6 +16,7 @@ later(function()
       },
     },
     formatters_by_ft = {
+      css = { 'biome' },
       fish = { 'fish_indent' },
       javascript = { 'biome-check', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
