@@ -164,9 +164,16 @@ vim.api.nvim_create_autocmd('LspDetach', {
     if not client then
       return
     end
-    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-    vim.lsp.completion.enable(false, client.id, bufnr, {})
-    vim.bo[bufnr].completeopt = nil
+
+    if client.supports_method(Methods.textDocument_inlayHint) then
+      vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+    end
+
+    if client.supports_method(Methods.textDocument_completion) then
+      vim.lsp.completion.enable(false, client.id, bufnr, {})
+      vim.bo[bufnr].completeopt = nil
+    end
+
     vim.opt.updatetime = 4000
     disable_document_highlight(client, bufnr)
   end,
