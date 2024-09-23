@@ -96,49 +96,9 @@ add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
 
-g.netrw_altfile = 1
-g.netrw_liststyle = 3
-
-vim.api.nvim_create_user_command('W', 'w', { nargs = 0 })
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'netrw',
-  callback = function()
-    local ok, ignore = vim.fn['netrw_gitignore#Hide']()
-    if ok then
-      g.netrw_list_hide = ignore
-    end
-  end,
-})
-
--- :h last-position-jump
-vim.api.nvim_create_autocmd('BufRead', {
-  group = vim.api.nvim_create_augroup('last_position_jump', {}),
-  callback = function(opts)
-    local buf = opts.buf
-    vim.api.nvim_create_autocmd('BufWinEnter', {
-      once = true,
-      buffer = buf,
-      callback = function()
-        local ft = vim.bo[buf].filetype
-        local last_known_line = vim.api.nvim_buf_get_mark(buf, '"')[1]
-        if
-          not (ft:match('commit') or ft:match('rebase'))
-          and last_known_line > 1
-          and last_known_line <= vim.api.nvim_buf_line_count(buf)
-        then
-          vim.api.nvim_feedkeys([[g`"]], 'nx', false)
-        end
-      end,
-    })
-  end,
-})
-
--- :h vim.highlight
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('yank_highlight', {}),
-  callback = function()
-    require('vim.highlight').on_yank()
-  end,
-  desc = 'Highlight yanked text',
-})
+do
+  g.netrw_altfile = 1
+  g.netrw_list_hide = vim.fn['netrw_gitignore#Hide']()
+  g.netrw_liststyle = 3
+  g.netrw_preview = 1
+end
