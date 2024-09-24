@@ -2,7 +2,6 @@ local add = MiniDeps.add
 
 add('nvim-treesitter/nvim-treesitter-context')
 add('nvim-treesitter/nvim-treesitter-textobjects')
-add('nvim-treesitter/playground')
 
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup({
