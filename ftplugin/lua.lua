@@ -4,7 +4,16 @@ local ws = require('lsp.ws')
 local now = MiniDeps.now
 
 now(function()
-  require('lazydev').setup()
+  require('lazydev').setup({
+    library = {
+      { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+    },
+    integrations = {
+      lspconfig = false,
+      cmp = false,
+      coq = false,
+    },
+  })
 end)
 
 lsp.start({
