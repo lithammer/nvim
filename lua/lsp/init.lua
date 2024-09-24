@@ -9,25 +9,6 @@ function M.has_server(name)
   return fn.executable(name) == 1
 end
 
----@param client vim.lsp.Client
----@param config vim.lsp.ClientConfig)
-function M.reuse_client(client, config)
-  local client_workspace_folders = client.workspace_folders or {}
-  local config_workspace_folders = config.workspace_folders or {}
-
-  if client.name == config.name then
-    for _, a in ipairs(client_workspace_folders) do
-      for _, b in ipairs(config_workspace_folders) do
-        if a.name == b.name and a.uri == b.uri then
-          return true
-        end
-      end
-    end
-  end
-
-  return false
-end
-
 local handlers = {
   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' }),
   ['textDocument/signatureHelp'] = vim.lsp.with(
@@ -69,9 +50,8 @@ end
 
 ---@param bufnr number Buffer handle to attach to if starting or re-using a client.
 ---@param config vim.lsp.ClientConfig
----@param opts? vim.lsp.start.Opts
 ---@return integer? client_id
-local function start(bufnr, config, opts)
+local function start(bufnr, config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   -- Enable dynamic registration of watched files. However might not work great on Linux.
@@ -86,23 +66,20 @@ local function start(bufnr, config, opts)
     local_config()
   )
 
-  local default_opts = { reuse_client = M.reuse_client, bufnr = bufnr }
-  local merged_opts = vim.tbl_extend('force', default_opts, opts or {})
-
-  return vim.lsp.start(merged_config, merged_opts)
+  return vim.lsp.start(merged_config, { bufnr = bufnr })
 end
 
 ---@class ClientConfig: vim.lsp.ClientConfig
 ---@field workspace_folders? lsp.WorkspaceFolder[]
 
 ---@param config ClientConfig|vim.lsp.ClientConfig
----@param opts? vim.lsp.start.Opts
-function M.start(config, opts)
+function M.start(config)
   if not vim.tbl_isempty(config.workspace_folders or {}) then
+    config.root_dir = config.workspace_folders[1].name
     local bufnr = vim.api.nvim_get_current_buf()
     -- Lazily start the LSP client to avoid blocking the UI.
     vim.defer_fn(function()
-      start(bufnr, config, opts)
+      start(bufnr, config)
     end, 1000)
   end
 end
