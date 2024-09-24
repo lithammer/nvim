@@ -6,8 +6,7 @@ local M = {}
 ---@param path string
 ---@return string
 local function abspath(path)
-  return fn.fnamemodify(path, ':p')
-  -- return vim.uv.fs_realpath(path)
+  return vim.uv.fs_realpath(path)
 end
 
 ---@return string
