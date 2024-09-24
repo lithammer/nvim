@@ -10,12 +10,6 @@
         "enable": true,
         "arrayIndex": "Disable",
     },
-    "workspace": {
-        "library": [
-            "lua",
-            "$VIMRUNTIME/lua"
-        ]
-    },
     "diagnostics": {
         "unusedLocalExclude": [
             "_*"
