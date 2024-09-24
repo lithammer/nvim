@@ -45,8 +45,8 @@ o.foldmethod = 'expr'
 o.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 do
-  ---@diagnostic disable-next-line: param-type-mismatch
-  local mini_path = vim.fs.joinpath(vim.fn.stdpath('data'), 'site/pack/deps/start/mini.nvim')
+  local data_path = vim.fn.stdpath('data') --[[@as string]]
+  local mini_path = vim.fs.joinpath(data_path, 'site/pack/deps/start/mini.nvim')
   if not vim.uv.fs_stat(mini_path) then
     vim.notify('Installing `mini.nvim`')
     vim
