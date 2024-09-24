@@ -28,7 +28,7 @@ local function read_file(path)
   local stat = assert(uv.fs_fstat(fd))
   local data = uv.fs_read(fd, stat.size, 0)
   uv.fs_close(fd)
-  return data
+  return data or ''
 end
 
 ---@return table
