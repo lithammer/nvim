@@ -4,6 +4,7 @@ add('mfussenegger/nvim-lint')
 
 later(function()
   require('lint').linters_by_ft = {
+    go = { 'golangcilint' },
     javascript = { 'biomejs' },
     typescript = { 'biomejs' },
   }
