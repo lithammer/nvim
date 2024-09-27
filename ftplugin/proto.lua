@@ -8,7 +8,7 @@ lsp.start({
   cmd = {
     'protobuf-language-server',
     '-logs',
-    fs.joinath(fn.stdpath('log'), 'protobuf-language-server.log'),
+    fs.joinpath(fn.stdpath('log') --[[@as string]], 'protobuf-language-server.log'),
   },
   workspace_folders = ws.git() or ws.cwd(),
 })
