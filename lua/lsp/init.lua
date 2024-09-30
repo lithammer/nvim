@@ -73,15 +73,29 @@ end
 ---@field workspace_folders? lsp.WorkspaceFolder[]
 
 ---@param config ClientConfig|vim.lsp.ClientConfig
-function M.start(config)
-  if not vim.tbl_isempty(config.workspace_folders or {}) then
-    config.root_dir = config.workspace_folders[1].name
-    local bufnr = vim.api.nvim_get_current_buf()
-    -- Lazily start the LSP client to avoid blocking the UI.
-    vim.defer_fn(function()
-      start(bufnr, config)
-    end, 1000)
+---@param cb? fun(client: vim.lsp.Client)
+function M.start(config, cb)
+  local workspace_folders = config.workspace_folders
+
+  if workspace_folders == nil or vim.tbl_isempty(workspace_folders) then
+    return
   end
+
+  if config.root_dir == nil then
+    config.root_dir = workspace_folders[1].name
+  end
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  -- Lazily start the LSP client to avoid blocking the UI.
+  vim.defer_fn(function()
+    local client_id = start(bufnr, config)
+    if client_id then
+      local client = vim.lsp.get_client_by_id(client_id)
+      if client and cb then
+        cb(client)
+      end
+    end
+  end, 1000)
 end
 
 return M

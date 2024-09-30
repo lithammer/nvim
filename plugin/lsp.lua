@@ -24,6 +24,7 @@ vim.diagnostic.config({
   },
 })
 
+---@param mode string
 local function trouble(mode)
   local width = vim.o.columns
   local is_small_window = width < 100
@@ -188,9 +189,13 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
 
   local clients = vim.lsp.get_clients({ bufnr = bufnr, name = name })
   for _, client in pairs(clients) do
-    -- local attached_buffers = client.attached_buffers
+    local attached_buffers = vim.tbl_keys(client.attached_buffers)
     client.stop()
-    require('lsp').start(client.config)
+    require('lsp').start(client.config, function(client)
+      for _, ab in pairs(attached_buffers) do
+        vim.lsp.buf_attach_client(ab, client.id)
+      end
+    end)
   end
 end, {
   nargs = 1,
