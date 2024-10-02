@@ -70,7 +70,6 @@ local function start(bufnr, config)
 end
 
 ---@class ClientConfig: vim.lsp.ClientConfig
----@field workspace_folders? lsp.WorkspaceFolder[]
 
 ---@param config ClientConfig|vim.lsp.ClientConfig
 ---@param cb? fun(client: vim.lsp.Client)
