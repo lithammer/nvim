@@ -98,7 +98,7 @@ add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } 
 
 do
   g.netrw_altfile = 1
-  g.netrw_list_hide = vim.fn['netrw_gitignore#Hide']()
+  -- g.netrw_list_hide = vim.fn['netrw_gitignore#Hide']()
   g.netrw_liststyle = 3
   g.netrw_preview = 1
 end
