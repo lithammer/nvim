@@ -142,6 +142,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
+    vim.bo[bufnr].tagfunc = [[v:lua.require'lsp.tagfunc']]
+
     setup_mappings(bufnr, client)
 
     if client.supports_method(Methods.textDocument_documentHighlight) then
