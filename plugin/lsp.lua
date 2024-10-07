@@ -28,6 +28,7 @@ vim.diagnostic.config({
 local function trouble(mode)
   local width = vim.o.columns
   local is_small_window = width < 100
+  ---@diagnostic disable-next-line: missing-fields, missing-parameter
   require('trouble').first({
     mode = mode,
     auto_refresh = false,
