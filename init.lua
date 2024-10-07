@@ -14,7 +14,7 @@ o.completeopt = 'menu,fuzzy'
 o.conceallevel = 2
 o.cursorline = true
 o.expandtab = true
-opt.fillchars:append({ diff = '╱' })
+opt.fillchars:append({ diff = '╱', fold = ' ' })
 -- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
 opt.grepformat:prepend({ '%f:%l:%c:%m' })
 o.grepprg = 'rg --vimgrep'
@@ -42,7 +42,6 @@ o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- o.foldlevel = 1
 o.foldlevelstart = 99
 o.foldmethod = 'expr'
-o.foldtext = 'v:lua.vim.treesitter.foldtext()'
 
 do
   local data_path = vim.fn.stdpath('data') --[[@as string]]
