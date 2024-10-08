@@ -131,6 +131,22 @@ end
 ---@param bufnr number The buffer number.
 local function enable_completion(client, bufnr)
   vim.bo[bufnr].completeopt = 'menu,fuzzy,noselect,popup'
+
+  -- Remove annoying trigger characters from LuaLS.
+  if client.name == 'lua_ls' then
+    -- { "\t", "\n", ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", " ", "+", "?" }
+    local trigger_characters = client.server_capabilities.completionProvider.triggerCharacters
+    if trigger_characters then
+      for _, c in pairs({ '\t', '\n', ' ' }) do
+        for i, v in ipairs(trigger_characters) do
+          if c == v then
+            table.remove(trigger_characters, i)
+          end
+        end
+      end
+    end
+  end
+
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 end
 
