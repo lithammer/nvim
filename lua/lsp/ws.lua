@@ -6,7 +6,7 @@ local M = {}
 ---@param path string
 ---@return string
 local function abspath(path)
-  return vim.uv.fs_realpath(path)
+  return vim.uv.fs_realpath(path) or path
 end
 
 ---@return string
