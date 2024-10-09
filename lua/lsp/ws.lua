@@ -57,4 +57,9 @@ function M.cwd()
   return { M.fname_to_workspace_folder(getcwd()) }
 end
 
+---@return lsp.WorkspaceFolder[]
+function M.bufdir()
+  return { M.fname_to_workspace_folder(fs.dirname(vim.api.nvim_buf_get_name(0))) }
+end
+
 return M
