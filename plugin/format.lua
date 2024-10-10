@@ -21,6 +21,7 @@ later(function()
       javascript = { 'biome-check', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
       nim = { 'nph', 'nimpretty', stop_after_first = true },
+      proto = { 'clang-format' },
       python = { 'ruff_format' },
       sh = { 'shfmt' },
       toml = { 'taplo' },
