@@ -1,13 +1,16 @@
 vim.api.nvim_create_autocmd({ 'ColorScheme', 'VimEnter' }, {
   pattern = '*',
   callback = function()
-    vim.api.nvim_set_hl(0, 'StatusLine', { bg = 'NvimDarkGrey3', fg = 'NvimLightGrey3' })
-
     local statusline = vim.api.nvim_get_hl(0, { name = 'StatusLine', link = false })
 
     for i, suffix in ipairs({ 'Error', 'Warn', 'Info', 'Hint' }) do
-      local fg = vim.api.nvim_get_hl(0, { name = 'Diagnostic' .. suffix, link = false }).fg
-      vim.api.nvim_set_hl(0, 'User' .. i, vim.tbl_extend('force', statusline, { fg = fg }))
+      local hl = vim.api.nvim_get_hl(0, { name = 'DiagnosticStatusLine' .. suffix, link = false })
+      if not vim.tbl_isempty(hl) then
+        vim.api.nvim_set_hl(0, 'User' .. i, { link = 'DiagnosticStatusLine' .. suffix })
+      else
+        local fg = vim.api.nvim_get_hl(0, { name = 'Diagnostic' .. suffix, link = false }).fg
+        vim.api.nvim_set_hl(0, 'User' .. i, vim.tbl_extend('force', statusline, { bg = fg }))
+      end
     end
   end,
 })
