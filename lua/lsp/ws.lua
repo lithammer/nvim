@@ -3,19 +3,6 @@ local fs = vim.fs
 
 local M = {}
 
----@param path string
----@return string
-local function abspath(path)
-  return vim.uv.fs_realpath(path) or path
-end
-
----@return string
-local function getcwd()
-  local winnr = vim.api.nvim_get_current_win()
-  local tabnr = vim.api.nvim_get_current_tabpage()
-  return fn.getcwd(winnr, tabnr)
-end
-
 --- Get WorkspaceFolder from a path.
 ---
 ---@param path string Path to file.
@@ -37,29 +24,34 @@ function M.find(names)
     return nil
   end
 
-  return { M.fname_to_workspace_folder(abspath(match)) }
+  return { M.fname_to_workspace_folder(match) }
 end
 
 --- Finds Git repository root relative to the current buffer.
 ---
+---@param bufnr number?
 ---@return lsp.WorkspaceFolder[]?
-function M.git()
-  local match = fs.root(0, '.git')
+function M.git(bufnr)
+  local match = fs.root(bufnr or 0, '.git')
   if not match then
     return nil
   end
 
-  return { M.fname_to_workspace_folder(abspath(match)) }
+  return { M.fname_to_workspace_folder(match) }
 end
 
+---@param winnr number?
+---@param tabnr number?
 ---@return lsp.WorkspaceFolder[]
-function M.cwd()
-  return { M.fname_to_workspace_folder(getcwd()) }
+function M.cwd(winnr, tabnr)
+  return { M.fname_to_workspace_folder(fn.getcwd(winnr or 0, tabnr or 0)) }
 end
 
+---@param bufnr number
 ---@return lsp.WorkspaceFolder[]
-function M.bufdir()
-  return { M.fname_to_workspace_folder(fs.dirname(vim.api.nvim_buf_get_name(0))) }
+function M.bufdir(bufnr)
+  local bufpath = vim.api.nvim_buf_get_name(bufnr)
+  return { M.fname_to_workspace_folder(fs.dirname(bufpath)) }
 end
 
 return M

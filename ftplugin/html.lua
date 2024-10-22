@@ -2,7 +2,7 @@ local lsp = require('lsp')
 local ws = require('lsp.ws')
 
 local has_superhtml = lsp.has_server('superhtml') == 1
-local workspace_folders = ws.find('package.json') or ws.git() or ws.cwd()
+local workspace_folders = ws.find('package.json')
 
 lsp.start({
   name = 'vscode-html-language-server',

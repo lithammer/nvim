@@ -13,7 +13,6 @@ else
   -- lsp.start({
   --   name = 'vscode-markdown-language-server',
   --   cmd = { 'vscode-markdown-language-server', '--stdio' },
-  --   workspace_folders = ws.git(),
   --   init_options = {
   --     provideFormatter = true,
   --   },

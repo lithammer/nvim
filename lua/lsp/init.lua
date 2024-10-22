@@ -74,17 +74,29 @@ end
 ---@param config ClientConfig|vim.lsp.ClientConfig
 ---@param cb? fun(client: vim.lsp.Client)
 function M.start(config, cb)
-  local workspace_folders = config.workspace_folders
+  local ws = require('lsp.ws')
 
-  if workspace_folders == nil or vim.tbl_isempty(workspace_folders) then
-    return
-  end
-
-  if config.root_dir == nil then
-    config.root_dir = workspace_folders[1].name
-  end
-
+  local winnr = vim.api.nvim_get_current_win()
+  local tabnr = vim.api.nvim_get_current_tabpage()
   local bufnr = vim.api.nvim_get_current_buf()
+
+  local workspace_folders = vim
+    .iter(config.workspace_folders or ws.git(bufnr) or ws.cwd(winnr, tabnr) or ws.bufdir(bufnr))
+    :filter(function(v)
+      return v.name ~= vim.env.HOME
+    end)
+    :totable()
+
+  if vim.tbl_isempty(workspace_folders) then
+    vim.notify('Unable to find a workspace root', vim.log.levels.WARN)
+    config.workspace_folders = nil
+  else
+    config.workspace_folders = workspace_folders
+    if config.root_dir == nil then
+      config.root_dir = workspace_folders[1].name
+    end
+  end
+
   -- Lazily start the LSP client to avoid blocking the UI.
   vim.defer_fn(function()
     local client_id = start(bufnr, config)

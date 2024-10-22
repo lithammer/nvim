@@ -12,7 +12,7 @@ lsp.start({
     'setup.py',
     'setup.cfg',
     'requirements.txt',
-  }) or ws.cwd(),
+  }),
   settings = {
     pyright = {
       disableOrganizeImports = has_ruff,

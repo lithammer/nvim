@@ -1,4 +1,4 @@
-local finders = require('lsp.finders')
+-- local finders = require('lsp.finders')
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
