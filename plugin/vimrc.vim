@@ -9,10 +9,10 @@ augroup RestoreCursor
     \ | endif
 augroup END
 
-" :h vim.highlight
+" :h vim.hl
 augroup HighlightYank
   autocmd!
-  autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  autocmd TextYankPost * silent! lua vim.hl.on_yank()
 augroup END
 
 command W w
