@@ -57,6 +57,7 @@ require('nvim-treesitter.configs').setup({
     'json5',
     'jsonc',
     'jsonnet',
+    'just',
     'lua',
     'luadoc',
     'make',
