@@ -1,6 +1,4 @@
 if vim.env.TERM:find('wezterm') and vim.env.SSH_TTY then
-  vim.o.clipboard = 'unnamedplus'
-
   local fn = vim.fn
   local function paste()
     return {
