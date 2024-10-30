@@ -71,10 +71,6 @@ local function setup_mappings(bufnr, client)
     end, { desc = 'List implementations' })
   end
 
-  if client.supports_method(Methods.textDocument_documentSymbol) then
-    map('n', 'gO', vim.lsp.buf.document_symbol, { desc = 'List all symbols in the buffer' })
-  end
-
   if client.supports_method(Methods.workspace_symbol) then
     map(
       'n',
