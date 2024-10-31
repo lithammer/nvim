@@ -59,6 +59,10 @@ local function setup_mappings(bufnr, client)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
   end
 
+  map('n', 'K', function()
+    vim.lsp.buf.hover({ border = 'rounded' })
+  end, { desc = 'Show hover information' })
+
   map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Jump to declaration' })
 
   if client.supports_method(Methods.textDocument_typeDefinition) then
