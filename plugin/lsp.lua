@@ -213,6 +213,7 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
   for _, client in pairs(clients) do
     local attached_buffers = vim.tbl_keys(client.attached_buffers)
     client.stop()
+    ---@diagnostic disable-next-line: redefined-local
     require('lsp').start(client.config, function(client)
       for _, ab in pairs(attached_buffers) do
         vim.lsp.buf_attach_client(ab, client.id)
