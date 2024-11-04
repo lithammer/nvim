@@ -1,6 +1,5 @@
 local fn = vim.fn
 local fs = vim.fs
-local uv = vim.uv
 
 local M = {}
 
@@ -9,33 +8,21 @@ function M.has_server(name)
   return fn.executable(name) == 1
 end
 
----@param path string Path to the file to read.
----@return string
-local function read_file(path)
-  local fd = uv.fs_open(path, 'r', 438)
-  if not fd then
-    vim.notify(('Could not open file %s for reading'):format(path), vim.log.levels.ERROR)
-    return ''
-  end
-  local stat = assert(uv.fs_fstat(fd))
-  local data = uv.fs_read(fd, stat.size, 0)
-  uv.fs_close(fd)
-  return data or ''
-end
-
+---@param bufnr number Buffer number.
 ---@return table
-local function local_config()
+local function workspace_config(bufnr)
   local match = fs.find('.lsp.json', {
     upward = true,
     type = 'file',
-    path = fs.dirname(vim.api.nvim_buf_get_name(0)),
+    path = fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
   })
-  if not match[1] then
+  local lsp_json_path = match[1]
+  if not lsp_json_path then
     return {}
   end
-  local data = read_file(match[1])
+  local data = vim.trim(fn.readblob(lsp_json_path))
   if data == '' then
-    data = '{}'
+    return {}
   end
   return vim.json.decode(data)
 end
@@ -52,7 +39,7 @@ local function start(bufnr, config)
   capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
   local merged_config =
-    vim.tbl_deep_extend('force', { capabilities = capabilities }, config, local_config())
+    vim.tbl_deep_extend('force', { capabilities = capabilities }, config, workspace_config(bufnr))
 
   return vim.lsp.start(merged_config, { bufnr = bufnr })
 end
