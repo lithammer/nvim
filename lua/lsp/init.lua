@@ -9,13 +9,6 @@ function M.has_server(name)
   return fn.executable(name) == 1
 end
 
-local handlers = {
-  ['textDocument/signatureHelp'] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    { border = 'rounded' }
-  ),
-}
-
 ---@param path string Path to the file to read.
 ---@return string
 local function read_file(path)
@@ -58,12 +51,8 @@ local function start(bufnr, config)
   -- https://github.com/neovim/neovim/pull/29374
   capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
-  local merged_config = vim.tbl_deep_extend(
-    'force',
-    { capabilities = capabilities, handlers = handlers },
-    config,
-    local_config()
-  )
+  local merged_config =
+    vim.tbl_deep_extend('force', { capabilities = capabilities }, config, local_config())
 
   return vim.lsp.start(merged_config, { bufnr = bufnr })
 end
