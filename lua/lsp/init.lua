@@ -11,10 +11,14 @@ end
 ---@param bufnr number Buffer number.
 ---@return table
 local function workspace_config(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return {}
+  end
+
   local match = fs.find('.lsp.json', {
     upward = true,
     type = 'file',
-    path = fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+    path = vim.api.nvim_buf_get_name(bufnr),
   })
   local lsp_json_path = match[1]
   if not lsp_json_path then
