@@ -1,3 +1,5 @@
+local finders = require('lsp.finders')
+
 local fn = vim.fn
 local fs = vim.fs
 
@@ -14,7 +16,7 @@ function M.fname_to_workspace_folder(path)
   }
 end
 
---- Finds any file or directory searching upwards.
+--- Finds any file or directory searching upward.
 ---
 ---@param names string | string[] | fun(name: string, path: string): boolean The name of the files or directories to search for.
 ---@return lsp.WorkspaceFolder[]?
@@ -50,8 +52,7 @@ end
 ---@param bufnr number
 ---@return lsp.WorkspaceFolder[]
 function M.bufdir(bufnr)
-  local bufpath = vim.api.nvim_buf_get_name(bufnr)
-  return { M.fname_to_workspace_folder(fs.dirname(bufpath)) }
+  return { M.fname_to_workspace_folder(finders.bufdir(bufnr)) }
 end
 
 return M

@@ -1,20 +1,49 @@
-local fs = vim.fs
+local fn, fs = vim.fn, vim.fs
 
 local M = {}
 
 ---@param path string
 ---@return string
 local function abspath(path)
-  return vim.fn.fnamemodify(path, ':p')
+  return fn.fnamemodify(path, ':p')
+end
+
+---@param path string
+---@return boolean
+local function isdirectory(path)
+  return fn.isdirectory(path) == 1
+end
+
+---@param bufnr number?
+---@return string
+function M.bufdir(bufnr)
+  local bufpath = vim.api.nvim_buf_get_name(bufnr or 0)
+  if not isdirectory(bufpath) then
+    bufpath = fs.dirname(bufpath)
+  end
+  return bufpath
+end
+
+---@param names string|fun(name: string, path: string):boolean|string[]
+---@return string?
+function M.find(names)
+  local matches = fs.find(names, {
+    path = M.bufdir(),
+    upward = true,
+  })
+  if vim.tbl_isempty(matches) then
+    return nil
+  end
+
+  return abspath(matches[1])
 end
 
 ---@param bufnr number
 ---@return string?
 local function find_node_modules(bufnr)
-  local path = fs.dirname(vim.api.nvim_buf_get_name(bufnr))
   local matches = fs.find('node_modules', {
     upward = true,
-    path = path,
+    path = M.bufdir(bufnr),
     type = 'directory',
   })
 

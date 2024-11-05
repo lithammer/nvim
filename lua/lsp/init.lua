@@ -1,3 +1,5 @@
+local finders = require('lsp.finders')
+
 local fn = vim.fn
 local fs = vim.fs
 
@@ -18,7 +20,7 @@ local function workspace_config(bufnr)
   local match = fs.find('.lsp.json', {
     upward = true,
     type = 'file',
-    path = vim.api.nvim_buf_get_name(bufnr),
+    path = finders.bufdir(bufnr),
   })
   local lsp_json_path = match[1]
   if not lsp_json_path then
