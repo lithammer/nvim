@@ -1,4 +1,4 @@
-local add = MiniDeps.add
+local add, later = MiniDeps.add, MiniDeps.later
 
 add('nvim-treesitter/nvim-treesitter-context')
 ---@diagnostic disable-next-line: missing-fields
@@ -122,8 +122,9 @@ require('nvim-treesitter.configs').setup({
 })
 
 add('nvim-treesitter/nvim-treesitter-textobjects')
-require('treesitter-context').setup({
-  max_lines = 3,
-  multiwindow = true,
-  separator = vim.opt.fillchars:get().diff,
-})
+later(function()
+  require('treesitter-context').setup({
+    multiwindow = true,
+    separator = vim.opt.fillchars:get().diff,
+  })
+end)
