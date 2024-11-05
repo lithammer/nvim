@@ -37,3 +37,7 @@ later(function()
     },
   })
 end)
+
+later(function()
+  require('ts-comments').setup()
+end)
