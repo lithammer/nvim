@@ -1,8 +1,6 @@
 local add = MiniDeps.add
 
 add('nvim-treesitter/nvim-treesitter-context')
-add('nvim-treesitter/nvim-treesitter-textobjects')
-
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup({
   highlight = {
@@ -123,6 +121,7 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
+add('nvim-treesitter/nvim-treesitter-textobjects')
 require('treesitter-context').setup({
   max_lines = 3,
   multiwindow = true,
