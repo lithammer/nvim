@@ -1,7 +1,7 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'vscode-json-language-server',
+  name = 'jsonls',
   cmd = { 'vscode-json-language-server', '--stdio' },
   init_options = {
     provideFormatter = true,

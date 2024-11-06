@@ -5,7 +5,7 @@ local has_superhtml = lsp.has_server('superhtml') == 1
 local workspace_folders = ws.find('package.json')
 
 lsp.start({
-  name = 'vscode-html-language-server',
+  name = 'html',
   cmd = { 'vscode-html-language-server', '--stdio' },
   workspace_folders = workspace_folders,
   init_options = {

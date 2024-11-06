@@ -83,7 +83,7 @@ local settings = {
 }
 
 lsp.start({
-  name = 'rust-analyzer',
+  name = 'rust_analyzer',
   cmd = { 'rust-analyzer' },
   workspace_folders = library_workspace() or resolve_workspace_folders(),
   settings = settings,

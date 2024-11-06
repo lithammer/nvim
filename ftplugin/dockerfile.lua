@@ -1,6 +1,6 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'docker-langserver',
+  name = 'dockerls',
   cmd = { 'docker-langserver', '--stdio' },
 })

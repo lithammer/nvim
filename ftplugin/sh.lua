@@ -1,6 +1,6 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'bash-language-server',
+  name = 'bashls',
   cmd = { 'bash-language-server', 'start' },
 })

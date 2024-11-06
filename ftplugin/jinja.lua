@@ -1,7 +1,7 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'jinja-lsp',
+  name = 'jinja_lsp',
   cmd = { 'jinja-lsp' },
   settings = {},
 })

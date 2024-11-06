@@ -1,6 +1,6 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'awk-language-server',
+  name = 'awkls',
   cmd = { 'awk-language-server' },
 })

@@ -12,7 +12,7 @@ do
 end
 
 lsp.start({
-  name = 'nimlangserver',
+  name = 'nim_langserver',
   cmd = { 'nimlangserver' },
   workspace_folders = ws.find(function(name, _path)
     return name:match('.*%.nimble$') ~= nil

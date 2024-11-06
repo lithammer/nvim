@@ -2,7 +2,7 @@ local lsp = require('lsp')
 local ws = require('lsp.ws')
 
 lsp.start({
-  name = 'vscode-css-language-server',
+  name = 'cssls',
   cmd = { 'vscode-css-language-server', '--stdio' },
   workspace_folders = ws.find('package.json'),
   init_options = { provideFormatter = true },

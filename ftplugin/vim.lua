@@ -1,7 +1,7 @@
 local lsp = require('lsp')
 
 lsp.start({
-  name = 'vim-language-server',
+  name = 'vimls',
   cmd = { 'vim-language-server', '--stdio' },
   init_options = {
     isNeovim = true,
