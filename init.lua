@@ -35,6 +35,7 @@ o.tabstop = 4
 o.termguicolors = true
 o.undofile = true
 o.updatetime = 300
+o.wildignorecase = true
 o.wrap = false
 
 o.foldenable = false
