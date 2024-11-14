@@ -18,6 +18,7 @@ opt.fillchars:append({ diff = '╱', fold = ' ' })
 -- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
 opt.grepformat:prepend({ '%f:%l:%c:%m' })
 o.grepprg = 'rg --vimgrep'
+o.ignorecase = true
 o.inccommand = 'split'
 o.list = true
 opt.listchars:append({ tab = '│ ', trail = '·' })
