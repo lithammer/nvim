@@ -51,7 +51,7 @@ local function diagnostic(focused)
     -- [vim.diagnostic.severity.HINT] = ' ',
   }
 
-  local bufnr = vim.api.nvim_get_current_buf()
+  local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
 
   local counts = {}
   for _, level in ipairs(levels) do
