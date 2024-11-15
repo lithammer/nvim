@@ -23,13 +23,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
-  -- command = 'redrawstatus',
-  callback = function()
-    vim.api.nvim__redraw({
-      statusline = true,
-      -- flush = true,
-    })
-  end,
+  command = 'redrawstatus!',
+  -- XXX: nvim__redraw() causes the blink.cmp menu to linger.
+  -- callback = function()
+  --   vim.api.nvim__redraw({
+  --     statusline = true,
+  --     flush = true,
+  --   })
+  -- end,
 })
 
 ---@param focused boolean
