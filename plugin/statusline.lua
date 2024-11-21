@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
 vim.api.nvim_create_autocmd('DiagnosticChanged', {
   command = 'redrawstatus!',
-  -- XXX: nvim__redraw() causes the blink.cmp menu to linger.
+  -- XXX: nvim__redraw() is corrupting the blink.cmp menu.
   -- callback = function()
   --   vim.api.nvim__redraw({
   --     statusline = true,
