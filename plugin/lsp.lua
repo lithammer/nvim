@@ -60,7 +60,7 @@ local function setup_mappings(bufnr, client)
   end
 
   --- Override default 'K' mapping to add border.
-  if client.supports_method(Methods.textDocument_hover) then
+  if client:supports_method(Methods.textDocument_hover) then
     map('n', 'K', function()
       vim.lsp.buf.hover({ border = 'rounded' })
     end, { desc = 'Show hover information' })
@@ -68,17 +68,17 @@ local function setup_mappings(bufnr, client)
 
   map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Jump to declaration' })
 
-  if client.supports_method(Methods.textDocument_typeDefinition) then
+  if client:supports_method(Methods.textDocument_typeDefinition) then
     map('n', 'gy', vim.lsp.buf.type_definition, { desc = 'Jump to type definition' })
   end
 
-  if client.supports_method(Methods.textDocument_implementation) then
+  if client:supports_method(Methods.textDocument_implementation) then
     map('n', 'gI', function()
       trouble('lsp_implementations')
     end, { desc = 'List implementations' })
   end
 
-  if client.supports_method(Methods.workspace_symbol) then
+  if client:supports_method(Methods.workspace_symbol) then
     map(
       'n',
       '<leader>s',
@@ -121,7 +121,7 @@ end
 ---@param client vim.lsp.Client The client to disable document highlight for.
 ---@param bufnr number The buffer number.
 local function disable_document_highlight(client, bufnr)
-  if client.supports_method(Methods.textDocument_documentHighlight) then
+  if client:supports_method(Methods.textDocument_documentHighlight) then
     local group = string.format('lsp_document_highlight_%d', bufnr)
     local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
     if not vim.tbl_isempty(autocmds) then
@@ -165,15 +165,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     setup_mappings(bufnr, client)
 
-    if client.supports_method(Methods.textDocument_documentHighlight) then
+    if client:supports_method(Methods.textDocument_documentHighlight) then
       enable_document_highlight(bufnr)
     end
 
-    if client.supports_method(Methods.textDocument_inlayHint) then
+    if client:supports_method(Methods.textDocument_inlayHint) then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
-    if client.supports_method(Methods.textDocument_completion) then
+    if client:supports_method(Methods.textDocument_completion) then
       enable_completion(client, bufnr)
     end
   end,
@@ -191,11 +191,11 @@ vim.api.nvim_create_autocmd('LspDetach', {
       return
     end
 
-    if client.supports_method(Methods.textDocument_inlayHint) then
+    if client:supports_method(Methods.textDocument_inlayHint) then
       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
     end
 
-    if client.supports_method(Methods.textDocument_completion) then
+    if client:supports_method(Methods.textDocument_completion) then
       vim.lsp.completion.enable(false, client.id, bufnr, {})
       vim.bo[bufnr].completeopt = nil
     end
@@ -212,7 +212,7 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
   local clients = vim.lsp.get_clients({ bufnr = bufnr, name = name })
   for _, client in pairs(clients) do
     local attached_buffers = vim.tbl_keys(client.attached_buffers)
-    client.stop()
+    client:stop()
     ---@diagnostic disable-next-line: redefined-local
     require('lsp').start(client.config, function(client)
       for _, ab in pairs(attached_buffers) do
