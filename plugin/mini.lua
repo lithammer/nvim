@@ -1,4 +1,4 @@
-local now, later = MiniDeps.now, MiniDeps.later
+local later = MiniDeps.later
 
 later(function()
   require('mini.ai').setup({
@@ -55,29 +55,6 @@ later(function()
     },
   })
 end)
-
-if not vim.lsp.completion then
-  now(function()
-    require('mini.completion').setup({
-      mappings = {
-        force_twostep = '',
-        force_fallback = '',
-      },
-      window = {
-        info = {
-          height = 25,
-          width = 80,
-          border = 'single',
-        },
-        signature = {
-          height = 25,
-          width = 80,
-          border = 'single',
-        },
-      },
-    })
-  end)
-end
 
 later(function()
   require('mini.diff').setup({
