@@ -7,7 +7,7 @@ local fnamemodify = vim.fn.fnamemodify
 ---@param name string
 ---@param range lsp.Range
 ---@param uri string
----@param offset_encoding string
+---@param position_encoding string
 ---@return {name: string, filename: string, cmd: string, kind?: string}
 local function mk_tag_item(name, range, uri, offset_encoding)
   local bufnr = vim.uri_to_bufnr(uri)
@@ -34,8 +34,8 @@ local function query_definition(pattern)
   --- @param range lsp.Range
   --- @param uri string
   --- @param offset_encoding string
-  local add = function(range, uri, offset_encoding)
-    table.insert(results, mk_tag_item(pattern, range, uri, offset_encoding))
+  local add = function(range, uri, position_encoding)
+    table.insert(results, mk_tag_item(pattern, range, uri, position_encoding))
   end
 
   local remaining = #clients
@@ -108,11 +108,11 @@ local function query_workspace_symbols(pattern)
   local results = {}
   for client_id, responses in pairs(assert(results_by_client)) do
     local client = lsp.get_client_by_id(client_id)
-    local offset_encoding = client and client.offset_encoding or 'utf-16'
+    local position_encoding = client and client.offset_encoding or 'utf-16'
     local symbols = responses.result --[[@as lsp.SymbolInformation[]|nil]]
     for _, symbol in pairs(symbols or {}) do
       local loc = symbol.location
-      local item = mk_tag_item(symbol.name, loc.range, loc.uri, offset_encoding)
+      local item = mk_tag_item(symbol.name, loc.range, loc.uri, position_encoding)
       item.kind = symbol_to_kind[lsp.protocol.SymbolKind[symbol.kind]] or ''
       table.insert(results, item)
     end
