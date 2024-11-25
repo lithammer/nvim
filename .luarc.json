@@ -8,12 +8,12 @@
     },
     "hint": {
         "enable": true,
-        "arrayIndex": "Disable",
+        "arrayIndex": "Disable"
     },
     "diagnostics": {
         "unusedLocalExclude": [
             "_*"
-        ],
+        ]
     },
     "diagnostics.globals": [
         "MiniDeps",
