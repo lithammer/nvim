@@ -73,7 +73,7 @@ now(function()
 end)
 
 add('brenoprata10/nvim-highlight-colors')
-add({ source = 'folke/lazydev.nvim', depends = { 'Bilal2453/luvit-meta' } })
+add('folke/lazydev.nvim')
 add('folke/trouble.nvim')
 add('folke/ts-comments.nvim')
 add('folke/twilight.nvim')
