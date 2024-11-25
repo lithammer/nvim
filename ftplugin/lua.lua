@@ -1,6 +1,7 @@
 local lsp = require('lsp')
 local ws = require('lsp.ws')
 
+local fn, fs, uv = vim.fn, vim.fs, vim.uv
 local now = MiniDeps.now
 
 now(function()
@@ -13,6 +14,19 @@ now(function()
       cmp = false,
       coq = false,
     },
+    enabled = function(root_dir)
+      local luarc_path = fs.joinpath(root_dir, '.luarc.json')
+
+      if uv.fs_stat(luarc_path) then
+        local luarc = vim.json.decode(fn.readblob(luarc_path))
+        local lib = vim.tbl_get(luarc, 'workspace', 'library')
+        if lib and not vim.tbl_isempty(lib) then
+          return false
+        end
+      end
+
+      return true
+    end,
   })
 end)
 
