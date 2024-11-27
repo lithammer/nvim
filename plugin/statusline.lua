@@ -1,13 +1,30 @@
+-- https://www.w3.org/TR/AERT/#color-contrast
+local function color_brightness(int_color)
+  local hex_color = string.format('%06x', int_color)
+  local r = tonumber(hex_color:sub(1, 2), 16)
+  local g = tonumber(hex_color:sub(3, 4), 16)
+  local b = tonumber(hex_color:sub(5, 6), 16)
+  return (r * 299 + g * 587 + b * 114) / 1000
+end
+
 local function update_diagnostic_statusline_hl()
   local statusline = vim.api.nvim_get_hl(0, { name = 'StatusLine', link = false })
 
   for i, suffix in ipairs({ 'Error', 'Warn', 'Info', 'Hint' }) do
-    local hl = vim.api.nvim_get_hl(0, { name = 'DiagnosticStatusLine' .. suffix, link = false })
+    local hl = vim.api.nvim_get_hl(0, {
+      name = 'DiagnosticStatusLine' .. suffix,
+      link = false,
+      create = false,
+    })
     if not vim.tbl_isempty(hl) then
       vim.api.nvim_set_hl(0, 'User' .. i, { link = 'DiagnosticStatusLine' .. suffix })
     else
-      local fg = vim.api.nvim_get_hl(0, { name = 'Diagnostic' .. suffix, link = false }).fg
-      vim.api.nvim_set_hl(0, 'User' .. i, vim.tbl_extend('force', statusline, { bg = fg }))
+      -- This assumes the relevant color (red, yellow etc) is the foreground color.
+      local bg = vim.api.nvim_get_hl(0, { name = 'Diagnostic' .. suffix, link = false }).fg
+      -- Pick the darker color as foreground.
+      local fg = color_brightness(statusline.fg) < color_brightness(statusline.bg) and statusline.fg
+        or statusline.bg
+      vim.api.nvim_set_hl(0, 'User' .. i, vim.tbl_extend('force', statusline, { bg = bg, fg = fg }))
     end
   end
 end
