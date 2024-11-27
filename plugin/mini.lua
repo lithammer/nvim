@@ -10,6 +10,10 @@ later(function()
 end)
 
 later(function()
+  require('mini.bracketed').setup()
+end)
+
+later(function()
   local miniclue = require('mini.clue')
   miniclue.setup({
     triggers = {
@@ -62,10 +66,10 @@ later(function()
       apply = '',
       reset = '',
       textobject = '',
-      goto_first = '',
-      goto_prev = '[c',
-      goto_next = ']c',
-      goto_last = '',
+      goto_first = '[H',
+      goto_prev = '[h',
+      goto_next = ']h',
+      goto_last = ']H',
     },
   })
 end)

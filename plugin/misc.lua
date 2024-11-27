@@ -3,13 +3,6 @@ local keymap = vim.keymap
 local add, later = MiniDeps.add, MiniDeps.later
 
 add('romainl/vim-qf')
-later(function()
-  keymap.set('n', '<leader>q', '<plug>(qf_qf_toggle)', { desc = 'Toggle quickfix window' })
-  keymap.set('n', ']q', '<plug>(qf_qf_next)', { desc = 'Go down the quickfix list' })
-  keymap.set('n', '[q', '<plug>(qf_qf_previous)', { desc = 'Go up the quickfix list' })
-  keymap.set('n', ']l', '<plug>(qf_loc_next)', { desc = 'Go down the current location list' })
-  keymap.set('n', '[l', '<plug>(qf_loc_previous)', { desc = 'Go up the current location list' })
-end)
 
 add('folke/flash.nvim')
 later(function()
