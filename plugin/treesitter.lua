@@ -122,9 +122,3 @@ require('nvim-treesitter.configs').setup({
 })
 
 add('nvim-treesitter/nvim-treesitter-textobjects')
-later(function()
-  require('treesitter-context').setup({
-    multiwindow = true,
-    separator = vim.opt.fillchars:get().diff,
-  })
-end)
