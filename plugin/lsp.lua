@@ -59,13 +59,6 @@ local function setup_mappings(bufnr, client)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('keep', { buffer = bufnr }, opts or {}))
   end
 
-  --- Override default 'K' mapping to add border.
-  if client:supports_method(Methods.textDocument_hover) then
-    map('n', 'K', function()
-      vim.lsp.buf.hover({ border = 'rounded' })
-    end, { desc = 'Show hover information' })
-  end
-
   map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Jump to declaration' })
 
   if client:supports_method(Methods.textDocument_typeDefinition) then
