@@ -10,7 +10,9 @@ later(function()
 end)
 
 later(function()
-  require('mini.bracketed').setup()
+  require('mini.bracketed').setup({
+    comment = { suffix = '', options = {} },
+  })
 end)
 
 later(function()
@@ -66,10 +68,10 @@ later(function()
       apply = '',
       reset = '',
       textobject = '',
-      goto_first = '[H',
-      goto_prev = '[h',
-      goto_next = ']h',
-      goto_last = ']H',
+      goto_first = '[C',
+      goto_prev = '[c',
+      goto_next = ']c',
+      goto_last = ']C',
     },
   })
 end)
