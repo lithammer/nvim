@@ -1,4 +1,4 @@
-local add, later = MiniDeps.add, MiniDeps.later
+local add = MiniDeps.add
 
 add('nvim-treesitter/nvim-treesitter-context')
 ---@diagnostic disable-next-line: missing-fields
