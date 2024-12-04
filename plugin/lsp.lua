@@ -169,6 +169,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client:supports_method(Methods.textDocument_completion) then
       enable_completion(client, bufnr)
     end
+
+    if client:supports_method(Methods.textDocument_rangeFormatting) then
+      -- vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr()'
+      vim.bo[bufnr].formatexpr = [[v:lua.require'conform'.formatexpr()]]
+    end
   end,
 })
 
