@@ -5,6 +5,10 @@ add('stevearc/conform.nvim')
 later(function()
   require('conform').setup({
     formatters = {
+      hurlfmt = {
+        command = 'hurlfmt',
+        args = {},
+      },
       nimpretty = {
         command = 'nimpretty',
         args = { '$FILENAME' },
@@ -18,6 +22,7 @@ later(function()
     formatters_by_ft = {
       css = { 'biome' },
       fish = { 'fish_indent' },
+      hurl = { 'hurlfmt' },
       javascript = { 'biome-check', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
       nim = { 'nph', 'nimpretty', stop_after_first = true },
