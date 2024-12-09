@@ -73,6 +73,8 @@ now(function()
 end)
 
 add('brenoprata10/nvim-highlight-colors')
+add('dgagn/diagflow.nvim')
+add('folke/flash.nvim')
 add('folke/lazydev.nvim')
 add('folke/trouble.nvim')
 add('folke/ts-comments.nvim')
@@ -88,6 +90,7 @@ add({
     end,
   },
 })
+add('romainl/vim-qf')
 add('sphamba/smear-cursor.nvim')
 add('stevearc/oil.nvim')
 add('tpope/vim-fugitive')
@@ -101,6 +104,35 @@ add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
 
 later(function()
+  require('diagflow').setup({
+    padding_top = 3,
+    toggle_event = { 'InsertEnter', 'InsertLeave' },
+  })
+end)
+
+later(function()
+  local flash = require('flash')
+  vim.keymap.set({ 'n', 'x', 'o' }, 's', flash.jump, { desc = 'Flash' })
+  vim.keymap.set({ 'n', 'x', 'o' }, 'S', flash.treesitter, { desc = 'Flash Treesitter' })
+  vim.keymap.set('o', 'r', flash.remote, { desc = 'Remote Flash' })
+  vim.keymap.set({ 'o', 'x' }, 'R', flash.treesitter_search, { desc = 'Treesitter Search' })
+  vim.keymap.set({ 'c' }, '<c-s>', flash.toggle, { desc = 'Toggle Flash Search' })
+end)
+
+later(function()
+  require('ts-comments').setup()
+end)
+
+later(function()
+  require('trouble').setup({
+    keys = {
+      j = 'next',
+      k = 'prev',
+    },
+  })
+end)
+
+later(function()
   local smear_cursor = require('smear_cursor')
   smear_cursor.setup({
     stiffness = 0.8,
@@ -110,6 +142,14 @@ later(function()
   })
   smear_cursor.enabled = not vim.env.TERM:match('kitty')
 end)
+
+g.gutentags_add_default_project_roots = 0
+g.gutentags_project_root = { '.git' }
+g.gutentags_file_list_command = {
+  markers = {
+    ['.git'] = 'git ls-files',
+  },
+}
 
 do
   g.netrw_altfile = 1
