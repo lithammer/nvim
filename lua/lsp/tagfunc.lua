@@ -9,10 +9,10 @@ local fnamemodify = vim.fn.fnamemodify
 ---@param uri string
 ---@param position_encoding string
 ---@return {name: string, filename: string, cmd: string, kind?: string}
-local function mk_tag_item(name, range, uri, offset_encoding)
+local function mk_tag_item(name, range, uri, position_encoding)
   local bufnr = vim.uri_to_bufnr(uri)
   -- This is get_line_byte_from_position is 0-indexed, call cursor expects a 1-indexed position
-  local byte = util._get_line_byte_from_position(bufnr, range.start, offset_encoding) + 1
+  local byte = util._get_line_byte_from_position(bufnr, range.start, position_encoding) + 1
   return {
     name = name,
     filename = fnamemodify(vim.uri_to_fname(uri), ':~:.'),
@@ -33,7 +33,7 @@ local function query_definition(pattern)
 
   --- @param range lsp.Range
   --- @param uri string
-  --- @param offset_encoding string
+  --- @param position_encoding string
   local add = function(range, uri, position_encoding)
     table.insert(results, mk_tag_item(pattern, range, uri, position_encoding))
   end
