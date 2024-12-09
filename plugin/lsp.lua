@@ -144,6 +144,8 @@ local function enable_completion(client, bufnr)
   end
 
   vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+  vim.keymap.set('i', '<c-space>', vim.lsp.completion.trigger, { buffer = bufnr })
+  vim.keymap.set('i', '<c-x><c-o>', vim.lsp.completion.trigger, { buffer = bufnr })
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
