@@ -180,9 +180,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       -- vim.opt_local.foldexpr = 'v:lua.vim.lsp.foldexpr()'
       -- vim.opt_local.foldtext = 'v:lua.vim.lsp.foldtext()'
       local winid = vim.fn.bufwinid(bufnr)
-      vim.wo[winid].foldmethod = 'expr'
-      vim.wo[winid].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-      vim.wo[winid].foldtext = 'v:lua.vim.lsp.foldtext()'
+      if vim.api.nvim_win_is_valid(winid) then
+        vim.wo[winid].foldmethod = 'expr'
+        vim.wo[winid].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+        vim.wo[winid].foldtext = 'v:lua.vim.lsp.foldtext()'
+      end
     end
   end,
 })
