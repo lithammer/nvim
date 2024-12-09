@@ -78,6 +78,7 @@ add('folke/trouble.nvim')
 add('folke/ts-comments.nvim')
 add('folke/twilight.nvim')
 add('github/copilot.vim')
+add('ludovicchabant/vim-gutentags')
 add('mfussenegger/nvim-ansible')
 add({
   source = 'nvim-treesitter/nvim-treesitter',

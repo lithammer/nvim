@@ -34,3 +34,14 @@ end)
 later(function()
   require('ts-comments').setup()
 end)
+
+do
+  local g = vim.g
+  g.gutentags_add_default_project_roots = 0
+  g.gutentags_project_root = { '.git' }
+  g.gutentags_file_list_command = {
+    markers = {
+      ['.git'] = 'git ls-files',
+    },
+  }
+end
