@@ -64,7 +64,7 @@ do
 end
 
 require('mini.deps').setup()
-local add, now = MiniDeps.add, MiniDeps.now
+local add, later, now = MiniDeps.add, MiniDeps.later, MiniDeps.now
 add('echasnovski/mini.nvim')
 
 now(function()
@@ -88,6 +88,7 @@ add({
     end,
   },
 })
+add('sphamba/smear-cursor.nvim')
 add('stevearc/oil.nvim')
 add('tpope/vim-fugitive')
 add('tpope/vim-sleuth')
@@ -98,6 +99,17 @@ add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
+
+later(function()
+  local smear_cursor = require('smear_cursor')
+  smear_cursor.setup({
+    stiffness = 0.8,
+    trailing_stiffness = 0.5,
+    distance_stop_animating = 0.5,
+    hide_target_hack = false,
+  })
+  smear_cursor.enabled = not vim.env.TERM:match('kitty')
+end)
 
 do
   g.netrw_altfile = 1
