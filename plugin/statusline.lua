@@ -50,6 +50,11 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
   -- end,
 })
 
+vim.api.nvim_create_autocmd('User', {
+  pattern = { 'GutentagsUpdating', 'GutentagsUpdated' },
+  command = 'redrawstatus',
+})
+
 ---@param focused boolean
 ---@return string
 local function diagnostic(focused)
@@ -104,7 +109,7 @@ function Statusline()
     '%m',
     '%r',
     diagnostic(focused),
-    '%{gutentags#statusline()}',
+    "%{gutentags#statusline('[', ']')}",
     '%=',
     '%-14.(%l,%c%V%)',
     '%P',
