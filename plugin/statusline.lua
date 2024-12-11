@@ -29,31 +29,39 @@ local function update_diagnostic_statusline_hl()
   end
 end
 
-vim.api.nvim_create_autocmd('DiagnosticChanged', {
-  callback = update_diagnostic_statusline_hl,
-  once = true,
-})
+do
+  local group = vim.api.nvim_create_augroup('statusline_redraw', { clear = true })
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = '*',
-  callback = update_diagnostic_statusline_hl,
-})
+  vim.api.nvim_create_autocmd('DiagnosticChanged', {
+    group = group,
+    callback = update_diagnostic_statusline_hl,
+    once = true,
+  })
 
-vim.api.nvim_create_autocmd('DiagnosticChanged', {
-  command = 'redrawstatus!',
-  -- XXX: nvim__redraw() is corrupting the blink.cmp menu.
-  -- callback = function()
-  --   vim.api.nvim__redraw({
-  --     statusline = true,
-  --     flush = true,
-  --   })
-  -- end,
-})
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    group = group,
+    pattern = '*',
+    callback = update_diagnostic_statusline_hl,
+  })
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = { 'GutentagsUpdating', 'GutentagsUpdated' },
-  command = 'redrawstatus!',
-})
+  vim.api.nvim_create_autocmd('DiagnosticChanged', {
+    group = group,
+    command = 'redrawstatus!',
+    -- XXX: nvim__redraw() is corrupting the blink.cmp menu.
+    -- callback = function()
+    --   vim.api.nvim__redraw({
+    --     statusline = true,
+    --     flush = true,
+    --   })
+    -- end,
+  })
+
+  vim.api.nvim_create_autocmd('User', {
+    group = group,
+    pattern = { 'GutentagsUpdating', 'GutentagsUpdated' },
+    command = 'redrawstatus!',
+  })
+end
 
 ---@param focused boolean
 ---@return string
