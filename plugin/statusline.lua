@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('DiagnosticChanged', {
 
 vim.api.nvim_create_autocmd('User', {
   pattern = { 'GutentagsUpdating', 'GutentagsUpdated' },
-  command = 'redrawstatus',
+  command = 'redrawstatus!',
 })
 
 ---@param focused boolean
