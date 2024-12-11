@@ -123,31 +123,6 @@ local function disable_document_highlight(client, bufnr)
   end
 end
 
----@param client vim.lsp.Client The client to enable completion for.
----@param bufnr number The buffer number.
-local function enable_completion(client, bufnr)
-  vim.bo[bufnr].completeopt = 'menu,fuzzy,noselect,popup'
-
-  -- Remove annoying trigger characters from LuaLS.
-  if client.name == 'lua_ls' then
-    -- { "\t", "\n", ".", ":", "(", "'", '"', "[", ",", "#", "*", "@", "|", "=", "-", "{", " ", "+", "?" }
-    local trigger_characters = client.server_capabilities.completionProvider.triggerCharacters
-    if trigger_characters then
-      for _, c in pairs({ '\t', '\n', ' ' }) do
-        for i, v in ipairs(trigger_characters) do
-          if c == v then
-            table.remove(trigger_characters, i)
-          end
-        end
-      end
-    end
-  end
-
-  vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-  vim.keymap.set('i', '<c-space>', vim.lsp.completion.trigger, { buffer = bufnr })
-  vim.keymap.set('i', '<c-x><c-o>', vim.lsp.completion.trigger, { buffer = bufnr })
-end
-
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf --[[@as number]]
@@ -166,10 +141,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client:supports_method(Methods.textDocument_inlayHint) then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    end
-
-    if client:supports_method(Methods.textDocument_completion) then
-      enable_completion(client, bufnr)
     end
 
     if client:supports_method(Methods.textDocument_rangeFormatting) then
