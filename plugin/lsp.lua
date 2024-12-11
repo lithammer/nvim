@@ -244,3 +244,8 @@ end, {
       :totable()
   end,
 })
+
+vim.lsp.config('*', {
+  root_markers = { '.git' },
+})
+vim.lsp.enable('typos_lsp')
