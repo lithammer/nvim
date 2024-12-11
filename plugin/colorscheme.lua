@@ -40,10 +40,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       local pmenu_extra = vim.api.nvim_get_hl(0, { name = 'PmenuExtra', link = false })
       -- local pmenu_extra_sel = vim.api.nvim_get_hl(0, { name = 'PmenuExtraSel', link = false })
 
-      -- hi('BlinkCmpLabel', { default = true })
-      -- hi('BlinkCmpLabelMatch', { fg = '#d787d7' })
-      -- hi('BlinkCmpLabelDetail', { fg = '#767676' })
-      -- hi('BlinkCmpLabelDescription', { fg = '#767676' })
       hi('BlinkCmpLabel', { default = true })
       hi('BlinkCmpLabelMatch', { fg = pmenu_match.fg })
       hi('BlinkCmpLabelDetail', { fg = pmenu_extra.fg })
