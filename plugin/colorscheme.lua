@@ -12,7 +12,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   group = group,
   pattern = 'default',
   callback = function()
-    hi('TreesitterContextSeparator', { link = 'NonText' })
+    hi('BlinkCmpLabelDetail', { link = 'PmenuExtra' })
+    hi('BlinkCmpLabelDescription', { link = 'PmenuExtra' })
+    hi('BlinkCmpKind', { link = 'PmenuKind' })
   end,
 })
 
@@ -20,9 +22,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   group = group,
   pattern = 'lunaperche',
   callback = function()
-    -- hi('TreesitterContextSeparator', { link = 'NonText' })
-    -- hi('NormalFloat', { link = 'Normal' })
-    -- hi('FloatBorder', { link = 'NormalFloat' })
     vim.cmd [[hi VertSplit guibg=NONE ctermbg=NONE]]
 
     hi('DiagnosticStatusLineError', { fg = '#000000', bg = '#ff0000' })
