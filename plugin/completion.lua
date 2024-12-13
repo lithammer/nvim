@@ -54,7 +54,7 @@ later(function()
       },
       menu = {
         draw = {
-          treesitter = true,
+          treesitter = false,
           columns = { { 'label', 'label_description', gap = 1 }, { 'kind' } },
         },
       },
