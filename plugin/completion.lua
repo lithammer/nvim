@@ -70,6 +70,7 @@ later(function()
         -- lsp = { name = 'LSP', fallback_for = { 'lazydev' } },
         lazydev = { name = 'LazyDev', module = 'lazydev.integrations.blink', fallbacks = { 'lsp' } },
       },
+      cmdline = {},
     },
   })
 end)
