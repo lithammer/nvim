@@ -1,5 +1,3 @@
----@diagnostic disable: missing-fields
-
 local add, later = MiniDeps.add, MiniDeps.later
 
 local on_exit = function(obj)
@@ -54,7 +52,7 @@ later(function()
       },
       menu = {
         draw = {
-          treesitter = false,
+          treesitter = {},
           columns = { { 'label', 'label_description', gap = 1 }, { 'kind' } },
         },
       },
