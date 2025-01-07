@@ -47,7 +47,6 @@ local function start(bufnr, config)
   local resolved_config = vim.tbl_deep_extend(
     'force',
     { capabilities = capabilities },
-    vim.lsp.config['*'],
     vim.lsp.config[config.name],
     config,
     workspace_config(bufnr)
