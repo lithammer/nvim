@@ -38,17 +38,22 @@ end
 ---@return integer? client_id
 local function start(bufnr, config)
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
   -- Enable dynamic registration of watched files. However might not work great on Linux.
   -- https://github.com/neovim/neovim/pull/28690
   -- https://github.com/neovim/neovim/pull/29374
   capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
-  local merged_config =
-    vim.tbl_deep_extend('force', { capabilities = capabilities }, config, workspace_config(bufnr))
+  local resolved_config = vim.tbl_deep_extend(
+    'force',
+    { capabilities = capabilities },
+    vim.lsp.config['*'],
+    vim.lsp.config[config.name],
+    config,
+    workspace_config(bufnr)
+  )
 
-  return vim.lsp.start(merged_config, { bufnr = bufnr })
+  return vim.lsp.start(resolved_config, { bufnr = bufnr })
 end
 
 ---@class ClientConfig: vim.lsp.ClientConfig
