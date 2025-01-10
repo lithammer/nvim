@@ -134,6 +134,9 @@ end)
 
 later(function()
   local smear_cursor = require('smear_cursor')
+  smear_cursor.setup({
+    smear_to_cmd = false,
+  })
   smear_cursor.enabled = not vim.env.TERM:match('kitty')
 end)
 
