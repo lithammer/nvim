@@ -140,14 +140,6 @@ later(function()
   smear_cursor.enabled = not vim.env.TERM:match('kitty')
 end)
 
--- Sometimes the <Tab> binding is lost because of conflicts with blink.cmp and/or vim.snippet.
--- https://github.com/Saghen/blink.cmp/issues/289
-g.copilot_no_tab_map = true
-vim.keymap.set('i', '<C-j>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false,
-})
-
 g.gutentags_add_default_project_roots = 0
 g.gutentags_project_root = { '.git' }
 g.gutentags_file_list_command = {
