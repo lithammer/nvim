@@ -1,4 +1,4 @@
-vim.lsp.config('typos_lsp', {
+return {
   cmd = { 'typos-lsp' },
   cmd_env = { RUST_LOG = 'error' },
   root_markers = { 'typos.toml', '_typos.toml', '.typos.toml' },
@@ -6,4 +6,4 @@ vim.lsp.config('typos_lsp', {
     diagnosticSeverity = 'Information',
   },
   filetypes = { 'lua', 'go', 'yaml' },
-})
+}
