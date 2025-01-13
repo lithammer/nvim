@@ -55,9 +55,7 @@ local function start(bufnr, config)
   return vim.lsp.start(resolved_config, { bufnr = bufnr })
 end
 
----@class ClientConfig: vim.lsp.ClientConfig
-
----@param config ClientConfig|vim.lsp.ClientConfig
+---@param config vim.lsp.ClientConfig
 ---@param cb? fun(client: vim.lsp.Client)
 function M.start(config, cb)
   local ws = require('lsp.ws')
