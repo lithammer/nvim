@@ -1,12 +1,11 @@
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 local fs = vim.fs
 
 --- Resolve the path to a Rust library.
 ---
----@return lsp.WorkspaceFolder[]?
-local function library_workspace()
+---@return string?
+local function library_root_dir()
   local name = vim.api.nvim_buf_get_name(0)
 
   local cargo_home = vim.env.CARGO_HOME or fs.normalize('~/.cargo')
@@ -17,13 +16,13 @@ local function library_workspace()
   local toolchains = fs.joinpath(rustup_home, 'toolchains')
 
   local is_library = vim.iter({ toolchains, registry, git_registry }):find(function(value)
-    return name:sub(1, #value) == value
+    return vim.startswith(name, value)
   end) ~= nil
 
   if is_library then
     local client = vim.iter(vim.lsp.get_clients({ name = 'rust-analyzer' })):last() --[[@as vim.lsp.Client?]]
     if client then
-      return client.workspace_folders
+      return client.root_dir
     end
   end
 
@@ -56,16 +55,16 @@ local function cargo_locate_project(manifest_path)
   return fs.dirname(obj.stdout)
 end
 
----@return lsp.WorkspaceFolder[]?
-local function resolve_workspace_folders()
-  local workspace_folders = ws.find('Cargo.toml')
-  if not workspace_folders then
+---@return string?
+local function project_root_dir()
+  local match = vim.fs.root(0, 'Cargo.toml')
+  if not match then
     return nil
   end
 
-  local manifest_path = fs.joinpath(workspace_folders[1].name, 'Cargo.toml')
+  local manifest_path = fs.joinpath(match[1], 'Cargo.toml')
   local project_root = cargo_locate_project(manifest_path)
-  return { ws.fname_to_workspace_folder(project_root) }
+  return project_root
 end
 
 local settings = {
@@ -85,7 +84,7 @@ local settings = {
 lsp.start({
   name = 'rust_analyzer',
   cmd = { 'rust-analyzer' },
-  workspace_folders = library_workspace() or resolve_workspace_folders(),
+  root_dir = library_root_dir() or project_root_dir(),
   settings = settings,
   init_options = settings['rust-analyzer'],
 })

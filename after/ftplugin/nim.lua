@@ -1,5 +1,4 @@
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 do
   local bo = vim.bo
@@ -14,7 +13,7 @@ end
 lsp.start({
   name = 'nim_langserver',
   cmd = { 'nimlangserver' },
-  workspace_folders = ws.find(function(name, _path)
+  root_dir = vim.fs.root(0, function(name, _path)
     return name:match('.*%.nimble$') ~= nil
   end),
 })

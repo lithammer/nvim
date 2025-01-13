@@ -1,12 +1,11 @@
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 local has_ruff = lsp.has_server('ruff')
 
 lsp.start({
   name = 'pyright',
   cmd = { 'pyright-langserver', '--stdio' },
-  workspace_folders = ws.find({
+  root_dir = vim.fs.root(0, {
     'pyrightconfig.json',
     'pyproject.toml',
     'setup.py',
@@ -32,7 +31,7 @@ if has_ruff then
   lsp.start({
     name = 'ruff',
     cmd = { 'ruff', 'server' },
-    workspace_folders = ws.find({ 'pyproject.toml', 'ruff.toml', '.ruff.toml' }),
+    root_dir = vim.fs.root(0, { 'pyproject.toml', 'ruff.toml', '.ruff.toml' }),
     on_attach = function(client)
       -- Disable hover in favour of Pyright.
       client.server_capabilities.hoverProvider = false

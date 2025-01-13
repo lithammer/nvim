@@ -1,5 +1,4 @@
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 local fn, fs, uv = vim.fn, vim.fs, vim.uv
 local now = MiniDeps.now
@@ -33,6 +32,6 @@ end)
 lsp.start({
   name = 'lua_ls',
   cmd = { 'lua-language-server' },
-  workspace_folders = ws.find({ '.luarc.json', '.luarc.jsonc' }),
+  root_dir = vim.fs.root(0, { '.luarc.json', '.luarc.jsonc' }),
   settings = {},
 })

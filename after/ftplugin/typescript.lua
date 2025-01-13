@@ -1,11 +1,10 @@
 -- local finders = require('lsp.finders')
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 lsp.start({
   name = 'vtsls',
   cmd = { 'vtsls', '--stdio' },
-  workspace_folders = ws.find('package.json'),
+  root_dir = vim.fs.root(0, 'package.json'),
   settings = {
     typescript = {
       inlayHints = {
@@ -19,12 +18,3 @@ lsp.start({
     },
   },
 })
-
--- local biome_json = ws.find({ 'biome.json', 'biome.jsonc' })
--- if biome_json then
---   lsp.start({
---     name = 'biome',
---     cmd = { finders.node_modules_bin('biome'), 'lsp-proxy' },
---     workspace_folders = biome_json,
---   })
--- end

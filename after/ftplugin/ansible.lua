@@ -1,9 +1,8 @@
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
 lsp.start({
   name = 'ansiblels',
   cmd = { 'ansible-language-server', '--stdio' },
-  workspace_folders = ws.find({ 'ansible.cfg', 'requirements.yml', '.ansible-lint' }),
+  root_dir = vim.fs.root(0, { 'ansible.cfg', 'requirements.yml', '.ansible-lint' }),
   settings = {},
 })

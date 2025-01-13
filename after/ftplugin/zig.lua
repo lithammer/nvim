@@ -1,12 +1,11 @@
-local finders = require('lsp.finders')
 local lsp = require('lsp')
-local ws = require('lsp.ws')
 
-local zls_json = finders.find('zls.json')
-local args = zls_json and { '--config-path', zls_json } or {}
+local root_dir = vim.fs.root(0, 'build.zig')
+local zls_json = vim.fs.joinpath(root_dir, 'zls.json')
+local args = vim.uv.fs_stat(zls_json) and { '--config-path', zls_json } or {}
 
 lsp.start({
   name = 'zls',
   cmd = { 'zls', unpack(args) },
-  workspace_folders = ws.find('build.zig'),
+  root_dir = root_dir,
 })
