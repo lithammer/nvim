@@ -62,7 +62,7 @@ local function project_root_dir()
     return nil
   end
 
-  local manifest_path = fs.joinpath(match[1], 'Cargo.toml')
+  local manifest_path = fs.joinpath(match, 'Cargo.toml')
   local project_root = cargo_locate_project(manifest_path)
   return project_root
 end
