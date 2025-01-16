@@ -60,14 +60,14 @@ function M.start(config, cb)
   local fallback = is_under_cwd and cwd or fs.dirname(bufname)
 
   if not config.root_dir then
-    config.root_dir = resolved_config.root_markers
+    resolved_config.root_dir = resolved_config.root_markers
         and vim.fs.root(bufnr, resolved_config.root_markers)
       or fallback
   end
 
   -- Prevent rampant file scanning by some servers.
   if config.root_dir == vim.env.HOME then
-    config.root_dir = nil
+    resolved_config.root_dir = nil
   end
 
   -- Lazily start the LSP client to avoid blocking the UI.
