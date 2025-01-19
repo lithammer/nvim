@@ -54,10 +54,10 @@ function M.start(config, cb)
   )
 
   -- If the buffer is under the current working directory, use it as the root.
-  -- Otherwise use the buffer directory.
+  -- Otherwise use the buffer's directory.
   local cwd = fn.getcwd(winnr, tabnr)
-  local is_under_cwd = vim.startswith(fs.abspath(bufname), cwd)
-  local fallback = is_under_cwd and cwd or fs.dirname(bufname)
+  local is_cwd_descendant = vim.startswith(fs.abspath(bufname), cwd)
+  local fallback = is_cwd_descendant and cwd or fs.dirname(bufname)
 
   if not config.root_dir then
     resolved_config.root_dir = resolved_config.root_markers
