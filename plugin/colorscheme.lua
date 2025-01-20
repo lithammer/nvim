@@ -45,6 +45,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       hi('BlinkCmpLabelDescription', { fg = pmenu_extra.fg })
       hi('BlinkCmpKind', { fg = pmenu_kind.fg })
     end
+
+    hi('SnacksPicker', { link = 'Normal' })
   end,
 })
 

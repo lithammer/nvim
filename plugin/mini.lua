@@ -86,7 +86,7 @@ end)
 
 later(function()
   require('mini.pick').setup()
-  vim.keymap.set('n', '<c-p>', MiniPick.builtin.files)
+  -- vim.keymap.set('n', '<c-p>', MiniPick.builtin.files)
 end)
 
 later(function()

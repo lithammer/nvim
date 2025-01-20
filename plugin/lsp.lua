@@ -48,6 +48,8 @@ local function code_action_kind(kind)
   vim.lsp.buf.code_action({ context = { only = { kind } } })
 end
 
+---@module 'snacks'
+
 ---@param bufnr number The buffer number.
 ---@param client vim.lsp.Client
 local function setup_mappings(bufnr, client)
@@ -74,9 +76,9 @@ local function setup_mappings(bufnr, client)
   if client:supports_method(Methods.workspace_symbol) then
     map(
       'n',
-      '<leader>s',
-      vim.lsp.buf.workspace_symbol,
-      { desc = 'List all symbols in the workspace' }
+      '<leader>ss',
+      Snacks.picker.lsp_workspace_symbols,
+      { desc = 'Search workspace symbols' }
     )
   end
 
