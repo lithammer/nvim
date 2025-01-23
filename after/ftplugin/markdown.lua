@@ -6,11 +6,4 @@ lsp.start({
   init_options = {
     provideFormatter = true,
   },
-  settings = {
-    markdown = {
-      validate = {
-        enabled = true,
-      },
-    },
-  },
 })
