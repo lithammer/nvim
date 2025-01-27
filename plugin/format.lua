@@ -5,10 +5,6 @@ add('stevearc/conform.nvim')
 later(function()
   require('conform').setup({
     formatters = {
-      hurlfmt = {
-        command = 'hurlfmt',
-        args = {},
-      },
       nimpretty = {
         command = 'nimpretty',
         args = { '$FILENAME' },
