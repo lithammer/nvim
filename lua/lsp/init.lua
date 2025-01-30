@@ -32,8 +32,10 @@ end
 ---@param config vim.lsp.ClientConfig
 ---@param cb? fun(client: vim.lsp.Client)
 function M.start(config, cb)
-  local winnr = vim.api.nvim_get_current_win()
-  local tabnr = vim.api.nvim_get_current_tabpage()
+  local winid = vim.api.nvim_get_current_win()
+  local winnr = vim.api.nvim_win_get_number(winid)
+  local tabid = vim.api.nvim_get_current_tabpage()
+  local tabnr = vim.api.nvim_tabpage_get_number(tabid)
   local bufnr = vim.api.nvim_get_current_buf()
   local bufname = vim.api.nvim_buf_get_name(bufnr)
 
