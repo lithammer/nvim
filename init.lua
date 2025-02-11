@@ -73,7 +73,6 @@ now(function()
 end)
 
 add('brenoprata10/nvim-highlight-colors')
-add('dgagn/diagflow.nvim')
 add('folke/flash.nvim')
 add('folke/lazydev.nvim')
 add('folke/snacks.nvim')
@@ -103,13 +102,6 @@ add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
-
-later(function()
-  require('diagflow').setup({
-    padding_top = 3,
-    toggle_event = { 'InsertEnter', 'InsertLeave' },
-  })
-end)
 
 later(function()
   local flash = require('flash')

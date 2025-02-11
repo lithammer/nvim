@@ -8,22 +8,6 @@ later(function()
   require('fidget').setup({})
 end)
 
-vim.diagnostic.config({
-  severity_sort = true,
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = ' ',
-      [vim.diagnostic.severity.WARN] = ' ',
-      [vim.diagnostic.severity.INFO] = ' ',
-      [vim.diagnostic.severity.HINT] = ' ',
-    },
-  },
-  virtual_text = false,
-  jump = {
-    float = true,
-  },
-})
-
 ---@param mode string
 local function trouble(mode)
   local width = vim.o.columns
