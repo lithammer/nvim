@@ -57,15 +57,6 @@ local function setup_mappings(bufnr, client)
     end, { desc = 'List implementations' })
   end
 
-  if client:supports_method(Methods.workspace_symbol) then
-    map(
-      'n',
-      '<leader>ss',
-      Snacks.picker.lsp_workspace_symbols,
-      { desc = 'Search workspace symbols' }
-    )
-  end
-
   map('n', 'grr', function()
     trouble('lsp_references')
   end, { desc = 'List references' })
