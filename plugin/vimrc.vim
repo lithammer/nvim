@@ -15,4 +15,10 @@ augroup HighlightYank
   autocmd TextYankPost * silent! lua vim.hl.on_yank()
 augroup END
 
+" Ensure relative paths in :buffers.
+augroup BufferRelativePaths
+  autocmd!
+  autocmd BufReadPost * call chdir(getcwd())
+augroup END
+
 command W w
