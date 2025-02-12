@@ -4,17 +4,6 @@ add('stevearc/conform.nvim')
 
 later(function()
   require('conform').setup({
-    formatters = {
-      nimpretty = {
-        command = 'nimpretty',
-        args = { '$FILENAME' },
-        stdin = false,
-      },
-      nph = {
-        command = 'nph',
-        args = { '-' },
-      },
-    },
     formatters_by_ft = {
       css = { 'biome' },
       fish = { 'fish_indent' },
