@@ -64,6 +64,7 @@ require('nvim-treesitter.configs').setup({
     'nim',
     'nim_format_string',
     'nix',
+    'odin',
     'ocaml',
     'ocaml_interface',
     'ocamllex',
