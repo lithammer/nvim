@@ -67,7 +67,7 @@ later(function()
           score_offset = 100,
         },
       },
-      cmdline = {},
     },
+    cmdline = { enabled = false },
   })
 end)
