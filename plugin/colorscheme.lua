@@ -47,6 +47,11 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     end
 
     hi('SnacksPicker', { link = 'Normal' })
+
+    -- Fix yaml property highlight. The default link is @property.yaml -> @property -> Identifier.
+    -- But Identifier is cleared in lunaperche. Map to Statement instead since that's what
+    -- the vanilla syntax engine does.
+    hi('@property.yaml', { link = 'Statement' })
   end,
 })
 
