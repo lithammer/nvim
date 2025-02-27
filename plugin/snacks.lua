@@ -31,7 +31,7 @@ later(function()
   end, { desc = 'Search symbols' })
 
   vim.keymap.set('n', '<leader>sS', function()
-    Snacks.picker.lsp_symbols()
+    Snacks.picker.lsp_workspace_symbols()
   end, { desc = 'Search workspace symbols' })
 
   vim.keymap.set('n', '<leader>/', function()
