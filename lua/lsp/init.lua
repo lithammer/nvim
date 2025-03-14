@@ -50,7 +50,8 @@ function M.start(config, cb)
   local resolved_config = vim.tbl_deep_extend(
     'force',
     { capabilities = capabilities },
-    vim.lsp.config['*'] or {},
+    ---@diagnostic disable-next-line: invisible
+    vim.lsp.config._configs['*'] or {},
     vim.lsp.config[config.name] or {},
     config,
     workspace_config(bufnr)
