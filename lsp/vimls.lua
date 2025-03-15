@@ -1,8 +1,7 @@
-local lsp = require('lsp')
-
-lsp.start({
-  name = 'vimls',
+---@type vim.lsp.Config
+return {
   cmd = { 'vim-language-server', '--stdio' },
+  filetypes = { 'vim' },
   init_options = {
     isNeovim = true,
     indexes = {
@@ -14,4 +13,4 @@ lsp.start({
       },
     },
   },
-})
+}

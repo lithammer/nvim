@@ -1,13 +1,12 @@
-local lsp = require('lsp')
-
-lsp.start({
-  name = 'cssls',
+---@type vim.lsp.Config
+return {
   cmd = { 'vscode-css-language-server', '--stdio' },
-  root_dir = vim.fs.root(0, 'package.json'),
+  filetypes = { 'css' },
+  root_markers = { 'package.json' },
   init_options = { provideFormatter = true },
   settings = {
     css = { validate = true },
     scss = { validate = true },
     less = { validate = true },
   },
-})
+}

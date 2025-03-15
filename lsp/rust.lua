@@ -1,12 +1,11 @@
-local lsp = require('lsp')
-
 local fs = vim.fs
 
 --- Resolve the path to a Rust library.
 ---
+---@param bufnr number
 ---@return string?
-local function library_root_dir()
-  local name = vim.api.nvim_buf_get_name(0)
+local function library_root_dir(bufnr)
+  local name = vim.api.nvim_buf_get_name(bufnr)
 
   local cargo_home = vim.env.CARGO_HOME or fs.normalize('~/.cargo')
   local registry = fs.joinpath(cargo_home, 'registry', 'src')
@@ -55,9 +54,10 @@ local function cargo_locate_project(manifest_path)
   return fs.dirname(obj.stdout)
 end
 
+---@param bufnr number
 ---@return string?
-local function project_root_dir()
-  local match = vim.fs.root(0, 'Cargo.toml')
+local function project_root_dir(bufnr)
+  local match = vim.fs.root(bufnr, 'Cargo.toml')
   if not match then
     return nil
   end
@@ -81,10 +81,13 @@ local settings = {
   },
 }
 
-lsp.start({
-  name = 'rust_analyzer',
+---@type vim.lsp.Config
+return {
   cmd = { 'rust-analyzer' },
-  root_dir = library_root_dir() or project_root_dir(),
+  filetypes = { 'rust' },
+  root_dir = function(bufnr, cb)
+    cb(library_root_dir(bufnr) or project_root_dir(bufnr))
+  end,
   settings = settings,
   init_options = settings['rust-analyzer'],
-})
+}

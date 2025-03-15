@@ -196,4 +196,37 @@ end, {
 vim.lsp.config('*', {
   root_markers = { '.git' },
 })
-vim.lsp.enable('typos_lsp')
+
+vim.lsp.enable({
+  'ansiblels',
+  'awkls',
+  'bashls',
+  'bazel_lsp',
+  'biome',
+  'clangd',
+  'crystalline',
+  'cssls',
+  'dockerls',
+  'gleam',
+  'gopls',
+  'html',
+  'jinja_lsp',
+  'jsonls',
+  'lua_ls',
+  'markdown',
+  'nimlangserver',
+  'protols',
+  'pyright',
+  'ruff',
+  'rust',
+  -- 'starlark',
+  'starpls',
+  'superhtml',
+  'taplo',
+  'terraformls',
+  'typos_lsp',
+  'vimls',
+  'vtsls',
+  'yamlls',
+  'zls',
+})

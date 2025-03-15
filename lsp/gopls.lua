@@ -1,5 +1,3 @@
-local lsp = require('lsp')
-
 --- For buffers in the Go module cache (e.g. third-party libraries),
 --- attempt to attach to the most recent gopls client.
 ---
@@ -26,10 +24,13 @@ local function modcache_root_dir()
   return nil
 end
 
-lsp.start({
-  name = 'gopls',
+---@type vim.lsp.Config
+return {
   cmd = { 'gopls', 'serve' },
-  root_dir = modcache_root_dir() or vim.fs.root(0, 'go.work') or vim.fs.root(0, 'go.mod'),
+  filetypes = { 'go', 'gomod', 'gotmpl', 'gowork' },
+  root_dir = function(bufnr, cb)
+    cb(modcache_root_dir() or vim.fs.root(bufnr, 'go.work') or vim.fs.root(bufnr, 'go.mod'))
+  end,
   settings = {
     gopls = {
       analyses = {
@@ -59,4 +60,4 @@ lsp.start({
       usePlaceholders = true,
     },
   },
-})
+}

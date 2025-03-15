@@ -1,8 +1,7 @@
-local lsp = require('lsp')
-
-lsp.start({
-  name = 'jsonls',
+---@type vim.lsp.Config
+return {
   cmd = { 'vscode-json-language-server', '--stdio' },
+  filetypes = { 'json' },
   init_options = {
     provideFormatter = true,
   },
@@ -11,4 +10,4 @@ lsp.start({
       format = { enable = true },
     },
   },
-})
+}
