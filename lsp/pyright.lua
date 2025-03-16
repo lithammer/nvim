@@ -2,13 +2,13 @@
 return {
   cmd = { 'pyright-langserver', '--stdio' },
   filetypes = { 'python' },
-  root_dir = vim.fs.root(0, {
+  root_markers = {
     'pyrightconfig.json',
     'pyproject.toml',
     'setup.py',
     'setup.cfg',
     'requirements.txt',
-  }),
+  },
   settings = {
     pyright = {
       -- Disable in favour of Ruff.
