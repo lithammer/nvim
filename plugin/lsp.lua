@@ -103,10 +103,7 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf --[[@as number]]
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if not client then
-      return
-    end
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
     vim.bo[bufnr].tagfunc = [[v:lua.require'lsp.tagfunc']]
 
@@ -173,12 +170,15 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
   for _, client in pairs(clients) do
     local attached_buffers = vim.tbl_keys(client.attached_buffers)
     client:stop()
-    ---@diagnostic disable-next-line: redefined-local
-    require('lsp').start(client.config, function(client)
-      for _, ab in pairs(attached_buffers) do
-        vim.lsp.buf_attach_client(ab, client.id)
+    vim.defer_fn(function()
+      local client_id = vim.lsp.start(vim.lsp.config[client.name])
+
+      if client_id then
+        for _, ab in pairs(attached_buffers) do
+          vim.lsp.buf_attach_client(ab, client_id)
+        end
       end
-    end)
+    end, 1000)
   end
 end, {
   nargs = 1,
