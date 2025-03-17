@@ -1,4 +1,4 @@
-local finders = require('lsp.finders')
+local finders = require('lspextras.finders')
 
 local biome_bin = finders.node_modules_bin('biome') or 'biome'
 

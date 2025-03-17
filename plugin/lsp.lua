@@ -133,6 +133,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.wo[winid].foldtext = 'v:lua.vim.lsp.foldtext()'
       end
     end
+
+    if client:supports_method(Methods.workspace_didChangeConfiguration) then
+      require('lspextras').apply_local_settings(client)
+    end
   end,
 })
 
