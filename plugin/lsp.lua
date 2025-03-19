@@ -204,6 +204,7 @@ vim.lsp.config('*', {
 vim.lsp.enable({
   'ansiblels',
   'awkls',
+  -- 'basedpyright',
   'bashls',
   'bazel_lsp',
   'biome',
