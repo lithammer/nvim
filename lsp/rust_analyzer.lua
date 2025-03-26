@@ -67,20 +67,6 @@ local function project_root_dir(bufnr)
   return project_root
 end
 
-local settings = {
-  ['rust-analyzer'] = {
-    check = {
-      command = 'clippy',
-    },
-    cargo = {
-      features = 'all',
-    },
-    completion = {
-      postfix = { enable = false },
-    },
-  },
-}
-
 ---@type vim.lsp.Config
 return {
   cmd = { 'rust-analyzer' },
@@ -88,6 +74,23 @@ return {
   root_dir = function(bufnr, cb)
     cb(library_root_dir(bufnr) or project_root_dir(bufnr))
   end,
-  settings = settings,
-  init_options = settings['rust-analyzer'],
+  settings = {
+    ['rust-analyzer'] = {
+      check = {
+        command = 'clippy',
+      },
+      cargo = {
+        features = 'all',
+      },
+      completion = {
+        postfix = { enable = false },
+      },
+    },
+  },
+  before_init = function(params, config)
+    -- https://rust-analyzer.github.io/book/contributing/lsp-extensions.html#configuration-in-initializationoptions
+    if config.settings and config.settings['rust-analyzer'] then
+      params.initializationOptions = config.settings['rust-analyzer']
+    end
+  end,
 }
