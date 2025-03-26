@@ -223,7 +223,7 @@ vim.lsp.enable({
   'protols',
   'pyright',
   'ruff',
-  'rust',
+  'rust_analyzer',
   -- 'starlark',
   'starpls',
   'superhtml',
