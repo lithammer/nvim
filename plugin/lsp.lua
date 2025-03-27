@@ -52,7 +52,7 @@ local function setup_mappings(bufnr, client)
   end
 
   if client:supports_method(Methods.textDocument_implementation) then
-    map('n', 'gI', function()
+    map('n', 'gri', function()
       trouble('lsp_implementations')
     end, { desc = 'List implementations' })
   end
