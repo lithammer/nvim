@@ -6,6 +6,7 @@ local biome_bin = finders.node_modules_bin('biome') or 'biome'
 return {
   cmd = { biome_bin, 'lsp-proxy' },
   filetypes = {
+    'css',
     'javascript',
     'javascriptreact',
     'typescript',
