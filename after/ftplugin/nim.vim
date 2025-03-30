@@ -1,4 +1,4 @@
-setl commentstring='# %s'
+setl commentstring=#\ %s
 setl expandtab
 setl shiftwidth=2
 setl softtabstop=2
