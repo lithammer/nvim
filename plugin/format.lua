@@ -12,7 +12,7 @@ later(function()
       lua = { 'stylua' },
       nim = { 'nph', 'nimpretty', stop_after_first = true },
       proto = { 'clang-format' },
-      python = { 'ruff_format' },
+      python = { 'ruff_format', 'ruff_organize_imports' },
       sh = { 'shfmt' },
       toml = { 'taplo' },
       typescript = { 'biome-check', 'prettier', stop_after_first = true },
