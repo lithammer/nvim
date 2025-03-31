@@ -15,6 +15,7 @@ later(function()
       python = { 'ruff_format', 'ruff_organize_imports' },
       sh = { 'shfmt' },
       toml = { 'taplo' },
+      terraform = { 'terraform_fmt' },
       typescript = { 'biome-check', 'prettier', stop_after_first = true },
     },
     format_on_save = function(bufnr)
