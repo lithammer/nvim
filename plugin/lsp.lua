@@ -204,7 +204,7 @@ vim.lsp.config('*', {
 vim.lsp.enable({
   'ansiblels',
   'awkls',
-  -- 'basedpyright',
+  'basedpyright',
   'bashls',
   'bazel_lsp',
   'biome',
@@ -221,7 +221,7 @@ vim.lsp.enable({
   'markdown',
   'nimlangserver',
   'protols',
-  'pyright',
+  -- 'pyright',
   'ruff',
   'rust_analyzer',
   -- 'starlark',
