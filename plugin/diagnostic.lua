@@ -18,10 +18,16 @@ local virtual_text = vim.diagnostic.config().virtual_text
 
 vim.keymap.set('n', 'gK', function()
   local virtual_lines = not vim.diagnostic.config().virtual_lines
-  vim.diagnostic.config({ virtual_lines = virtual_lines })
+
   if virtual_lines then
-    vim.diagnostic.config({ virtual_text = false })
+    vim.diagnostic.config({
+      virtual_text = false,
+      virtual_lines = { current_line = true },
+    })
   else
-    vim.diagnostic.config({ virtual_text = virtual_text })
+    vim.diagnostic.config({
+      virtual_text = virtual_text,
+      virtual_lines = false,
+    })
   end
 end, { desc = 'Toggle diagnostic virtual_lines' })
