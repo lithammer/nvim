@@ -16,6 +16,7 @@
         ]
     },
     "diagnostics.globals": [
+        "MiniCompletion",
         "MiniDeps",
         "MiniNotify",
         "MiniPick"
