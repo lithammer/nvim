@@ -108,6 +108,10 @@ add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
 
 later(function()
+  require('nvim-highlight-colors').setup({})
+end)
+
+later(function()
   local flash = require('flash')
   vim.keymap.set({ 'n', 'x', 'o' }, 's', flash.jump, { desc = 'Flash' })
   vim.keymap.set({ 'n', 'x', 'o' }, 'S', flash.treesitter, { desc = 'Flash Treesitter' })
