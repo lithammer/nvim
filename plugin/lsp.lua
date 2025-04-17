@@ -216,6 +216,7 @@ vim.lsp.enable({
   'jinja_lsp',
   'jsonls',
   'lua_ls',
+  -- 'oxc',
   'markdown',
   'nimlangserver',
   'protols',
