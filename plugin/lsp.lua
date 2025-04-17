@@ -209,6 +209,7 @@ vim.lsp.enable({
   'crystalline',
   'cssls',
   'dockerls',
+  -- 'emmylua_ls',
   'gleam',
   'gopls',
   'html',
