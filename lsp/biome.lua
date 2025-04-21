@@ -12,10 +12,6 @@ return {
     'typescript',
     'typescriptreact',
   },
-  root_dir = function(bufnr, cb)
-    local biome_root_dir = vim.fs.root(bufnr, { 'biome.json', 'biome.jsonc' })
-    if biome_root_dir then
-      cb(biome_root_dir)
-    end
-  end,
+  root_markers = { 'biome.json', 'biome.jsonc' },
+  workspace_required = true,
 }
