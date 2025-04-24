@@ -12,13 +12,14 @@ return {
   settings = {
     -- https://docs.basedpyright.com/latest/configuration/language-server-settings/
     basedpyright = {
-      disableOrganizeImports = true, -- Disable in favour of Ruff.
       analysis = {
-        fileEnumerationTimeout = 0,
         autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
         diagnosticMode = 'openFilesOnly',
+        fileEnumerationTimeout = 30,
+        typeCheckingMode = 'basic',
+        useLibraryCodeForTypes = true,
       },
+      disableOrganizeImports = true, -- Disable in favour of Ruff.
     },
   },
 }
