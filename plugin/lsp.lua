@@ -216,6 +216,7 @@ vim.lsp.enable({
   -- 'oxc',
   'markdown',
   'nimlangserver',
+  'postgrestools',
   'protols',
   -- 'pyright',
   'ruff',
