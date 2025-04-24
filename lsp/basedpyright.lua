@@ -15,7 +15,7 @@ return {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = 'openFilesOnly',
-        fileEnumerationTimeout = 30,
+        fileEnumerationTimeout = 60,
         typeCheckingMode = 'basic',
         useLibraryCodeForTypes = true,
       },
