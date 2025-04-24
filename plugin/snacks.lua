@@ -1,9 +1,10 @@
-local later = MiniDeps.later
+local later, now = MiniDeps.later, MiniDeps.now
 
 ---@module 'snacks'
 
-later(function()
+now(function()
   require('snacks').setup({
+    bigfile = { enabled = true },
     dim = { enabled = true },
     picker = { enabled = true, ui_select = false },
     toggle = { enabled = true },
