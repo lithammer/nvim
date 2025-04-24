@@ -94,6 +94,8 @@ add({
     end,
   },
 })
+add('nvim-treesitter/nvim-treesitter-context')
+add('nvim-treesitter/nvim-treesitter-textobjects')
 add('romainl/vim-qf')
 add('sphamba/smear-cursor.nvim')
 add('stevearc/oil.nvim')
