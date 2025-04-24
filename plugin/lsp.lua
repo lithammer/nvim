@@ -117,6 +117,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
+    if client:supports_method(Methods.textDocument_documentColor) then
+      vim.lsp.document_color.enable(true, bufnr)
+    end
+
     if client:supports_method(Methods.textDocument_rangeFormatting) then
       -- vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr()'
       vim.bo[bufnr].formatexpr = [[v:lua.require'conform'.formatexpr()]]
@@ -151,6 +155,10 @@ vim.api.nvim_create_autocmd('LspDetach', {
 
     if client:supports_method(Methods.textDocument_inlayHint) then
       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+    end
+
+    if client:supports_method(Methods.textDocument_documentColor) then
+      vim.lsp.document_color.enable(false, bufnr)
     end
 
     if client:supports_method(Methods.textDocument_completion) then
