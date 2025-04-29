@@ -201,6 +201,16 @@ end, {
 
 vim.lsp.config('*', {
   root_markers = { '.git' },
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        -- Enable dynamic registration of watched files. However might not work great on Linux.
+        -- https://github.com/neovim/neovim/pull/28690
+        -- https://github.com/neovim/neovim/pull/29374
+        dynamicRegistration = true,
+      },
+    },
+  },
 })
 
 vim.lsp.enable({
