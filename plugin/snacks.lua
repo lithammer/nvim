@@ -1,4 +1,4 @@
-local later, now = MiniDeps.later, MiniDeps.now
+local now = MiniDeps.now
 
 ---@module 'snacks'
 
