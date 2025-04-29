@@ -1,23 +1,39 @@
-local fs = vim.fs
+local fs, uv = vim.fs, vim.uv
 
 local M = {}
 
 ---@param bufnr number
+---@param name string
 ---@return string?
-local function find_node_modules(bufnr)
-  local match = fs.root(bufnr, 'node_modules')
-  if not match then
-    return nil
+local function node_modules_bin(bufnr, name)
+  local matches = fs.find('node_modules', {
+    path = vim.api.nvim_buf_get_name(bufnr),
+    upward = true,
+    limit = math.huge,
+    type = 'directory',
+  })
+
+  for _, node_modules in ipairs(matches) do
+    local path = fs.joinpath(node_modules, '.bin', name)
+    if uv.fs_stat(path) then
+      return path
+    end
   end
-  return fs.joinpath(match, 'node_modules')
+
+  return nil
 end
 
----@param name string Name of the binary.
----@return string?
-function M.node_modules_bin(name)
+---@param cmd string[]
+---@return fun(dispatchers: vim.lsp.rpc.Dispatchers): vim.lsp.rpc.PublicClient
+function M.node_modules_cmd(cmd)
   local bufnr = vim.api.nvim_get_current_buf()
-  local node_modules = find_node_modules(bufnr)
-  return node_modules and fs.joinpath(node_modules, '.bin', name) or nil
+
+  return function(dispatchers)
+    if cmd[1] then
+      cmd[1] = node_modules_bin(bufnr, cmd[1])
+    end
+    return vim.lsp.rpc.start(cmd, dispatchers)
+  end
 end
 
 return M

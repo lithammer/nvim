@@ -1,10 +1,8 @@
 local finders = require('lspextras.finders')
 
-local biome_bin = finders.node_modules_bin('biome') or 'biome'
-
 ---@type vim.lsp.Config
 return {
-  cmd = { biome_bin, 'lsp-proxy' },
+  cmd = finders.node_modules_cmd({ 'biome', 'lsp-proxy' }),
   filetypes = {
     'css',
     'javascript',
