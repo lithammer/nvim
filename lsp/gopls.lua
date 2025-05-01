@@ -28,8 +28,8 @@ end
 return {
   cmd = { 'gopls', 'serve' },
   filetypes = { 'go', 'gomod', 'gotmpl', 'gowork' },
-  root_dir = function(bufnr, cb)
-    cb(modcache_root_dir() or vim.fs.root(bufnr, 'go.work') or vim.fs.root(bufnr, 'go.mod'))
+  root_dir = function(bufnr, on_dir)
+    on_dir(modcache_root_dir() or vim.fs.root(bufnr, 'go.work') or vim.fs.root(bufnr, 'go.mod'))
   end,
   settings = {
     gopls = {

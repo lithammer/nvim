@@ -71,8 +71,8 @@ end
 return {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
-  root_dir = function(bufnr, cb)
-    cb(library_root_dir(bufnr) or project_root_dir(bufnr))
+  root_dir = function(bufnr, on_dir)
+    on_dir(library_root_dir(bufnr) or project_root_dir(bufnr))
   end,
   settings = {
     ['rust-analyzer'] = {
