@@ -8,26 +8,32 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT] = ' ',
     },
   },
-  virtual_text = { current_line = true },
+  virtual_lines = {
+    current_line = true,
+  },
   jump = {
-    float = true,
+    float = false,
   },
 })
 
-local virtual_text = vim.diagnostic.config().virtual_text
-
 vim.keymap.set('n', 'gK', function()
-  local virtual_lines = not vim.diagnostic.config().virtual_lines
+  local virtual_lines_enabled = vim.diagnostic.config().virtual_lines ~= nil
 
-  if virtual_lines then
+  if virtual_lines_enabled then
     vim.diagnostic.config({
-      virtual_text = false,
-      virtual_lines = { current_line = true },
+      jump = {
+        float = true,
+      },
+      virtual_lines = false,
+      virtual_text = { current_line = true },
     })
   else
     vim.diagnostic.config({
-      virtual_text = virtual_text,
-      virtual_lines = false,
+      jump = {
+        float = true,
+      },
+      virtual_lines = { current_line = true },
+      virtual_text = false,
     })
   end
-end, { desc = 'Toggle diagnostic virtual_lines' })
+end, { desc = 'Toggle between diagnostic virtual_lines and virtual_text' })
