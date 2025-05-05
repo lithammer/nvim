@@ -4,16 +4,13 @@ local Methods = vim.lsp.protocol.Methods
 local M = {}
 
 --- @param path string
---- @param mode integer
---- @return string? data
-local function readfile(path, mode)
-  local f = uv.fs_open(path, 'r', mode)
-  if f then
-    local size = assert(uv.fs_fstat(f)).size
-    local data = uv.fs_read(f, size, 0)
-    uv.fs_close(f)
-    return data
-  end
+--- @return string data
+local function readfile(path)
+  local f = assert(uv.fs_open(path, 'r', 438))
+  local size = assert(uv.fs_fstat(f)).size
+  local data = assert(uv.fs_read(f, size, 0))
+  assert(uv.fs_close(f))
+  return data
 end
 
 ---@param client vim.lsp.Client Client to get settings for.
@@ -28,11 +25,7 @@ local function get_local_workspace_settings(client)
     return
   end
 
-  local data = readfile(fs.joinpath(match, '.lsp.json'), 438)
-  if not data then
-    return
-  end
-
+  local data = readfile(fs.joinpath(match, '.lsp.json'))
   local settings = vim.json.decode(data)
   local filtered_settings = {}
   for _, key in pairs(vim.tbl_keys(client.settings)) do
