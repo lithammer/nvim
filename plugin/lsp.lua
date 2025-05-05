@@ -117,6 +117,33 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
+    if client:supports_method(Methods.textDocument_codeLens) then
+      vim.keymap.set(
+        'n',
+        '<leader>Ln',
+        vim.lsp.codelens.run,
+        { buffer = bufnr, desc = 'Run codelens' }
+      )
+      local group = vim.api.nvim_create_augroup(
+        string.format('lsp_document_codelens_%d', bufnr),
+        { clear = true }
+      )
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        group = group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.codelens.refresh({ bufnr = bufnr })
+        end,
+      })
+      vim.api.nvim_create_autocmd('InsertLeave', {
+        group = group,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.codelens.display(nil, bufnr, client.id)
+        end,
+      })
+    end
+
     if client:supports_method(Methods.textDocument_documentColor) then
       vim.lsp.document_color.enable(true, bufnr, { style = 'virtual' })
     end
