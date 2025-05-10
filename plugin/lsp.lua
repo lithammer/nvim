@@ -213,12 +213,11 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
 end, {
   nargs = 1,
   complete = function()
-    return vim
-      .iter(vim.lsp.get_clients())
-      :map(function(client)
-        return client.name
-      end)
-      :totable()
+    local names = {}
+    for _, client in ipairs(vim.lsp.get_clients()) do
+      table.insert(names, client.name)
+    end
+    return names
   end,
 })
 
