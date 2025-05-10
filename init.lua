@@ -41,6 +41,7 @@ o.termguicolors = true
 o.undofile = true
 o.updatetime = 300
 o.wildignorecase = true
+o.winborder = 'rounded'
 o.wrap = false
 
 o.foldenable = false
