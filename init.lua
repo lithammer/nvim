@@ -27,6 +27,7 @@ o.inccommand = 'split'
 o.list = true
 opt.listchars:append({ tab = '│ ', trail = '·' })
 o.number = true
+o.path = '.'
 o.pumblend = 10
 o.scrolloff = 4
 o.shiftwidth = 4
