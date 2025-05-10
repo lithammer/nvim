@@ -14,14 +14,14 @@ local function library_root_dir(bufnr)
   local rustup_home = vim.env.RUSTUP_HOME or fs.normalize('~/.rustup')
   local toolchains = fs.joinpath(rustup_home, 'toolchains')
 
-  local is_library = vim.iter({ toolchains, registry, git_registry }):find(function(value)
-    return vim.startswith(name, value)
-  end) ~= nil
-
-  if is_library then
-    local client = vim.iter(vim.lsp.get_clients({ name = 'rust-analyzer' })):last() --[[@as vim.lsp.Client?]]
-    if client then
-      return client.root_dir
+  for _, path in ipairs({ toolchains, registry, git_registry }) do
+    local is_library = vim.startswith(name, path)
+    if is_library then
+      local clients = vim.lsp.get_clients({ name = 'rust-analyzer' })
+      if #clients > 0 then
+        -- Return the root_dir of the last client.
+        return clients[#clients].root_dir
+      end
     end
   end
 
