@@ -10,7 +10,7 @@ g.loaded_ruby_provider = 0
 
 o.breakindent = true
 o.breakindentopt = 'shift:2,sbr'
-o.completeopt = 'menu,fuzzy'
+o.completeopt = 'menu,fuzzy,nosort'
 o.conceallevel = 2
 o.cursorline = true
 if fn.has('nvim-0.12') == 1 then
