@@ -4,6 +4,7 @@ return {
   cmd_env = { RUST_LOG = 'error' },
   root_markers = { 'typos.toml', '_typos.toml', '.typos.toml', 'pyroject.toml', 'Cargo.toml' },
   filetypes = {
+    'gitcommit',
     'go',
     'lua',
     'python',
