@@ -102,13 +102,17 @@ add('sphamba/smear-cursor.nvim')
 add('stevearc/oil.nvim')
 add('tpope/vim-fugitive')
 add('tpope/vim-sleuth')
-add('tpope/vim-vinegar')
 
 -- Colorschemes.
 add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
+
+later(function()
+  require('oil').setup()
+  vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+end)
 
 later(function()
   local flash = require('flash')
