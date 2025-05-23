@@ -3,11 +3,6 @@ local add, later = MiniDeps.add, MiniDeps.later
 local Methods = vim.lsp.protocol.Methods
 local CodeActionKind = vim.lsp.protocol.CodeActionKind
 
-add('j-hui/fidget.nvim')
-later(function()
-  require('fidget').setup({})
-end)
-
 ---@param mode string
 local function trouble(mode)
   local width = vim.o.columns

@@ -85,6 +85,7 @@ add('folke/trouble.nvim')
 add('folke/ts-comments.nvim')
 add('folke/twilight.nvim')
 add('github/copilot.vim')
+add('j-hui/fidget.nvim')
 add('ludovicchabant/vim-gutentags')
 add('mfussenegger/nvim-ansible')
 add({
@@ -117,6 +118,10 @@ later(function()
   vim.keymap.set('o', 'r', flash.remote, { desc = 'Remote Flash' })
   vim.keymap.set({ 'o', 'x' }, 'R', flash.treesitter_search, { desc = 'Treesitter Search' })
   vim.keymap.set({ 'c' }, '<c-s>', flash.toggle, { desc = 'Toggle Flash Search' })
+end)
+
+later(function()
+  require('fidget').setup({})
 end)
 
 later(function()
