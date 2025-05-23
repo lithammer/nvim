@@ -27,11 +27,11 @@ now(function()
     Snacks.picker.files({ layout = 'select' })
   end, { desc = 'Find files' })
 
-  vim.keymap.set('n', '<leader>ss', function()
+  vim.keymap.set('n', '<leader>s', function()
     Snacks.picker.lsp_symbols({ layout = { preset = 'vscode', preview = 'main' } })
   end, { desc = 'Search symbols' })
 
-  vim.keymap.set('n', '<leader>sS', function()
+  vim.keymap.set('n', '<leader>S', function()
     Snacks.picker.lsp_workspace_symbols()
   end, { desc = 'Search workspace symbols' })
 
