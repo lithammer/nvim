@@ -17,7 +17,7 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set('n', 'gK', function()
-  local virtual_lines_enabled = vim.diagnostic.config().virtual_lines ~= nil
+  local virtual_lines_enabled = vim.diagnostic.config().virtual_lines
 
   if virtual_lines_enabled then
     vim.diagnostic.config({
