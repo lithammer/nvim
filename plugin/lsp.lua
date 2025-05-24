@@ -261,6 +261,7 @@ vim.lsp.enable({
   'superhtml',
   'taplo',
   'terraformls',
+  -- 'tombi',
   -- 'ty',
   'typos_lsp',
   'vimls',
