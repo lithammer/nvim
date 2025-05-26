@@ -89,7 +89,8 @@ add('ludovicchabant/vim-gutentags')
 add('mfussenegger/nvim-ansible')
 add({
   source = 'nvim-treesitter/nvim-treesitter',
-  checkhout = 'main',
+  checkout = 'master',
+  monitor = 'main',
   hooks = {
     post_checkout = function()
       vim.cmd.TSUpdate()
