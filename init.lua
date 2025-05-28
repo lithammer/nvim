@@ -45,7 +45,6 @@ o.winborder = 'single'
 o.wrap = false
 
 o.foldenable = false
-o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- o.foldlevel = 1
 o.foldlevelstart = 99
 o.foldmethod = 'expr'
@@ -88,7 +87,7 @@ add('ludovicchabant/vim-gutentags')
 add('mfussenegger/nvim-ansible')
 add({
   source = 'nvim-treesitter/nvim-treesitter',
-  checkout = 'master',
+  checkout = 'main',
   monitor = 'main',
   hooks = {
     post_checkout = function()
@@ -97,7 +96,11 @@ add({
   },
 })
 add('nvim-treesitter/nvim-treesitter-context')
-add('nvim-treesitter/nvim-treesitter-textobjects')
+add({
+  source = 'nvim-treesitter/nvim-treesitter-textobjects',
+  checkout = 'main',
+  monitor = 'main',
+})
 add('romainl/vim-qf')
 add('sphamba/smear-cursor.nvim')
 add('stevearc/oil.nvim')
