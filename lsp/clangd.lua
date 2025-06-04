@@ -7,6 +7,11 @@ return {
   filetypes = { 'c', 'cpp' },
   root_markers = { '.clangd', 'compile_commands.json' },
   capabilities = {
+    textDocument = {
+      completion = {
+        editsNearCursor = true,
+      },
+    },
     offsetEncoding = { 'utf-8', 'utf-16' },
   },
   ---@param init_result ClangdInitializeResult
