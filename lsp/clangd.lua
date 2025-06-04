@@ -16,7 +16,6 @@ return {
   },
   ---@param init_result ClangdInitializeResult
   on_init = function(client, init_result)
-    ---@diagnostic disable-next-line: undefined-field
     if init_result.offsetEncoding then
       client.offset_encoding = init_result.offsetEncoding
     end
