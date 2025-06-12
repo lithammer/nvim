@@ -70,13 +70,8 @@ end
 
 require('mini.deps').setup()
 local add, later, now = MiniDeps.add, MiniDeps.later, MiniDeps.now
+
 add('echasnovski/mini.nvim')
-
-now(function()
-  require('mini.notify').setup({ lsp_progress = { enable = false } })
-  vim.notify = MiniNotify.make_notify()
-end)
-
 add('folke/flash.nvim')
 add('folke/lazydev.nvim')
 add('folke/snacks.nvim')
@@ -86,6 +81,7 @@ add('github/copilot.vim')
 add('j-hui/fidget.nvim')
 add('ludovicchabant/vim-gutentags')
 add('mfussenegger/nvim-ansible')
+add('mfussenegger/nvim-lint')
 add({
   source = 'nvim-treesitter/nvim-treesitter',
   checkout = 'main',
@@ -104,6 +100,7 @@ add({
 })
 add('romainl/vim-qf')
 add('sphamba/smear-cursor.nvim')
+add('stevearc/conform.nvim')
 add('stevearc/oil.nvim')
 add('tpope/vim-fugitive')
 add('tpope/vim-sleuth')
@@ -113,6 +110,13 @@ add({ source = 'catppuccin/nvim', name = 'catppuccin' })
 add('rebelot/kanagawa.nvim')
 add('sainnhe/gruvbox-material')
 add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
+
+now(function()
+  require('mini.notify').setup({ lsp_progress = { enable = false } })
+  vim.notify = MiniNotify.make_notify({
+    INFO = { hl_group = 'MiniNotifyNormal' },
+  })
+end)
 
 later(function()
   require('oil').setup()

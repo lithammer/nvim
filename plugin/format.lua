@@ -1,6 +1,4 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
-add('stevearc/conform.nvim')
+local later = MiniDeps.later
 
 later(function()
   require('conform').setup({

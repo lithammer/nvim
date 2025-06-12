@@ -1,6 +1,4 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
-add('mfussenegger/nvim-lint')
+local later = MiniDeps.later
 
 later(function()
   require('lint').linters_by_ft = {
