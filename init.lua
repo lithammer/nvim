@@ -59,6 +59,7 @@ do
         'git',
         'clone',
         '--filter=blob:none',
+        '--depth=1',
         'https://github.com/echasnovski/mini.nvim',
         mini_path,
       })
