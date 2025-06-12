@@ -251,6 +251,7 @@ vim.lsp.enable({
   'html',
   'jinja_lsp',
   'jsonls',
+  'jsonnet_ls',
   'lua_ls',
   -- 'oxc',
   'markdown',
