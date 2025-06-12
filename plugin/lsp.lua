@@ -1,5 +1,3 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
 local Methods = vim.lsp.protocol.Methods
 local CodeActionKind = vim.lsp.protocol.CodeActionKind
 
