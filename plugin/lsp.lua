@@ -56,6 +56,10 @@ local function setup_mappings(bufnr, client)
     trouble('lsp_references')
   end, { desc = 'List references' })
 
+  map('n', '<leader>d', function()
+    trouble('diagnostics')
+  end, { desc = 'List diagnostics' })
+
   map('n', '<leader>rs', function()
     code_action_kind(CodeActionKind.Source)
   end, { desc = 'List source code actions' })
