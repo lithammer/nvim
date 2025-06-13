@@ -3,6 +3,7 @@ local later = MiniDeps.later
 later(function()
   require('conform').setup({
     formatters_by_ft = {
+      bzl = { 'buildifier' },
       css = { 'biome' },
       fish = { 'fish_indent' },
       hurl = { 'hurlfmt' },
