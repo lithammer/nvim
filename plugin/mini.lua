@@ -5,6 +5,10 @@ later(function()
     mappings = {
       goto_left = '',
       goto_right = '',
+      -- These conflict with LSP incremental selection bindings.
+      -- :help lsp-defaults
+      around_next = '', -- an
+      inside_next = '', -- in
     },
   })
 end)
