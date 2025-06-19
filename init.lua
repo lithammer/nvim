@@ -1,6 +1,6 @@
 vim.loader.enable()
 
-local fn, g, o, opt = vim.fn, vim.g, vim.o, vim.opt
+local g, o, opt = vim.g, vim.o, vim.opt
 
 -- Disable providers.
 g.loaded_node_provider = 0
@@ -11,11 +11,10 @@ g.loaded_ruby_provider = 0
 o.breakindent = true
 o.breakindentopt = 'shift:2,sbr'
 o.completeopt = 'menu,fuzzy,nosort'
+-- o.completeopt = 'menuone,fuzzy,nosort,noinsert'
 o.conceallevel = 2
 o.cursorline = true
-if fn.has('nvim-0.12') == 1 then
-  opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
-end
+opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
 o.expandtab = true
 opt.fillchars:append({ diff = '╱', fold = ' ' })
 -- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
