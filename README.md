@@ -1,1 +1,1 @@
-Requires Neovim 0.11 or later.
+Requires Neovim 0.12 (nightly) or later.
