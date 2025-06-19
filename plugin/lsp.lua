@@ -265,10 +265,11 @@ vim.lsp.enable({
   -- 'taplo',
   'terraformls',
   'tombi',
+  'tsgo',
   -- 'ty',
   'typos_lsp',
   'vimls',
-  'vtsls',
+  -- 'vtsls',
   'yamlls',
   'zls',
 })
