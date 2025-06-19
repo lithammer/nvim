@@ -1,22 +1,24 @@
 local Methods = vim.lsp.protocol.Methods
 local CodeActionKind = vim.lsp.protocol.CodeActionKind
 
----@param mode string
-local function trouble(mode)
+---@param input string
+local function trouble(input)
   local width = vim.o.columns
   local is_small_window = width < 100
-  ---@diagnostic disable-next-line: missing-fields, missing-parameter
-  require('trouble').first({
-    mode = mode,
-    auto_refresh = false,
-    focus = true,
-    preview = {
-      type = 'split',
-      relative = 'win',
-      position = is_small_window and 'top' or 'right',
-      size = is_small_window and 100 or 0.3,
-    },
-  })
+  local preview = {
+    type = 'split',
+    relative = 'win',
+    position = is_small_window and 'top' or 'right',
+    size = is_small_window and 100 or 0.3,
+  }
+
+  local ret = require('trouble.command').parse(input)
+  ret.action = ret.action or 'open'
+  ret.opts.mode = ret.opts.mode or ret.mode
+  if not ret.opts.preview then
+    ret.opts.preview = preview
+  end
+  require('trouble')[ret.action](ret.opts)
 end
 
 ---@param kind lsp.CodeActionKind
@@ -46,17 +48,21 @@ local function setup_mappings(bufnr, client)
 
   if client:supports_method(Methods.textDocument_implementation) then
     map('n', 'gri', function()
-      trouble('lsp_implementations')
+      trouble('lsp_implementations first focus=true auto_refresh=false')
     end, { desc = 'List implementations' })
   end
 
   map('n', 'grr', function()
-    trouble('lsp_references')
+    trouble('lsp_references first focus=true auto_refresh=false')
   end, { desc = 'List references' })
 
   map('n', '<leader>d', function()
-    trouble('diagnostics')
-  end, { desc = 'List diagnostics' })
+    trouble('diagnostics toggle filter.buf=0')
+  end, { desc = 'List buffer diagnostics' })
+
+  map('n', '<leader>D', function()
+    trouble('diagnostics toggle')
+  end, { desc = 'List workspace diagnostics' })
 
   map('n', '<leader>rs', function()
     code_action_kind(CodeActionKind.Source)
