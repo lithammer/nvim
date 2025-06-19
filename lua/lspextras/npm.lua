@@ -59,9 +59,8 @@ end
 ---@param cmd string[]
 ---@return fun(dispatchers: vim.lsp.rpc.Dispatchers, config: vim.lsp.ClientConfig): vim.lsp.rpc.PublicClient
 function M.node_modules_cmd(cmd)
-  local bufnr = vim.api.nvim_get_current_buf()
-
   return function(dispatchers, _config)
+    local bufnr = vim.api.nvim_get_current_buf()
     if cmd[1] then
       cmd[1] = node_modules_bin(bufnr, cmd[1])
     end
