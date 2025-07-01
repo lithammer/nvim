@@ -42,10 +42,6 @@ local function setup_mappings(bufnr, client)
 
   map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Jump to declaration' })
 
-  if client:supports_method(Methods.textDocument_typeDefinition) then
-    map('n', 'gy', vim.lsp.buf.type_definition, { desc = 'Jump to type definition' })
-  end
-
   if client:supports_method(Methods.textDocument_implementation) then
     map('n', 'gri', function()
       trouble('lsp_implementations first focus=true auto_refresh=false')
