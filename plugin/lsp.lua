@@ -72,7 +72,7 @@ end
 ---@param bufnr number The buffer number.
 local function enable_document_highlight(bufnr)
   local group =
-    vim.api.nvim_create_augroup(string.format('lsp_document_highlight_%d', bufnr), { clear = true })
+    vim.api.nvim_create_augroup(string.format('lsp_document_highlight:%d', bufnr), { clear = true })
 
   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     callback = vim.lsp.buf.document_highlight,
@@ -91,7 +91,7 @@ end
 ---@param bufnr number The buffer number.
 local function disable_document_highlight(client, bufnr)
   if client:supports_method(Methods.textDocument_documentHighlight) then
-    local group = string.format('lsp_document_highlight_%d', bufnr)
+    local group = string.format('lsp_document_highlight:%d', bufnr)
     local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
     if not vim.tbl_isempty(autocmds) then
       vim.api.nvim_del_augroup_by_id(autocmds[1].group)
@@ -124,7 +124,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         { buffer = bufnr, desc = 'Run codelens' }
       )
       local group = vim.api.nvim_create_augroup(
-        string.format('lsp_document_codelens_%d', bufnr),
+        string.format('lsp_document_codelens:%d', bufnr),
         { clear = true }
       )
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
