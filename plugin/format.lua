@@ -2,6 +2,12 @@ local later = MiniDeps.later
 
 later(function()
   require('conform').setup({
+    formatters = {
+      mbake = {
+        command = 'mbake',
+        args = { 'format', '--stdin' },
+      },
+    },
     formatters_by_ft = {
       bzl = { 'buildifier' },
       css = { 'biome' },
@@ -9,6 +15,7 @@ later(function()
       hurl = { 'hurlfmt' },
       javascript = { 'biome-check', 'prettier', stop_after_first = true },
       lua = { 'stylua' },
+      make = { 'mbake' },
       nim = { 'nph', 'nimpretty', stop_after_first = true },
       proto = { 'clang-format' },
       python = { 'ruff_format', 'ruff_organize_imports' },
