@@ -241,6 +241,7 @@ vim.lsp.enable({
   'bashls',
   'bazel_lsp',
   'biome',
+  'bufls',
   'clangd',
   'crystalline',
   'cssls',
