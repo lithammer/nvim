@@ -237,7 +237,7 @@ vim.lsp.config('*', {
 vim.lsp.enable({
   'ansiblels',
   'awkls',
-  'basedpyright',
+  -- 'basedpyright',
   'bashls',
   'bazel_lsp',
   'biome',
@@ -258,6 +258,7 @@ vim.lsp.enable({
   'nimlangserver',
   'postgrestools',
   'protols',
+  'pyrefly',
   -- 'pyright',
   'ruff',
   'rust_analyzer',
