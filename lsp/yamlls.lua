@@ -10,4 +10,8 @@ return {
       },
     },
   },
+  on_init = function(client)
+    -- https://github.com/redhat-developer/yaml-language-server/issues/486
+    client.server_capabilities.documentFormattingProvider = true
+  end,
 }
