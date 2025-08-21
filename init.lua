@@ -89,7 +89,11 @@ require('mini.deps').setup()
 local later, now = MiniDeps.later, MiniDeps.now
 
 now(function()
-  require('mini.notify').setup({ lsp_progress = { enable = false } })
+  require('mini.notify').setup({
+    lsp_progress = {
+      enable = false,
+    },
+  })
   vim.notify = MiniNotify.make_notify({
     INFO = { hl_group = 'MiniNotifyNormal' },
   })
