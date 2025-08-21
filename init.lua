@@ -135,7 +135,7 @@ later(function()
   smear_cursor.setup({
     smear_to_cmd = false,
   })
-  smear_cursor.enabled = not vim.env.TERM:match('kitty')
+  smear_cursor.enabled = not (vim.env.TERM:match('kitty') or vim.env.TERM:match('ghostty'))
 end)
 
 g.gutentags_add_default_project_roots = 0
