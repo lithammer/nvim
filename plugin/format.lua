@@ -3,6 +3,11 @@ local later = MiniDeps.later
 later(function()
   require('conform').setup({
     formatters = {
+      buf = {
+        -- Override to add `--path` argument:
+        -- https://github.com/bufbuild/buf/issues/3593
+        args = { 'format', '-w', '--path', '$FILENAME' },
+      },
       mbake = {
         command = 'mbake',
         args = { 'format', '--stdin' },
@@ -17,7 +22,7 @@ later(function()
       lua = { 'stylua' },
       make = { 'mbake' },
       nim = { 'nph', 'nimpretty', stop_after_first = true },
-      proto = { 'clang-format' },
+      proto = { 'buf' },
       python = { 'ruff_format', 'ruff_organize_imports' },
       sh = { 'shfmt' },
       toml = { 'taplo' },
