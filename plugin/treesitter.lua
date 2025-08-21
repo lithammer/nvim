@@ -103,6 +103,23 @@ later(function()
   require('nvim-treesitter').install(filetypes)
 end)
 
+do
+  local group = vim.api.nvim_create_augroup('treesitter_update', { clear = true })
+  vim.api.nvim_create_autocmd('PackChanged', {
+    desc = 'Update treesitter parsers',
+    group = group,
+    callback = function(event)
+      local spec = event.data.spec
+      local kind = event.data.kind
+      if spec and spec.name == 'nvim-treesitter' and kind == 'update' then
+        vim.schedule(function()
+          require('nvim-treesitter').update()
+        end)
+      end
+    end,
+  })
+end
+
 later(function()
   require('nvim-treesitter-textobjects').setup({
     select = {

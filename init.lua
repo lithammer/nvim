@@ -48,67 +48,45 @@ o.foldenable = false
 o.foldlevelstart = 99
 o.foldmethod = 'expr'
 
-do
-  local data_path = vim.fn.stdpath('data')
-  local mini_path = vim.fs.joinpath(data_path, 'site/pack/deps/start/mini.nvim')
-  if not vim.uv.fs_stat(mini_path) then
-    vim.notify('Installing `mini.nvim`')
-    vim
-      .system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        '--depth=1',
-        'https://github.com/echasnovski/mini.nvim',
-        mini_path,
-      })
-      :wait()
-    vim.cmd [[packadd mini.nvim | helptags ALL]]
-  end
-end
-
-require('mini.deps').setup()
-local add, later, now = MiniDeps.add, MiniDeps.later, MiniDeps.now
-
-add('echasnovski/mini.nvim')
-add('folke/flash.nvim')
-add('folke/lazydev.nvim')
-add('folke/snacks.nvim')
-add('folke/trouble.nvim')
-add('folke/ts-comments.nvim')
-add('github/copilot.vim')
-add('j-hui/fidget.nvim')
-add('ludovicchabant/vim-gutentags')
-add('mfussenegger/nvim-ansible')
-add('mfussenegger/nvim-lint')
-add({
-  source = 'nvim-treesitter/nvim-treesitter',
-  checkout = 'main',
-  monitor = 'main',
-  hooks = {
-    post_checkout = function()
-      vim.cmd.TSUpdate()
-    end,
-  },
+vim.pack.add({
+  'https://github.com/echasnovski/mini.nvim',
+  'https://github.com/folke/flash.nvim',
+  'https://github.com/folke/lazydev.nvim',
+  'https://github.com/folke/snacks.nvim',
+  'https://github.com/folke/trouble.nvim',
+  'https://github.com/folke/ts-comments.nvim',
+  'https://github.com/github/copilot.vim',
+  'https://github.com/j-hui/fidget.nvim',
+  'https://github.com/ludovicchabant/vim-gutentags',
+  'https://github.com/mfussenegger/nvim-ansible',
+  'https://github.com/mfussenegger/nvim-lint',
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  'https://github.com/nvim-treesitter/nvim-treesitter-context',
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+  'https://github.com/romainl/vim-qf',
+  'https://github.com/sphamba/smear-cursor.nvim',
+  'https://github.com/stevearc/conform.nvim',
+  'https://github.com/stevearc/oil.nvim',
+  'https://github.com/tpope/vim-fugitive',
+  'https://github.com/tpope/vim-sleuth',
 })
-add('nvim-treesitter/nvim-treesitter-context')
-add({
-  source = 'nvim-treesitter/nvim-treesitter-textobjects',
-  checkout = 'main',
-  monitor = 'main',
+
+vim.pack.add({
+  'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/olimorris/codecompanion.nvim',
 })
-add('romainl/vim-qf')
-add('sphamba/smear-cursor.nvim')
-add('stevearc/conform.nvim')
-add('stevearc/oil.nvim')
-add('tpope/vim-fugitive')
-add('tpope/vim-sleuth')
 
 -- Colorschemes.
-add({ source = 'catppuccin/nvim', name = 'catppuccin' })
-add('rebelot/kanagawa.nvim')
-add('sainnhe/gruvbox-material')
-add({ source = 'zenbones-theme/zenbones.nvim', depends = { 'rktjmp/lush.nvim' } })
+vim.pack.add({
+  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
+  'https://github.com/rebelot/kanagawa.nvim',
+  'https://github.com/sainnhe/gruvbox-material',
+  'https://github.com/zenbones-theme/zenbones.nvim',
+  'https://github.com/rktjmp/lush.nvim',
+})
+
+require('mini.deps').setup()
+local later, now = MiniDeps.later, MiniDeps.now
 
 now(function()
   require('mini.notify').setup({ lsp_progress = { enable = false } })
