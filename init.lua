@@ -85,6 +85,10 @@ vim.pack.add({
   'https://github.com/rktjmp/lush.nvim',
 })
 
+vim.api.nvim_create_user_command('PackUpdate', function()
+  vim.pack.update()
+end, {})
+
 require('mini.deps').setup()
 local later, now = MiniDeps.later, MiniDeps.now
 
