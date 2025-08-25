@@ -50,7 +50,6 @@ o.foldmethod = 'expr'
 
 vim.pack.add({
   'https://github.com/echasnovski/mini.nvim',
-  'https://github.com/folke/flash.nvim',
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/folke/snacks.nvim',
   'https://github.com/folke/trouble.nvim',
@@ -106,15 +105,6 @@ end)
 later(function()
   require('oil').setup()
   vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-end)
-
-later(function()
-  local flash = require('flash')
-  vim.keymap.set({ 'n', 'x', 'o' }, 's', flash.jump, { desc = 'Flash' })
-  vim.keymap.set({ 'n', 'x', 'o' }, 'S', flash.treesitter, { desc = 'Flash Treesitter' })
-  vim.keymap.set('o', 'r', flash.remote, { desc = 'Remote Flash' })
-  vim.keymap.set({ 'o', 'x' }, 'R', flash.treesitter_search, { desc = 'Treesitter Search' })
-  vim.keymap.set({ 'c' }, '<c-s>', flash.toggle, { desc = 'Toggle Flash Search' })
 end)
 
 later(function()
