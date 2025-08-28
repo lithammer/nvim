@@ -49,7 +49,7 @@ o.foldlevelstart = 99
 o.foldmethod = 'expr'
 
 vim.pack.add({
-  'https://github.com/echasnovski/mini.nvim',
+  'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/folke/snacks.nvim',
   'https://github.com/folke/trouble.nvim',
