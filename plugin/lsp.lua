@@ -143,6 +143,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
+
     if client:supports_method(Methods.textDocument_rangeFormatting) then
       -- vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr()'
       vim.bo[bufnr].formatexpr = [[v:lua.require'conform'.formatexpr()]]
