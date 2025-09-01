@@ -8,6 +8,9 @@ return {
     'typescriptreact',
   },
   root_markers = { 'package.json' },
+  init_options = {
+    hostInfo = 'neovim',
+  },
   settings = {
     typescript = {
       inlayHints = {
