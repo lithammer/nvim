@@ -1,7 +1,6 @@
-local fn, fs, uv = vim.fn, vim.fs, vim.uv
-local now = MiniDeps.now
+local later = require('mini.deps').later
 
-now(function()
+later(function()
   require('lazydev').setup({
     library = {
       { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
