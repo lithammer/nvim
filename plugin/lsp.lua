@@ -257,7 +257,7 @@ vim.lsp.enable({
   'nimlangserver',
   'postgrestools',
   'protols',
-  'pyrefly',
+  -- 'pyrefly',
   -- 'pyright',
   'ruff',
   'rust_analyzer',
@@ -274,4 +274,5 @@ vim.lsp.enable({
   'vtsls',
   'yamlls',
   'zls',
+  'zuban',
 })
