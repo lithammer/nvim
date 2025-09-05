@@ -71,6 +71,10 @@ vim.pack.add({
 })
 
 vim.pack.add({
+  'https://github.com/saghen/blink.cmp',
+})
+
+vim.pack.add({
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/olimorris/codecompanion.nvim',
 })
@@ -89,49 +93,35 @@ vim.api.nvim_create_user_command('PackUpdate', function()
   vim.pack.update()
 end, {})
 
-require('mini.deps').setup()
-local later, now = MiniDeps.later, MiniDeps.now
-
-now(function()
-  require('mini.notify').setup({
-    lsp_progress = {
-      enable = false,
-    },
-  })
-  vim.notify = MiniNotify.make_notify({
-    INFO = { hl_group = 'MiniNotifyNormal' },
-  })
-end)
-
-later(function()
+do
   require('oil').setup()
   vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-end)
+end
 
-later(function()
+do
   require('fidget').setup({})
-end)
+end
 
-later(function()
+do
   require('ts-comments').setup()
-end)
+end
 
-later(function()
+do
   require('trouble').setup({
     keys = {
       j = 'next',
       k = 'prev',
     },
   })
-end)
+end
 
-later(function()
+do
   local smear_cursor = require('smear_cursor')
   smear_cursor.setup({
     smear_to_cmd = false,
   })
   smear_cursor.enabled = not (vim.env.TERM:match('kitty') or vim.env.TERM:match('ghostty'))
-end)
+end
 
 g.gutentags_add_default_project_roots = 0
 g.gutentags_project_root = { '.git' }
@@ -141,11 +131,8 @@ g.gutentags_file_list_command = {
   },
 }
 
-do
-  g.netrw_altfile = 1
-  -- g.netrw_list_hide = vim.fn['netrw_gitignore#Hide']()
-  g.netrw_preview = 1
-end
+g.netrw_altfile = 1
+g.netrw_preview = 1
 
 -- Fugitive.
 vim.keymap.set('n', '<leader>gf', ':G<cr>', { desc = 'Open Fugitive in a split' })

@@ -1,48 +1,44 @@
-local later = MiniDeps.later
-
-later(function()
-  require('conform').setup({
-    formatters = {
-      buf = {
-        -- Override to add `--path` argument:
-        -- https://github.com/bufbuild/buf/issues/3593
-        args = { 'format', '-w', '--path', '$FILENAME' },
-      },
-      mbake = {
-        command = 'mbake',
-        args = { 'format', '--stdin' },
-      },
+require('conform').setup({
+  formatters = {
+    buf = {
+      -- Override to add `--path` argument:
+      -- https://github.com/bufbuild/buf/issues/3593
+      args = { 'format', '-w', '--path', '$FILENAME' },
     },
-    formatters_by_ft = {
-      bzl = { 'buildifier' },
-      css = { 'biome' },
-      fish = { 'fish_indent' },
-      hurl = { 'hurlfmt' },
-      javascript = { 'biome-check', 'prettier', stop_after_first = true },
-      lua = { 'stylua' },
-      make = { 'mbake' },
-      nim = { 'nph', 'nimpretty', stop_after_first = true },
-      proto = { 'buf' },
-      python = { 'ruff_format', 'ruff_organize_imports' },
-      sh = { 'shfmt' },
-      toml = { 'taplo' },
-      terraform = { 'terraform_fmt' },
-      typescript = { 'biome-check', 'prettier', stop_after_first = true },
+    mbake = {
+      command = 'mbake',
+      args = { 'format', '--stdin' },
     },
-    format_on_save = function(bufnr)
-      if
-        vim.b[bufnr].disable_autoformat == false -- Prefer buffer local settings.
-        or not (vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat)
-      then
-        return {
-          lsp_format = 'fallback',
-          timeout_ms = 500,
-        }
-      end
-    end,
-    notify_on_error = false,
-  })
-end)
+  },
+  formatters_by_ft = {
+    bzl = { 'buildifier' },
+    css = { 'biome' },
+    fish = { 'fish_indent' },
+    hurl = { 'hurlfmt' },
+    javascript = { 'biome-check', 'prettier', stop_after_first = true },
+    lua = { 'stylua' },
+    make = { 'mbake' },
+    nim = { 'nph', 'nimpretty', stop_after_first = true },
+    proto = { 'buf' },
+    python = { 'ruff_format', 'ruff_organize_imports' },
+    sh = { 'shfmt' },
+    toml = { 'taplo' },
+    terraform = { 'terraform_fmt' },
+    typescript = { 'biome-check', 'prettier', stop_after_first = true },
+  },
+  format_on_save = function(bufnr)
+    if
+      vim.b[bufnr].disable_autoformat == false -- Prefer buffer local settings.
+      or not (vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat)
+    then
+      return {
+        lsp_format = 'fallback',
+        timeout_ms = 500,
+      }
+    end
+  end,
+  notify_on_error = false,
+})
 
 vim.api.nvim_create_user_command('FormatDisable', function(args)
   if args.bang then

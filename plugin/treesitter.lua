@@ -1,5 +1,3 @@
-local later = MiniDeps.later
-
 local filetypes = {
   'awk',
   'bash',
@@ -99,9 +97,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-later(function()
-  require('nvim-treesitter').install(filetypes)
-end)
+require('nvim-treesitter').install(filetypes)
 
 do
   local group = vim.api.nvim_create_augroup('treesitter_update', { clear = true })
@@ -120,7 +116,7 @@ do
   })
 end
 
-later(function()
+do
   require('nvim-treesitter-textobjects').setup({
     select = {
       lookahead = true,
@@ -147,4 +143,4 @@ later(function()
   vim.keymap.set({ 'x', 'o' }, 'ic', function()
     select_textobject('@class.inner', 'textobjects')
   end)
-end)
+end
