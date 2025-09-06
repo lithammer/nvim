@@ -72,7 +72,7 @@ vim.pack.add({
 
 do
   local group = vim.api.nvim_create_augroup('blink_cmp_update', { clear = true })
-  vim.api.nvim_create_autocmd('PackChanged', {
+  vim.api.nvim_create_autocmd({ 'PackChangedPre', 'PackChanged' }, {
     desc = 'Build blink.cmp',
     group = group,
     callback = function(event)
