@@ -10,16 +10,6 @@ local group = vim.api.nvim_create_augroup('on_colorscheme_change', {})
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = group,
-  pattern = 'default',
-  callback = function()
-    hi('BlinkCmpLabelDetail', { link = 'PmenuExtra' })
-    hi('BlinkCmpLabelDescription', { link = 'PmenuExtra' })
-    hi('BlinkCmpKind', { link = 'PmenuKind' })
-  end,
-})
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-  group = group,
   pattern = 'lunaperche',
   callback = function()
     vim.cmd [[hi VertSplit guibg=NONE ctermbg=NONE]]
