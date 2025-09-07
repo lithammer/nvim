@@ -68,20 +68,6 @@ miniclue.setup({
   },
 })
 
-do
-  require('mini.completion').setup({
-    lsp_completion = { source_func = 'omnifunc', auto_setup = false },
-  })
-
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('disable_mini_completion', {}),
-    pattern = { 'snacks_picker_input' },
-    callback = function()
-      vim.b.minicompletion_disable = true
-    end,
-  })
-end
-
 require('mini.diff').setup({
   mappings = {
     apply = '',
@@ -107,3 +93,15 @@ require('mini.notify').setup({
     enable = false,
   },
 })
+
+do
+  require('mini.pick').setup()
+  vim.keymap.set('n', '<c-p>', MiniPick.builtin.files, { desc = 'Find files' })
+  vim.keymap.set('n', '<leader-/>', MiniPick.builtin.grep_live, { desc = 'Grep' })
+  vim.keymap.set('n', '<leader>s', function()
+    MiniExtra.pickers.lsp({ scope = 'document_symbol' })
+  end, { desc = 'Search document symbols' })
+  vim.keymap.set('n', '<leader>S', function()
+    MiniExtra.pickers.lsp({ scope = 'workspace_symbol' })
+  end, { desc = 'Search workspace symbols' })
+end

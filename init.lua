@@ -51,7 +51,6 @@ o.foldmethod = 'expr'
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/folke/lazydev.nvim',
-  'https://github.com/folke/snacks.nvim',
   'https://github.com/folke/trouble.nvim',
   'https://github.com/folke/ts-comments.nvim',
   'https://github.com/github/copilot.vim',
