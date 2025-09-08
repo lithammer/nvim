@@ -60,18 +60,12 @@ vim.pack.add({
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
   'https://github.com/romainl/vim-qf',
+  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1') },
   'https://github.com/sphamba/smear-cursor.nvim',
   'https://github.com/stevearc/conform.nvim',
   'https://github.com/stevearc/oil.nvim',
   'https://github.com/tpope/vim-fugitive',
   'https://github.com/tpope/vim-sleuth',
-})
-
-vim.pack.add({
-  {
-    src = 'https://github.com/saghen/blink.cmp',
-    version = vim.version.range('1'),
-  },
 })
 
 vim.pack.add({
