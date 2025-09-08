@@ -67,36 +67,12 @@ vim.pack.add({
   'https://github.com/tpope/vim-sleuth',
 })
 
-do
-  local group = vim.api.nvim_create_augroup('blink_cmp_update', { clear = true })
-  vim.api.nvim_create_autocmd('PackChanged', {
-    desc = 'Build blink.cmp',
-    group = group,
-    callback = function(event)
-      local spec = event.data.spec
-      local kind = event.data.kind
-      local path = event.data.path
-
-      if spec and spec.name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
-        vim.notify('Building blink.cmp', vim.log.levels.INFO)
-        local cmd = { 'cargo', 'build', '--release' }
-        local env = { CARGO_NET_GIT_FETCH_WITH_CLI = 'true' }
-        local opts = { cwd = path, env = env }
-
-        local obj = vim.system(cmd, opts):wait()
-        if obj.code == 0 then
-          vim.notify('Building blink.cmp done', vim.log.levels.INFO)
-        else
-          vim.notify('Building blink.cmp failed', vim.log.levels.ERROR)
-        end
-      end
-    end,
-  })
-
-  vim.pack.add({
-    'https://github.com/saghen/blink.cmp',
-  })
-end
+vim.pack.add({
+  {
+    src = 'https://github.com/saghen/blink.cmp',
+    version = vim.version.range('1'),
+  },
+})
 
 vim.pack.add({
   'https://github.com/nvim-lua/plenary.nvim',

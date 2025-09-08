@@ -15,11 +15,6 @@ require('blink-cmp').setup({
       },
     },
   },
-  fuzzy = {
-    prebuilt_binaries = {
-      download = false, -- Always compile since we track 'main'
-    },
-  },
   sources = {
     default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
     providers = {
