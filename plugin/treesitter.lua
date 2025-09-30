@@ -45,6 +45,7 @@ local filetypes = {
   'jsonc',
   'jsonnet',
   'just',
+  'kitty',
   'lua',
   'luadoc',
   'make',
