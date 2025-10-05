@@ -1,5 +1,4 @@
 local fn, fs, uv = vim.fn, vim.fs, vim.uv
-local Methods = vim.lsp.protocol.Methods
 
 local M = {}
 
@@ -50,7 +49,7 @@ function M.apply_local_settings(client)
     client.settings = vim.tbl_deep_extend('force', old_settings, local_settings)
 
     if not vim.deep_equal(old_settings, client.config.settings) then
-      client:notify(Methods.workspace_didChangeConfiguration, {
+      client:notify('workspace/didChangeConfiguration', {
         settings = client.config.settings,
       })
       vim.notify('Configuration updated for ' .. client.name, vim.lsp.log.levels.INFO)

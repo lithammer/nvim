@@ -1,4 +1,3 @@
-local Methods = vim.lsp.protocol.Methods
 local CodeActionKind = vim.lsp.protocol.CodeActionKind
 
 ---@param input string
@@ -42,7 +41,7 @@ local function setup_mappings(bufnr, client)
 
   map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Jump to declaration' })
 
-  if client:supports_method(Methods.textDocument_implementation) then
+  if client:supports_method('textDocument/implementation') then
     map('n', 'gri', function()
       trouble('lsp_implementations first focus=true auto_refresh=false')
     end, { desc = 'List implementations' })
@@ -90,7 +89,7 @@ end
 ---@param client vim.lsp.Client The client to disable document highlight for.
 ---@param bufnr number The buffer number.
 local function disable_document_highlight(client, bufnr)
-  if client:supports_method(Methods.textDocument_documentHighlight) then
+  if client:supports_method('textDocument/documentHighlight') then
     local group = string.format('lsp_document_highlight:%d', bufnr)
     local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
     if not vim.tbl_isempty(autocmds) then
@@ -108,15 +107,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     setup_mappings(bufnr, client)
 
-    if client:supports_method(Methods.textDocument_documentHighlight) then
+    if client:supports_method('textDocument/documentHighlight') then
       enable_document_highlight(bufnr)
     end
 
-    if client:supports_method(Methods.textDocument_inlayHint) then
+    if client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
-    if client:supports_method(Methods.textDocument_codeLens) then
+    if client:supports_method('textDocument/codeLens') then
       vim.keymap.set(
         'n',
         '<leader>Ln',
@@ -145,12 +144,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
 
-    if client:supports_method(Methods.textDocument_rangeFormatting) then
+    if client:supports_method('textDocument/rangeFormatting') then
       -- vim.bo[bufnr].formatexpr = 'v:lua.vim.lsp.formatexpr()'
       vim.bo[bufnr].formatexpr = [[v:lua.require'conform'.formatexpr()]]
     end
 
-    if client:supports_method(Methods.textDocument_foldingRange) then
+    if client:supports_method('textDocument/foldingRange') then
       local winid = vim.fn.bufwinid(bufnr)
       if vim.api.nvim_win_is_valid(winid) then
         vim.wo[winid].foldmethod = 'expr'
@@ -159,7 +158,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
-    if client:supports_method(Methods.workspace_didChangeConfiguration) then
+    if client:supports_method('workspace/didChangeConfiguration') then
       require('lspextras').apply_local_settings(client)
     end
   end,
@@ -177,11 +176,11 @@ vim.api.nvim_create_autocmd('LspDetach', {
       return
     end
 
-    if client:supports_method(Methods.textDocument_inlayHint) then
+    if client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
     end
 
-    if client:supports_method(Methods.textDocument_completion) then
+    if client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(false, client.id, bufnr, {})
       vim.bo[bufnr].completeopt = nil
     end
