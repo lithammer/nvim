@@ -3,6 +3,7 @@ local filetypes = {
   'bash',
   'c',
   'c_sharp',
+  'caddy',
   'cmake',
   'comment',
   'cpp',
