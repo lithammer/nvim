@@ -20,7 +20,14 @@ require('mini.ai').setup({
 })
 
 require('mini.bracketed').setup({
-  comment = { suffix = '', options = {} },
+  buffer = { suffix = '' }, -- :help default-mappings
+  comment = { suffix = '' },
+  diagnostic = { suffix = '' }, -- :help default-mappings
+  indent = { suffix = '' },
+  location = { suffix = '' }, -- :help default-mappings
+  quickfix = { suffix = '' }, -- :help default-mappings
+  treesitter = { suffix = '' },
+  undo = { suffix = '' },
 })
 
 local miniclue = require('mini.clue')
