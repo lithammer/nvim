@@ -158,6 +158,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
+    if client:supports_method('textDocument/inlineCompletion', bufnr) then
+      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+      vim.keymap.set(
+        'i',
+        '<c-f>',
+        vim.lsp.inline_completion.get,
+        { desc = 'Accept inline completion', buffer = bufnr }
+      )
+      vim.keymap.set(
+        'i',
+        '<c-g>',
+        vim.lsp.inline_completion.select,
+        { desc = 'Switch inline completion', buffer = bufnr }
+      )
+    end
+
     if client:supports_method('workspace/didChangeConfiguration') then
       require('lspextras').apply_local_settings(client)
     end
