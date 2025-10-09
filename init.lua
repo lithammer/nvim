@@ -46,6 +46,10 @@ o.foldenable = false
 o.foldlevelstart = 99
 o.foldmethod = 'expr'
 
+vim.cmd [[
+  packadd nvim.undotree
+]]
+
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/folke/lazydev.nvim',
