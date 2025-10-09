@@ -1,5 +1,5 @@
 " :h last-position-jump
-augroup RestoreCursor
+augroup restore_cursor_position
   autocmd!
   autocmd BufReadPre * autocmd FileType <buffer> ++once
     \ let s:line = line("'\"")
@@ -10,13 +10,13 @@ augroup RestoreCursor
 augroup END
 
 " :h vim.hl
-augroup HighlightYank
+augroup highlight_yank
   autocmd!
   autocmd TextYankPost * silent! lua vim.hl.on_yank()
 augroup END
 
 " Ensure relative paths in :buffers.
-augroup BufferRelativePaths
+augroup buffer_relative_paths
   autocmd!
   autocmd BufReadPost * call chdir(getcwd())
 augroup END
