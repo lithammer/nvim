@@ -134,5 +134,5 @@ g.netrw_altfile = 1
 g.netrw_preview = 1
 
 -- Fugitive.
-vim.keymap.set('n', '<leader>gf', ':G<cr>', { desc = 'Open Fugitive in a split' })
-vim.keymap.set('n', '<leader>gF', ':tab G<cr>', { desc = 'Open Fugitive in a tab' })
+vim.keymap.set('n', '<leader>g', ':G<cr>', { desc = 'Open Fugitive in a split' })
+vim.keymap.set('n', '<leader>G', ':tab G<cr>', { desc = 'Open Fugitive in a tab' })
