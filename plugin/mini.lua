@@ -87,14 +87,6 @@ require('mini.diff').setup({
   },
 })
 
-do
-  local map_multistep = require('mini.keymap').map_multistep
-
-  -- map_multistep({ 'i', 's' }, '<Tab>', { 'vimsnippet_next', 'pmenu_next' })
-  -- map_multistep({ 'i', 's' }, '<S-Tab>', { 'vimsnippet_prev', 'pmenu_prev' })
-  map_multistep('i', '<CR>', { 'pmenu_accept' })
-end
-
 require('mini.notify').setup({
   lsp_progress = {
     enable = false,
