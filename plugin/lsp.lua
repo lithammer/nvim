@@ -273,7 +273,6 @@ vim.lsp.enable({
   'postgrestools',
   'protols',
   'pyrefly',
-  -- 'pyrefly',
   'ruff',
   'rust_analyzer',
   -- 'starlark',
