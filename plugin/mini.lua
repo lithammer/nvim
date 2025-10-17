@@ -98,7 +98,7 @@ do
   require('mini.pick').setup()
   vim.ui.select = vim_ui_select
   vim.keymap.set('n', '<c-p>', MiniPick.builtin.files, { desc = 'Find files' })
-  vim.keymap.set('n', '<leader-/>', MiniPick.builtin.grep_live, { desc = 'Grep' })
+  vim.keymap.set('n', '<leader>/', MiniPick.builtin.grep_live, { desc = 'Grep' })
   vim.keymap.set('n', '<leader>s', function()
     MiniExtra.pickers.lsp({ scope = 'document_symbol' })
   end, { desc = 'Search document symbols' })
