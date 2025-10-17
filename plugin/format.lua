@@ -22,7 +22,7 @@ require('conform').setup({
     proto = { 'buf' },
     python = { 'ruff_format', 'ruff_organize_imports' },
     sh = { 'shfmt' },
-    toml = { 'taplo' },
+    toml = { 'tombi', 'taplo', stop_after_first = true },
     terraform = { 'terraform_fmt' },
     typescript = { 'biome-check', 'prettier', stop_after_first = true },
   },
