@@ -279,6 +279,7 @@ vim.lsp.enable({
   -- 'starlark',
   'starpls',
   'superhtml',
+  'systemd_ls',
   -- 'taplo',
   'terraformls',
   'tombi',
