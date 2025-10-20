@@ -11,9 +11,6 @@ vim.diagnostic.config({
   virtual_lines = {
     current_line = true,
   },
-  jump = {
-    float = false,
-  },
 })
 
 vim.keymap.set('n', 'gK', function()
