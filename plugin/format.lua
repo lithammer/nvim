@@ -33,7 +33,7 @@ require('conform').setup({
     then
       return {
         lsp_format = 'fallback',
-        timeout_ms = 500,
+        timeout_ms = 1000,
       }
     end
   end,
