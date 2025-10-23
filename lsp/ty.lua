@@ -1,3 +1,5 @@
+-- https://github.com/astral-sh/ty
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'ty', 'server' },

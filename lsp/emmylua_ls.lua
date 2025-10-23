@@ -1,3 +1,5 @@
+-- https://github.com/EmmyLuaLs/emmylua-analyzer-rust
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'emmylua_ls' },

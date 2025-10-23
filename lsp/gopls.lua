@@ -1,3 +1,5 @@
+-- https://github.com/golang/tools/tree/master/gopls
+
 --- For buffers in the Go module cache (e.g. third-party libraries),
 --- attempt to attach to the most recent gopls client.
 ---

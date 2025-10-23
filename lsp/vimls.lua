@@ -1,3 +1,5 @@
+-- https://github.com/iamcco/vim-language-server
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'vim-language-server', '--stdio' },

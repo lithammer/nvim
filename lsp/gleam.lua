@@ -1,3 +1,5 @@
+-- https://gleam.run/language-server/
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'gleam', 'lsp' },

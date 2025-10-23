@@ -1,3 +1,5 @@
+-- https://github.com/grafana/jsonnet-language-server
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'jsonnet-language-server' },

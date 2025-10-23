@@ -1,3 +1,5 @@
+-- https://github.com/ansible/vscode-ansible/blob/main/docs/als/README.md
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'ansible-language-server', '--stdio' },

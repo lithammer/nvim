@@ -1,3 +1,5 @@
+-- https://github.com/yioneko/vtsls
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'vtsls', '--stdio' },

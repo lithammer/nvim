@@ -1,3 +1,5 @@
+-- https://github.com/tekumara/typos-lsp
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'typos-lsp' },

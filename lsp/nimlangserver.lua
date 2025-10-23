@@ -1,3 +1,5 @@
+-- https://github.com/nim-lang/langserver
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'nimlangserver' },

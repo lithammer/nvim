@@ -1,3 +1,5 @@
+-- https://github.com/biomejs/biome
+
 local npm = require('lspextras.npm')
 
 ---@type vim.lsp.Config

@@ -1,3 +1,5 @@
+-- https://github.com/zubanls/zuban
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'zuban', 'server' },

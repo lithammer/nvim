@@ -1,3 +1,5 @@
+-- https://rust-analyzer.github.io/
+
 local fs = vim.fs
 
 --- Resolve the path to a Rust library.

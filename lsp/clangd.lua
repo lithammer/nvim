@@ -1,3 +1,5 @@
+-- https://github.com/clangd/clangd
+
 ---@class ClangdInitializeResult: lsp.InitializeResult
 ---@field offsetEncoding? string
 

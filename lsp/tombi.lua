@@ -1,3 +1,5 @@
+-- https://github.com/tombi-toml/tombi
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'tombi', 'lsp' },

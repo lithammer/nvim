@@ -1,3 +1,5 @@
+-- https://github.com/tamasfe/taplo
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'taplo', 'lsp', 'stdio' },

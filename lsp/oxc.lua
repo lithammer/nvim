@@ -1,3 +1,5 @@
+-- https://github.com/oxc-project/oxc/tree/main/crates/oxc_language_server
+
 local npm = require('lspextras.npm')
 
 ---@type vim.lsp.Config

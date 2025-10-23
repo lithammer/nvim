@@ -1,3 +1,5 @@
+-- https://github.com/docker/docker-language-server
+
 ---@type vim.lsp.Config
 return {
   cmd = { 'docker-language-server', 'start', '--stdio' },
