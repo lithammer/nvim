@@ -270,7 +270,7 @@ vim.lsp.enable({
   -- 'oxc',
   'markdown',
   'nimlangserver',
-  'postgrestools',
+  'postgresls',
   'protols',
   'pyrefly',
   'ruff',
