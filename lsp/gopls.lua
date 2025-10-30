@@ -58,7 +58,6 @@ return {
         rangeVariableTypes = true,
       },
       semanticTokens = true,
-      staticcheck = true,
       usePlaceholders = true,
     },
   },
