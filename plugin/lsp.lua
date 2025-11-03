@@ -26,8 +26,6 @@ local function code_action_kind(kind)
   vim.lsp.buf.code_action({ context = { only = { kind } } })
 end
 
----@module 'snacks'
-
 ---@param bufnr number The buffer number.
 ---@param client vim.lsp.Client
 local function setup_mappings(bufnr, client)
