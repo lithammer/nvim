@@ -5,10 +5,6 @@ require('conform').setup({
       -- https://github.com/bufbuild/buf/issues/3593
       args = { 'format', '-w', '--path', '$FILENAME' },
     },
-    mbake = {
-      command = 'mbake',
-      args = { 'format', '--stdin' },
-    },
   },
   formatters_by_ft = {
     bzl = { 'buildifier' },
@@ -17,7 +13,7 @@ require('conform').setup({
     hurl = { 'hurlfmt' },
     javascript = { 'biome-check', 'prettier', stop_after_first = true },
     lua = { 'stylua' },
-    make = { 'mbake' },
+    make = { 'bake' },
     nim = { 'nph', 'nimpretty', stop_after_first = true },
     proto = { 'buf' },
     python = { 'ruff_format', 'ruff_organize_imports' },
