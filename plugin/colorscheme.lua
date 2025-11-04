@@ -60,8 +60,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   group = group,
   pattern = 'habamax',
   callback = function()
-    -- link('NormalFloat', 'Normal')
-    -- hi('FloatBorder', { fg = '#767676' })
+    link('FloatBorder', 'PmenuBorder')
 
     -- Treesitter.
     clear('@function')
@@ -69,8 +68,17 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     clear('@property')
     clear('@variable')
     clear('@variable.member')
+    link('@punctuation.delimiter', 'NonText')
 
-    link('@property.yaml', 'Statement') -- Fix yaml property highlight.
+    -- Treesitter (JSON).
+    link('@conceal.json', 'NonText')
+    link('@property.json', 'Statement')
+
+    -- Treesitter (Lua).
+    link('@punctuation.bracket.lua', 'NonText')
+
+    -- Treesitter (YAML).
+    link('@property.yaml', 'Statement')
     clear('@string.yaml')
 
     -- LSP.
