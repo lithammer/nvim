@@ -6,6 +6,17 @@ local function hi(name, val)
   vim.api.nvim_set_hl(0, name, val)
 end
 
+---@param name string
+---@param to string
+local function link(name, to)
+  hi(name, { link = to })
+end
+
+---@param name string
+local function clear(name)
+  vim.api.nvim_set_hl(0, name, {})
+end
+
 local group = vim.api.nvim_create_augroup('on_colorscheme_change', {})
 
 vim.api.nvim_create_autocmd('ColorScheme', {
@@ -36,12 +47,35 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       hi('BlinkCmpKind', { fg = pmenu_kind.fg })
     end
 
-    hi('SnacksPicker', { link = 'Normal' })
+    link('SnacksPicker', 'Normal')
 
     -- Fix yaml property highlight. The default link is @property.yaml -> @property -> Identifier.
     -- But Identifier is cleared in lunaperche. Map to Statement instead since that's what
     -- the vanilla syntax engine does.
-    hi('@property.yaml', { link = 'Statement' })
+    link('@property.yaml', 'Statement')
+  end,
+})
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = group,
+  pattern = 'habamax',
+  callback = function()
+    -- link('NormalFloat', 'Normal')
+    -- hi('FloatBorder', { fg = '#767676' })
+
+    -- Treesitter.
+    clear('@function')
+    link('@keyword.function', 'Identifier') -- Blue instead of purple.
+    clear('@property')
+    clear('@variable')
+    clear('@variable.member')
+
+    -- LSP.
+    clear('@lsp.type.function')
+    clear('@lsp.type.method')
+    clear('@lsp.type.parameter')
+    clear('@lsp.type.property')
+    clear('@lsp.type.variable')
   end,
 })
 
