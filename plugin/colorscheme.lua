@@ -70,6 +70,9 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     clear('@variable')
     clear('@variable.member')
 
+    link('@property.yaml', 'Statement') -- Fix yaml property highlight.
+    clear('@string.yaml')
+
     -- LSP.
     clear('@lsp.type.function')
     clear('@lsp.type.method')
