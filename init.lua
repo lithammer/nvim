@@ -14,6 +14,7 @@ o.conceallevel = 2
 o.cursorline = true
 opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
 o.expandtab = true
+o.exrc = true
 opt.fillchars:append({ diff = '╱', fold = ' ' })
 -- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
 opt.grepformat:prepend({ '%f:%l:%c:%m' })
