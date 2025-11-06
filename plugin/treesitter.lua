@@ -87,6 +87,7 @@ local filetypes = {
   'xml',
   'yaml',
   'zig',
+  'zsh',
 }
 
 vim.api.nvim_create_autocmd('FileType', {
