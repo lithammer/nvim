@@ -2,6 +2,7 @@ require('lint').linters_by_ft = {
   bzl = { 'buildifier' },
   go = { 'golangcilint' },
   javascript = { 'biomejs' },
+  toml = { 'tombi' },
   typescript = { 'biomejs' },
 }
 
