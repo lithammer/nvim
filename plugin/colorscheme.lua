@@ -70,12 +70,25 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     clear('@variable.member')
     link('@punctuation.delimiter', 'NonText')
 
+    -- Treesitter (Go).
+    link('@keyword.function.go', 'Keyword')
+    link('@keyword.type.go', 'Keyword')
+
     -- Treesitter (JSON).
     link('@conceal.json', 'NonText')
     link('@property.json', 'Statement')
 
     -- Treesitter (Lua).
-    link('@punctuation.bracket.lua', 'NonText')
+    clear('@punctuation.bracket.lua')
+
+    -- Treesitter (Protobuf).
+    link('@keyword.type.proto', 'Keyword')
+
+    -- Treesitter (Python).
+    link('@keyword.type.python', 'Keyword')
+    link('@keyword.function.python', 'Keyword')
+    clear('@lsp.type.namespace.python')
+    clear('@module.python')
 
     -- Treesitter (YAML).
     link('@property.yaml', 'Statement')
