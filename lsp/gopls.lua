@@ -35,30 +35,25 @@ return {
   end,
   settings = {
     gopls = {
-      analyses = {
-        useany = true,
-      },
-      completeUnimported = true,
-      completionDocumentation = true,
       diagnosticsTrigger = 'Save',
       directoryFilters = {
         '-**/node_modules',
+        '-.venv',
         '-bazel-bin',
         '-bazel-out',
         '-bazel-src',
         '-bazel-testlogs',
       },
       gofumpt = true,
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
+      -- hints = {
+      --   assignVariableTypes = true,
+      --   compositeLiteralFields = true,
+      --   constantValues = true,
+      --   functionTypeParameters = true,
+      --   parameterNames = true,
+      --   rangeVariableTypes = true,
+      -- },
       semanticTokens = true,
-      usePlaceholders = true,
     },
   },
 }
