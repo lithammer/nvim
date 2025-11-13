@@ -26,7 +26,7 @@ vim.filetype.add({
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('snacks_bigfile', { clear = true }),
+  group = vim.api.nvim_create_augroup('bigfile', { clear = true }),
   pattern = 'bigfile',
   callback = function(event)
     local bufnr = event.buf
@@ -43,9 +43,9 @@ vim.api.nvim_create_autocmd('FileType', {
       end
 
       local winid = vim.api.nvim_get_current_win()
-      vim.wo[winid][bufnr].conceallevel = 0
-      vim.wo[winid][bufnr].foldmethod = 'manual'
-      vim.wo[winid][bufnr].statuscolumn = ''
+      vim.wo[winid][0].conceallevel = 0
+      vim.wo[winid][0].foldmethod = 'manual'
+      vim.wo[winid][0].statuscolumn = ''
 
       vim.b.minianimate_disable = true
       vim.schedule(function()
