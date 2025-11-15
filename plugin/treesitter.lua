@@ -1,4 +1,4 @@
-local filetypes = {
+local langs = {
   'awk',
   'bash',
   'c',
@@ -90,17 +90,37 @@ local filetypes = {
   'zsh',
 }
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = filetypes,
-  callback = function(args)
-    -- vim.treesitter.start(args.buf, args.match)
-    vim.treesitter.start(args.buf)
-    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
+do
+  local group = vim.api.nvim_create_augroup('treesitter_install', { clear = true })
+  vim.api.nvim_create_autocmd('FileType', {
+    group = group,
+    callback = function(args)
+      local treesitter = require('nvim-treesitter')
+      local lang = vim.treesitter.language.get_lang(args.match)
+      if langs[lang] and not vim.list_contains(treesitter.get_installed(), lang) then
+        treesitter.install(lang)
+      end
+    end,
+  })
+end
 
-require('nvim-treesitter').install(filetypes)
+do
+  local group = vim.api.nvim_create_augroup('treesitter_start', { clear = true })
+  vim.api.nvim_create_autocmd('FileType', {
+    group = group,
+    callback = function(args)
+      local treesitter = require('nvim-treesitter')
+      local lang = vim.treesitter.language.get_lang(args.match)
+
+      if vim.list_contains(treesitter.get_installed(), lang) then
+        -- vim.treesitter.start(args.buf)
+        vim.treesitter.start(args.buf, lang)
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end,
+  })
+end
 
 do
   local group = vim.api.nvim_create_augroup('treesitter_update', { clear = true })
