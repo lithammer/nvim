@@ -214,13 +214,13 @@ vim.api.nvim_create_user_command('LspRestart', function(params)
 
   local clients = vim.lsp.get_clients({ name = name })
   for _, client in pairs(clients) do
-    local attached_buffers = vim.lsp.get_buffers_by_client_id(client.id)
+    local attached_buffers = vim.lsp.get_client_by_id(client.id).attached_buffers
     client:stop()
 
     vim.defer_fn(function()
       local config =
         vim.tbl_extend('force', vim.lsp.config[client.name], { root_dir = client.root_dir })
-      for _, bufnr in pairs(attached_buffers) do
+      for bufnr, _ in pairs(attached_buffers) do
         vim.lsp.start(config, { bufnr = bufnr })
       end
     end, 1000)
