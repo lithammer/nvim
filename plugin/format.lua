@@ -15,6 +15,7 @@ require('conform').setup({
     lua = { 'stylua' },
     make = { 'bake' },
     nim = { 'nph', 'nimpretty', stop_after_first = true },
+    perl = { 'perltidy' },
     proto = { 'buf' },
     python = { 'ruff_format', 'ruff_organize_imports' },
     sh = { 'shfmt' },
