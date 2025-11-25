@@ -110,13 +110,18 @@ do
     group = group,
     callback = function(args)
       local treesitter = require('nvim-treesitter')
-      local lang = vim.treesitter.language.get_lang(args.match)
+      local lang = assert(vim.treesitter.language.get_lang(args.match))
 
       if vim.list_contains(treesitter.get_installed(), lang) then
-        -- vim.treesitter.start(args.buf)
         vim.treesitter.start(args.buf, lang)
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        if vim.treesitter.query.get(lang, 'folds') then
+          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        end
+
+        if vim.treesitter.query.get(lang, 'indents') then
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
       end
     end,
   })
