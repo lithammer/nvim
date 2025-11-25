@@ -262,6 +262,7 @@ vim.lsp.enable({
   'cssls',
   'dockerls',
   -- 'emmylua_ls',
+  'fishlsp',
   'gleam',
   'gopls',
   'html',
