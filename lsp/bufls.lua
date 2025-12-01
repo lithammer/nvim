@@ -6,8 +6,8 @@ return {
   filetypes = { 'proto' },
   root_markers = { 'buf.yaml' },
   workspace_required = true,
-  reuse_client = function()
+  reuse_client = function(client, config)
     -- `buf lsp serve` is meant to be used with multiple workspaces.
-    return true
+    return client.name == config.name
   end,
 }
