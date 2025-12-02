@@ -163,12 +163,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- if client:supports_method('textDocument/inlineCompletion', bufnr) then
     --   vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
     --
-    --   vim.keymap.set(
-    --     'i',
-    --     '<c-f>',
-    --     vim.lsp.inline_completion.get,
-    --     { desc = 'Accept inline completion', buffer = bufnr }
-    --   )
+    --   vim.keymap.set('i', '<tab>', function()
+    --     if not vim.lsp.inline_completion.get() then
+    --       return '<tab>'
+    --     end
+    --   end, { desc = 'Accept inline completion', buffer = bufnr, expr = true })
     --   vim.keymap.set(
     --     'i',
     --     '<c-g>',
