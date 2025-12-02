@@ -26,3 +26,15 @@ do
     require('opencode').command('session.half.page.down')
   end, { desc = 'opencode half page down' })
 end
+
+do
+  require('sidekick').setup()
+  vim.keymap.set('n', '<tab>', function()
+    if not require('sidekick').nes_jump_or_apply() then
+      return '<Tab>'
+    end
+  end, {
+    expr = true,
+    desc = 'Goto/Apply Next Edit Suggestion',
+  })
+end

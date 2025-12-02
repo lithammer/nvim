@@ -74,6 +74,7 @@ vim.pack.add({
 })
 
 vim.pack.add({
+  'https://github.com/folke/sidekick.nvim',
   'https://github.com/nickvandyke/opencode.nvim',
   'https://github.com/nvim-lua/plenary.nvim', -- Dependency of codecompanion.
   'https://github.com/olimorris/codecompanion.nvim',
