@@ -56,7 +56,6 @@ vim.pack.add({
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/folke/trouble.nvim',
   'https://github.com/folke/ts-comments.nvim',
-  'https://github.com/github/copilot.vim',
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/ludovicchabant/vim-gutentags',
   'https://github.com/mfussenegger/nvim-ansible',
@@ -75,6 +74,7 @@ vim.pack.add({
 
 vim.pack.add({
   'https://github.com/folke/sidekick.nvim',
+  'https://github.com/github/copilot.vim',
   'https://github.com/nickvandyke/opencode.nvim',
   'https://github.com/nvim-lua/plenary.nvim', -- Dependency of codecompanion.
   'https://github.com/olimorris/codecompanion.nvim',
