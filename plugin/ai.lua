@@ -1,6 +1,9 @@
 do
   require('codecompanion').setup({})
 end
+vim.g.copilot_filetypes = {
+  gitcommit = true,
+}
 
 do
   vim.keymap.set({ 'n', 'x' }, '<leader>oa', function()
