@@ -45,7 +45,6 @@ o.wrap = false
 o.foldenable = false
 -- o.foldlevel = 1
 o.foldlevelstart = 99
-o.foldmethod = 'expr'
 
 vim.cmd [[
   packadd nvim.undotree

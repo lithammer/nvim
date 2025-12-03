@@ -117,6 +117,7 @@ do
 
         if vim.treesitter.query.get(lang, 'folds') then
           vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo.foldmethod = 'expr'
         end
 
         if vim.treesitter.query.get(lang, 'indents') then
