@@ -3,12 +3,10 @@ vim.g.copilot_filetypes = {
 }
 
 do
-  -- Schedule to work ensure v18 breaking changes warning is using mini.notify.
-  -- Otherwise it blocks loading.
-  -- https://github.com/olimorris/codecompanion.nvim/pull/2439
-  vim.schedule(function()
-    require('codecompanion').setup({})
-  end)
+  require('codecompanion').setup({
+    -- https://github.com/olimorris/codecompanion.nvim/pull/2439
+    ignore_warnings = true,
+  })
 end
 
 do
