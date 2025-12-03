@@ -1,9 +1,15 @@
-do
-  require('codecompanion').setup({})
-end
 vim.g.copilot_filetypes = {
   gitcommit = true,
 }
+
+do
+  -- Schedule to work ensure v18 breaking changes warning is using mini.notify.
+  -- Otherwise it blocks loading.
+  -- https://github.com/olimorris/codecompanion.nvim/pull/2439
+  vim.schedule(function()
+    require('codecompanion').setup({})
+  end)
+end
 
 do
   vim.keymap.set({ 'n', 'x' }, '<leader>oa', function()
