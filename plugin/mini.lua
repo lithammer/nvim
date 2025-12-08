@@ -75,6 +75,8 @@ miniclue.setup({
   },
 })
 
+require('mini.cmdline').setup()
+
 require('mini.diff').setup({
   mappings = {
     apply = '',
