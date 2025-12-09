@@ -76,7 +76,20 @@ miniclue.setup({
   },
 })
 
-require('mini.cmdline').setup()
+do
+  local disable = vim.schedule_wrap(function()
+    -- Disable autopeek when command-line is opened from visual selection.
+    local is_from_visual = vim.startswith(vim.fn.getcmdline(), "'<,'>")
+    MiniCmdline.config.autopeek.enable = not is_from_visual
+  end)
+  local reenable = function()
+    MiniCmdline.config.autopeek.enable = true
+  end
+
+  vim.api.nvim_create_autocmd('CmdlineEnter', { callback = disable })
+  vim.api.nvim_create_autocmd('CmdlineLeave', { callback = reenable })
+  require('mini.cmdline').setup()
+end
 
 require('mini.diff').setup({
   mappings = {
