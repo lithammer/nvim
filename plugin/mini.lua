@@ -1,5 +1,6 @@
 local modules = {
   'mini.icons', -- Loaded early since it's used by other plugins.
+  'mini.comment',
   'mini.extra',
   'mini.splitjoin',
   'mini.surround',
