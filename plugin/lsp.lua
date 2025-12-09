@@ -114,7 +114,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', '<leader>h', function()
         local enable = not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
         vim.lsp.inlay_hint.enable(enable, { bufnr = bufnr })
-      end, { buffer = bufnr, desc = 'Run codelens' })
+      end, { buffer = bufnr, desc = 'Toggle inlay hint' })
     end
 
     if client:supports_method('textDocument/codeLens') then
