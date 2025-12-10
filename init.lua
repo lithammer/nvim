@@ -10,6 +10,7 @@ g.loaded_ruby_provider = 0
 
 o.breakindent = true
 o.breakindentopt = 'shift:2,sbr'
+o.busy = 1
 o.conceallevel = 2
 o.cursorline = true
 opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
