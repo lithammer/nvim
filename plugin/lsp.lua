@@ -274,6 +274,7 @@ vim.lsp.enable({
   'nimlangserver',
   'postgresls',
   'protols',
+  'protobufls',
   'pyrefly',
   'ruff',
   'rust_analyzer',
