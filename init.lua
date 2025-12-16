@@ -59,7 +59,7 @@ vim.pack.add({
   'https://github.com/ludovicchabant/vim-gutentags',
   'https://github.com/mfussenegger/nvim-ansible',
   'https://github.com/mfussenegger/nvim-lint',
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'main' },
+  'https://github.com/nvim-treesitter/nvim-treesitter',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
   'https://github.com/romainl/vim-qf',
