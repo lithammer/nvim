@@ -1,10 +1,11 @@
--- https://github.com/oxc-project/oxc/tree/main/crates/oxc_language_server
+-- https://github.com/oxc-project/oxc
+-- https://oxc.rs/docs/guide/usage/linter.html
 
 local npm = require('lspextras.npm')
 
 ---@type vim.lsp.Config
 return {
-  cmd = npm.node_modules_cmd({ 'oxc_language_server' }),
+  cmd = npm.node_modules_cmd({ 'oxlint', '--lsp' }),
   filetypes = {
     'javascript',
     'javascriptreact',
