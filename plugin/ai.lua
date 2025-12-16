@@ -2,12 +2,7 @@ vim.g.copilot_filetypes = {
   gitcommit = true,
 }
 
-do
-  require('codecompanion').setup({
-    -- https://github.com/olimorris/codecompanion.nvim/pull/2439
-    ignore_warnings = true,
-  })
-end
+require('codecompanion').setup({})
 
 do
   vim.keymap.set({ 'n', 'x' }, '<leader>oa', function()
