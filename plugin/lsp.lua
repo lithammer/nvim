@@ -207,34 +207,6 @@ vim.api.nvim_create_autocmd('LspDetach', {
   end,
 })
 
-vim.api.nvim_create_user_command('LspRestart', function(params)
-  local name = params.args
-  vim.notify('Restarting LSP server: ' .. name)
-
-  local clients = vim.lsp.get_clients({ name = name })
-  for _, client in pairs(clients) do
-    local attached_buffers = vim.lsp.get_client_by_id(client.id).attached_buffers
-    client:stop()
-
-    vim.defer_fn(function()
-      local config =
-        vim.tbl_extend('force', vim.lsp.config[client.name], { root_dir = client.root_dir })
-      for bufnr, _ in pairs(attached_buffers) do
-        vim.lsp.start(config, { bufnr = bufnr })
-      end
-    end, 1000)
-  end
-end, {
-  nargs = 1,
-  complete = function()
-    local names = {}
-    for _, client in ipairs(vim.lsp.get_clients()) do
-      table.insert(names, client.name)
-    end
-    return names
-  end,
-})
-
 vim.lsp.config('*', {
   root_markers = { '.git' },
   capabilities = {
