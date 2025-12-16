@@ -89,10 +89,7 @@ end
 local function disable_document_highlight(client, bufnr)
   if client:supports_method('textDocument/documentHighlight') then
     local group = string.format('lsp_document_highlight:%d', bufnr)
-    local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
-    if not vim.tbl_isempty(autocmds) then
-      vim.api.nvim_del_augroup_by_id(autocmds[1].group)
-    end
+    vim.api.nvim_clear_autocmds({ group = group, buffer = bufnr })
   end
 end
 
