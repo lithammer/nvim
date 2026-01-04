@@ -134,11 +134,10 @@ do
     desc = 'Update treesitter parsers',
     group = group,
     callback = function(event)
-      local spec = event.data.spec
-      local kind = event.data.kind
-      if spec and spec.name == 'nvim-treesitter' and kind == 'update' then
+      local name, kind = event.data.spec.name, event.data.kind
+      if name == 'nvim-treesitter' and kind == 'update' then
         vim.schedule(function()
-          require('nvim-treesitter').update()
+          require('nvim-treesitter').update(nil, { summary = true })
         end)
       end
     end,
