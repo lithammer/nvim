@@ -8,14 +8,13 @@ local langs = {
   'comment',
   'cpp',
   'css',
-  'css',
   'csv',
   'diff',
   'disassembly',
   'dockerfile',
   'editorconfig',
-  'embedded_template',
   'elixir',
+  'embedded_template',
   'erlang',
   'fish',
   'git_config',
@@ -33,18 +32,21 @@ local langs = {
   'haskell',
   'hcl',
   'html',
+  'html_tags',
   'htmldjango',
   'http',
   'hurl',
   'ini',
   'java',
   'javascript',
+  'jinja',
+  'jinja_inline',
   'jq',
   'jsdoc',
   'json',
   'json5',
-  'jsonc',
   'jsonnet',
+  'jsx',
   'just',
   'kitty',
   'lua',
@@ -55,10 +57,10 @@ local langs = {
   'nim',
   'nim_format_string',
   'nix',
-  'odin',
   'ocaml',
   'ocaml_interface',
   'ocamllex',
+  'odin',
   'passwd',
   'pem',
   'perl',
@@ -75,6 +77,7 @@ local langs = {
   'sql',
   'ssh_config',
   'starlark',
+  'strace',
   'svelte',
   'swift',
   'terraform',
@@ -90,19 +93,29 @@ local langs = {
   'zsh',
 }
 
-do
-  local group = vim.api.nvim_create_augroup('treesitter_install', { clear = true })
-  vim.api.nvim_create_autocmd('FileType', {
-    group = group,
-    callback = function(args)
-      local treesitter = require('nvim-treesitter')
-      local lang = vim.treesitter.language.get_lang(args.match)
-      if langs[lang] and not vim.list_contains(treesitter.get_installed(), lang) then
-        treesitter.install(lang)
-      end
-    end,
-  })
-end
+require('nvim-treesitter').install(langs)
+
+-- XXX: Because of issues with lazy installation, this is disabled.
+-- A bunch of parsers are mostly used for injections like diff and they won't
+-- be installed.
+--
+-- for _, lang in ipairs(langs) do
+--   langs[lang] = true
+-- end
+--
+-- do
+--   local group = vim.api.nvim_create_augroup('treesitter_install', { clear = true })
+--   vim.api.nvim_create_autocmd('FileType', {
+--     group = group,
+--     callback = function(args)
+--       local treesitter = require('nvim-treesitter')
+--       local lang = vim.treesitter.language.get_lang(args.match)
+--       if langs[lang] and not vim.list_contains(treesitter.get_installed(), lang) then
+--         treesitter.install(lang)
+--       end
+--     end,
+--   })
+-- end
 
 do
   local group = vim.api.nvim_create_augroup('treesitter_start', { clear = true })
