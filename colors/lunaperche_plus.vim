@@ -1,12 +1,5 @@
-" Name:         Perchè il sole a Milano? Portofino? Dimmi la luna perchè?
-" Description:  White(perchè il sole)/Black(la luna perchè?) background colorscheme.
-" Author:       Peter Lithammer <peter.lithammer@gmail.com>
-" Maintainer:   Peter Lithammer <peter.lithammer@gmail.com>
-" Website:      https://www.github.com/lithammer/nvim
-" License:      Vim License (see `:help license`)
-
 source $VIMRUNTIME/colors/lunaperche.vim
-let g:colors_name = 'soleperche'
+let g:colors_name = 'lunaperche_plus'
 
 let s:t_Co = &t_Co
 
