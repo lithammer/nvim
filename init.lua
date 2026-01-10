@@ -8,6 +8,10 @@ g.loaded_perl_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
+if vim.env.SSH_TTY then
+  g.clipboard = 'osc52'
+end
+
 o.breakindent = true
 o.breakindentopt = 'shift:2,sbr'
 o.busy = 1
