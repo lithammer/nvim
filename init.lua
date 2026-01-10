@@ -1,55 +1,54 @@
 vim.loader.enable()
 
-local g, o, opt = vim.g, vim.o, vim.opt
-
 -- Disable providers.
-g.loaded_node_provider = 0
-g.loaded_perl_provider = 0
-g.loaded_python3_provider = 0
-g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
 
+-- Force OSC52 clipboard over SSH.
 if vim.env.SSH_TTY then
-  g.clipboard = 'osc52'
+  vim.g.clipboard = 'osc52'
 end
 
-o.breakindent = true
-o.breakindentopt = 'shift:2,sbr'
-o.busy = 1
-o.conceallevel = 2
-o.cursorline = true
-opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
-o.expandtab = true
-o.exrc = true
-opt.fillchars:append({ diff = '╱', fold = ' ' })
--- opt.formatoptions:append({ 'r', 'o', 'n', '1' })
-opt.grepformat:prepend({ '%f:%l:%c:%m' })
-o.grepprg = 'rg --vimgrep'
-o.guifont = 'PragmataPro Mono Liga:h14'
-o.ignorecase = true
-o.inccommand = 'split'
-o.list = true
-opt.listchars:append({ tab = '│ ', trail = '·' })
-o.number = true
-o.pumblend = 10
-o.scrolloff = 4
-o.shiftwidth = 4
-o.showbreak = '↪'
-o.sidescrolloff = 8
-o.signcolumn = 'number'
-o.smartcase = true
-o.smartindent = true
-o.tabstop = 4
-o.tabstop = 4
-o.termguicolors = true
-o.undofile = true
-o.updatetime = 300
-o.wildignorecase = true
-o.winborder = 'single'
-o.wrap = false
+vim.o.breakindent = true
+vim.o.breakindentopt = 'shift:2,sbr'
+vim.o.busy = 1
+vim.o.conceallevel = 2
+vim.o.cursorline = true
+vim.opt.diffopt:append({ 'inline:char', 'algorithm:histogram' })
+vim.o.expandtab = true
+vim.o.exrc = true
+vim.opt.fillchars:append({ diff = '╱', fold = ' ' })
+-- vim.opt.formatoptions:append({ 'r', 'o', 'n', '1' })
+vim.opt.grepformat:prepend({ '%f:%l:%c:%m' })
+vim.o.grepprg = 'rg --vimgrep'
+vim.o.guifont = 'PragmataPro Mono Liga:h14'
+vim.o.ignorecase = true
+vim.o.inccommand = 'split'
+vim.o.list = true
+vim.opt.listchars:append({ tab = '│ ', trail = '·' })
+vim.o.number = true
+vim.o.pumblend = 10
+vim.o.scrolloff = 4
+vim.o.shiftwidth = 4
+vim.o.showbreak = '↪'
+vim.o.sidescrolloff = 8
+vim.o.signcolumn = 'number'
+vim.o.smartcase = true
+vim.o.smartindent = true
+vim.o.tabstop = 4
+vim.o.tabstop = 4
+vim.o.termguicolors = true
+vim.o.undofile = true
+vim.o.updatetime = 300
+vim.o.wildignorecase = true
+vim.o.winborder = 'single'
+vim.o.wrap = false
 
-o.foldenable = false
--- o.foldlevel = 1
-o.foldlevelstart = 99
+vim.o.foldenable = false
+-- vim.o.foldlevel = 1
+vim.o.foldlevelstart = 99
 
 vim.cmd [[
   packadd nvim.undotree
@@ -93,47 +92,13 @@ vim.pack.add({
   'https://github.com/zenbones-theme/zenbones.nvim',
 })
 
+vim.cmd [[
+  colorscheme habamax_plus
+]]
+
 vim.api.nvim_create_user_command('PackUpdate', function()
   vim.pack.update()
 end, {})
 
-do
-  require('oil').setup()
-  vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-end
-
-do
-  require('fidget').setup({})
-end
-
-do
-  require('trouble').setup({
-    keys = {
-      j = 'next',
-      k = 'prev',
-    },
-  })
-end
-
-do
-  local smear_cursor = require('smear_cursor')
-  smear_cursor.setup({
-    smear_to_cmd = false,
-  })
-  smear_cursor.enabled = not vim.env.TERM:match('kitty')
-end
-
-g.gutentags_add_default_project_roots = 0
-g.gutentags_project_root = { '.git' }
-g.gutentags_file_list_command = {
-  markers = {
-    ['.git'] = 'git ls-files',
-  },
-}
-
-g.netrw_altfile = 1
-g.netrw_preview = 1
-
--- Fugitive.
-vim.keymap.set('n', '<leader>g', ':G<cr>', { desc = 'Open Fugitive in a split', silent = true })
-vim.keymap.set('n', '<leader>G', ':tab G<cr>', { desc = 'Open Fugitive in a tab', silent = true })
+vim.g.netrw_altfile = 1
+vim.g.netrw_preview = 1
