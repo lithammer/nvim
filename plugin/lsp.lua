@@ -207,7 +207,6 @@ vim.api.nvim_create_autocmd('LspDetach', {
 })
 
 vim.lsp.config('*', {
-  root_markers = { '.git' },
   capabilities = {
     workspace = {
       didChangeWatchedFiles = {
