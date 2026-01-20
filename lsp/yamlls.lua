@@ -15,6 +15,8 @@ return {
       format = {
         enable = true,
       },
+    },
+  },
   capabilities = {
     workspace = {
       didChangeConfiguration = {
