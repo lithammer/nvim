@@ -88,7 +88,9 @@ do
 
   vim.api.nvim_create_autocmd('CmdlineEnter', { callback = disable })
   vim.api.nvim_create_autocmd('CmdlineLeave', { callback = reenable })
-  require('mini.cmdline').setup()
+  require('mini.cmdline').setup({
+    autocomplete = { enable = false },
+  })
 end
 
 require('mini.diff').setup({
