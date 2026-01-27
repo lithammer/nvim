@@ -56,7 +56,6 @@ vim.cmd [[
 
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
-  'https://github.com/folke/lazydev.nvim',
   'https://github.com/folke/trouble.nvim',
   'https://github.com/j-hui/fidget.nvim',
   'https://github.com/ludovicchabant/vim-gutentags',
