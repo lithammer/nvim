@@ -36,5 +36,4 @@ return {
       vim.notify('Schema store ready', vim.log.levels.INFO)
     end,
   },
-  end,
 }
