@@ -25,6 +25,7 @@
     },
     "diagnostics.globals": [
         "MiniClue",
+        "MiniCmdline",
         "MiniCompletion",
         "MiniDeps",
         "MiniNotify",
