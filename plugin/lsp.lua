@@ -108,24 +108,55 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-      vim.keymap.set('n', '<leader>h', function()
-        local enable = not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-        vim.lsp.inlay_hint.enable(enable, { bufnr = bufnr })
+
+      vim.api.nvim_buf_create_user_command(bufnr, 'LspInlayHintToggle', function(opts)
+        if opts.bang then
+          local enable = not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+          vim.lsp.inlay_hint.enable(enable, { bufnr = bufnr })
+        else
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end
+      end, {
+        desc = 'Toggle inlay hint',
+        bang = true,
+      })
+
+      vim.keymap.set('n', '<leader>H', function()
+        vim.cmd [[LspInlayHintToggle]]
       end, { buffer = bufnr, desc = 'Toggle inlay hint' })
+
+      vim.keymap.set('n', '<leader>h', function()
+        vim.cmd [[LspInlayHintToggle!]]
+      end, { buffer = bufnr, desc = 'Toggle buffer inlay hint' })
     end
 
     if client:supports_method('textDocument/codeLens') then
       vim.lsp.codelens.enable(true, { bufnr = bufnr })
-      vim.keymap.set('n', '<leader>Lt', function()
-        local enable = not vim.lsp.codelens.is_enabled({ bufnr = bufnr })
-        vim.lsp.codelens.enable(enable, { bufnr = bufnr })
+
+      vim.api.nvim_buf_create_user_command(bufnr, 'LspCodeLensToggle', function(opts)
+        if opts.bang then
+          local enable = not vim.lsp.codelens.is_enabled({ bufnr = bufnr })
+          vim.lsp.codelens.enable(enable, { bufnr = bufnr })
+        else
+          vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+        end
+      end, {
+        desc = 'Toggle code lens',
+        bang = true,
+      })
+
+      vim.keymap.set('n', '<leader>L', function()
+        vim.cmd [[LspCodeLensToggle]]
       end, { buffer = bufnr, desc = 'Toggle code lens' })
-      vim.keymap.set(
-        'n',
-        '<leader>Ln',
-        vim.lsp.codelens.run,
-        { buffer = bufnr, desc = 'Run codelens' }
-      )
+
+      vim.keymap.set('n', '<leader>l', function()
+        vim.cmd [[LspCodeLensToggle!]]
+      end, { buffer = bufnr, desc = 'Toggle buffer code lens' })
+
+      vim.keymap.set('n', 'grl', vim.lsp.codelens.run, {
+        buffer = bufnr,
+        desc = 'Run code lens',
+      })
     end
 
     vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
