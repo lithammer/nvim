@@ -86,7 +86,6 @@ vim.pack.add({
 vim.pack.add({
   'https://github.com/rktjmp/lush.nvim', -- Used by zenbones.
 
-  { src = 'https://github.com/catppuccin/nvim', name = 'catppuccin' },
   'https://github.com/rebelot/kanagawa.nvim',
   'https://github.com/sainnhe/gruvbox-material',
   'https://github.com/zenbones-theme/zenbones.nvim',
