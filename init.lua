@@ -101,3 +101,8 @@ end, {})
 
 vim.g.netrw_altfile = 1
 vim.g.netrw_preview = 1
+
+vim.g.diffs = {
+  fugitive = true,
+  extra_filetypes = { 'diff' },
+}
