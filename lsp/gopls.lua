@@ -39,7 +39,9 @@ return {
       directoryFilters = {
         '-**/node_modules',
         '-.venv',
-        '-bazel-*',
+        '-bazel-bin',
+        '-bazel-out',
+        '-bazel-testlogs',
       },
       gofumpt = true,
       hints = {
