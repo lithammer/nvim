@@ -92,7 +92,7 @@ vim.pack.add({
 })
 
 vim.cmd [[
-  colorscheme habamax_plus
+  colorscheme jellybeans
 ]]
 
 vim.api.nvim_create_user_command('PackUpdate', function()
