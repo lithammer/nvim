@@ -38,7 +38,6 @@ vim.o.signcolumn = 'number'
 vim.o.smartcase = true
 vim.o.smartindent = true
 vim.o.tabstop = 4
-vim.o.tabstop = 4
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.updatetime = 300
