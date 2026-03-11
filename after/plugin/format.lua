@@ -39,11 +39,11 @@ require('conform').setup({
 
 vim.api.nvim_create_user_command('FormatDisable', function(args)
   if args.bang then
-    vim.b.disable_autoformat = true
-    vim.notify('Formatting disabled for current buffer', vim.log.levels.INFO)
-  else
     vim.g.disable_autoformat = true
     vim.notify('Formatting disabled globally', vim.log.levels.INFO)
+  else
+    vim.b.disable_autoformat = true
+    vim.notify('Formatting disabled for current buffer', vim.log.levels.INFO)
   end
 end, {
   desc = 'Disable format-on-save',
@@ -52,11 +52,11 @@ end, {
 
 vim.api.nvim_create_user_command('FormatEnable', function(args)
   if args.bang then
-    vim.b.disable_autoformat = false
-    vim.notify('Formatting enabled for current buffer', vim.log.levels.INFO)
-  else
     vim.g.disable_autoformat = false
     vim.notify('Formatting enabled globally', vim.log.levels.INFO)
+  else
+    vim.b.disable_autoformat = false
+    vim.notify('Formatting enabled for current buffer', vim.log.levels.INFO)
   end
 end, {
   desc = 'Enable format-on-save',
