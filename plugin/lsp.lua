@@ -152,11 +152,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set('n', '<leader>l', function()
         vim.cmd [[LspCodeLensToggle!]]
       end, { buffer = bufnr, desc = 'Toggle buffer code lens' })
-
-      vim.keymap.set('n', 'grl', vim.lsp.codelens.run, {
-        buffer = bufnr,
-        desc = 'Run code lens',
-      })
     end
 
     vim.lsp.on_type_formatting.enable(true, { client_id = client.id })
