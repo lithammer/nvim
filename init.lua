@@ -82,7 +82,6 @@ vim.pack.add({
 })
 
 vim.pack.add({
-  'https://github.com/carlos-algms/agentic.nvim',
   'https://github.com/folke/sidekick.nvim',
   'https://github.com/github/copilot.vim',
   'https://github.com/nickvandyke/opencode.nvim',
