@@ -109,8 +109,6 @@ vim.g.netrw_preview = 1
 
 vim.g.diffs = {
   integrations = {
-    fugitive = {
-      enabled = true,
-    },
+    fugitive = true,
   },
 }
