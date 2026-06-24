@@ -3,9 +3,10 @@
 --- For buffers in the Go module cache (e.g. third-party libraries),
 --- attempt to attach to the most recent gopls client.
 ---
+---@param bufnr number
 ---@return string?
-local function modcache_root_dir()
-  local name = vim.api.nvim_buf_get_name(0)
+local function modcache_root_dir(bufnr)
+  local name = vim.api.nvim_buf_get_name(bufnr)
 
   -- Check if the current buffer is a third-party module.
   local obj = vim.system({ 'go', 'env', 'GOMODCACHE' }, { text = true }):wait()
@@ -13,10 +14,10 @@ local function modcache_root_dir()
     local modcache = vim.trim(obj.stdout or '')
     local is_module = vim.startswith(name, modcache)
     if is_module then
-      -- Attach to the most recent gopls client.
-      local client = vim.iter(vim.lsp.get_clients({ name = 'gopls' })):last() --[[@as vim.lsp.Client?]]
-      if client then
-        return client.root_dir
+      local clients = vim.lsp.get_clients({ name = 'gopls' })
+      if #clients > 0 then
+        -- Return the root_dir of the last client.
+        return clients[#clients].root_dir
       end
     end
   else
@@ -31,7 +32,7 @@ return {
   cmd = { 'gopls', 'serve' },
   filetypes = { 'go', 'gomod', 'gotmpl', 'gowork' },
   root_dir = function(bufnr, on_dir)
-    on_dir(modcache_root_dir() or vim.fs.root(bufnr, { 'go.work', 'go.mod' }))
+    on_dir(modcache_root_dir(bufnr) or vim.fs.root(bufnr, { 'go.work', 'go.mod' }))
   end,
   settings = {
     gopls = {
