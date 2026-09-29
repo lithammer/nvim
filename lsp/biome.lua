@@ -9,6 +9,7 @@ return {
     'css',
     'javascript',
     'javascriptreact',
+    'json',
     'typescript',
     'typescriptreact',
   },
